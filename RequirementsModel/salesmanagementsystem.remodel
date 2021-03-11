@@ -1,0 +1,670 @@
+UseCaseModel SalesManagementSystem {
+
+	UC::orderManagement
+	UC::contractManagement relatedService(ContractManagementService)
+	UC::productManagement relatedService(ProductManagementService)
+	UC::clientInformationManagement relatedService(ClientManagementService)
+	UC::salesCommissionManagement()
+	UC::salesProcessing definedBySSD(SalesProcessingSSD) relatedService(SalesProcessingService)
+	UC::salesPlanManagement()
+	UC::deliveryNotification()
+	UC::exchangeNotification()
+	UC::itemsPricesMaintenance()
+	UC::invoiceManagement()
+	UC::postingOfAccount()
+	UC::contractTerminationAndSettlement()
+	UC::orderTerminationAndSettlement()
+
+	Actor SalesStaff("销售职员") {
+		salesProcessing
+		deliveryNotification
+		exchangeNotification
+	}
+
+	Actor FinancialStaff("财务职员") {
+		itemsPricesMaintenance
+		invoiceManagement
+		postingOfAccount
+		orderTerminationAndSettlement
+		contractTerminationAndSettlement
+	}
+
+	Actor DepartmentManager("部门经理") {
+		clientInformationManagement
+		salesCommissionManagement
+		salesPlanManagement
+	}
+
+	Actor Administrator("系统管理员") {
+		orderManagement
+		contractManagement
+		productManagement
+	}
+
+	Interaction SalesProcessingSSD {
+
+		[Participants: SalesStaff SalesProcessingService]
+
+		CallMessage::SalesProcessingSSDCallMessage1(makeNewOrder SalesProcessingSSDCallMessage1SendingEnd -> SalesProcessingSSDExecution1StartEnd)
+		ReturnMessage::SalesProcessingSSDCallMessage1Return(SalesProcessingSSDExecution1FinishEnd -> SalesProcessingSSDCallMessage1ReturnReceivingEnd SalesProcessingSSDCallMessage1)
+		CallMessage::SalesProcessingSSDCallMessage3(addProduct SalesProcessingSSDCallMessage3SendingEnd -> SalesProcessingSSDExecution2StartEnd)
+		ReturnMessage::SalesProcessingSSDCallMessage3Return(SalesProcessingSSDExecution2FinishEnd -> SalesProcessingSSDCallMessage3ReturnReceivingEnd SalesProcessingSSDCallMessage3)
+		CallMessage::SalesProcessingSSDCallMessage5(generateContract SalesProcessingSSDCallMessage5SendingEnd -> SalesProcessingSSDExecution3StartEnd)
+		ReturnMessage::SalesProcessingSSDCallMessage5Return(SalesProcessingSSDExecution3FinishEnd -> SalesProcessingSSDCallMessage5ReturnReceivingEnd SalesProcessingSSDCallMessage5)
+		CallMessage::SalesProcessingSSDCallMessage7(authorization SalesProcessingSSDCallMessage7SendingEnd -> SalesProcessingSSDExecution4StartEnd)
+		ReturnMessage::SalesProcessingSSDCallMessage7Return(SalesProcessingSSDExecution4FinishEnd -> SalesProcessingSSDCallMessage7ReturnReceivingEnd SalesProcessingSSDCallMessage7)
+		CallMessage::SalesProcessingSSDCallMessage9(generateOrder SalesProcessingSSDCallMessage9SendingEnd -> SalesProcessingSSDExecution5StartEnd)
+		ReturnMessage::SalesProcessingSSDCallMessage9Return(SalesProcessingSSDExecution5FinishEnd -> SalesProcessingSSDCallMessage9ReturnReceivingEnd SalesProcessingSSDCallMessage9)
+
+		Execution::SalesProcessingSSDExecution1(SalesProcessingService SalesProcessingSSDExecution1StartEnd SalesProcessingSSDExecution1FinishEnd)
+		Execution::SalesProcessingSSDExecution2(SalesProcessingService SalesProcessingSSDExecution2StartEnd SalesProcessingSSDExecution2FinishEnd)
+		Execution::SalesProcessingSSDExecution3(SalesProcessingService SalesProcessingSSDExecution3StartEnd SalesProcessingSSDExecution3FinishEnd)
+		Execution::SalesProcessingSSDExecution4(SalesProcessingService SalesProcessingSSDExecution4StartEnd SalesProcessingSSDExecution4FinishEnd)
+		Execution::SalesProcessingSSDExecution5(SalesProcessingService SalesProcessingSSDExecution5StartEnd SalesProcessingSSDExecution5FinishEnd)
+
+		CombinedFragment:: combinedFragement1 -> loop {
+
+			[Participants: SalesProcessingService SalesStaff]
+
+			combinedFragement1StartEnd -> combinedFragement1FinishEnd
+
+			Operand::hasMoreItem(condition1End combinedFragement1FinishEnd)
+		}
+
+		MessageEnd::SalesProcessingSSDCallMessage1SendingEnd(SalesStaff SalesProcessingSSDCallMessage1)
+		ExecutionEnd::SalesProcessingSSDExecution1StartEnd(SalesProcessingService SalesProcessingSSDExecution1)
+		ExecutionEnd::SalesProcessingSSDExecution1FinishEnd(SalesProcessingService SalesProcessingSSDExecution1)
+		MessageEnd::SalesProcessingSSDCallMessage1ReturnReceivingEnd(SalesStaff SalesProcessingSSDCallMessage1Return)
+		CombinedFragmentEnd::combinedFragement1StartEnd(combinedFragement1)
+		OperandEnd::condition1End(hasMoreItem)
+		MessageEnd::SalesProcessingSSDCallMessage3SendingEnd(SalesStaff SalesProcessingSSDCallMessage3)
+		ExecutionEnd::SalesProcessingSSDExecution2StartEnd(SalesProcessingService SalesProcessingSSDExecution2)
+		ExecutionEnd::SalesProcessingSSDExecution2FinishEnd(SalesProcessingService SalesProcessingSSDExecution2)
+		MessageEnd::SalesProcessingSSDCallMessage3ReturnReceivingEnd(SalesStaff SalesProcessingSSDCallMessage3Return)
+		CombinedFragmentEnd::combinedFragement1FinishEnd(combinedFragement1)
+		MessageEnd::SalesProcessingSSDCallMessage5SendingEnd(SalesStaff SalesProcessingSSDCallMessage5)
+		ExecutionEnd::SalesProcessingSSDExecution3StartEnd(SalesProcessingService SalesProcessingSSDExecution3)
+		ExecutionEnd::SalesProcessingSSDExecution3FinishEnd(SalesProcessingService SalesProcessingSSDExecution3)
+		MessageEnd::SalesProcessingSSDCallMessage5ReturnReceivingEnd(SalesStaff SalesProcessingSSDCallMessage5Return)
+		MessageEnd::SalesProcessingSSDCallMessage7SendingEnd(SalesStaff SalesProcessingSSDCallMessage7)
+		ExecutionEnd::SalesProcessingSSDExecution4StartEnd(SalesProcessingService SalesProcessingSSDExecution4)
+		ExecutionEnd::SalesProcessingSSDExecution4FinishEnd(SalesProcessingService SalesProcessingSSDExecution4)
+		MessageEnd::SalesProcessingSSDCallMessage7ReturnReceivingEnd(SalesStaff SalesProcessingSSDCallMessage7Return)
+		MessageEnd::SalesProcessingSSDCallMessage9SendingEnd(SalesStaff SalesProcessingSSDCallMessage9)
+		ExecutionEnd::SalesProcessingSSDExecution5StartEnd(SalesProcessingService SalesProcessingSSDExecution5)
+		ExecutionEnd::SalesProcessingSSDExecution5FinishEnd(SalesProcessingService SalesProcessingSSDExecution5)
+		MessageEnd::SalesProcessingSSDCallMessage9ReturnReceivingEnd(SalesStaff SalesProcessingSSDCallMessage9Return)
+
+	}
+
+	Service SalesManagementSystemSystem {
+
+		[Operation]
+		salesPlanManagement()
+		deliveryNotification()
+		exchangeNotification()
+		itemsPricesMaintenance()
+		postingOfAccount()
+		invoiceManagement()
+		contractTerminationAndSettlement()
+		orderTerminationAndSettlement()
+		salesCommissionManagement()
+
+	}
+
+	Service ThirdPartyServices {
+
+		[Operation]
+		authorizationProcessing()
+
+	}
+
+	Service ContractManagementService {
+
+		[Operation]
+		createContract(id, effectiveDate, buyer, quantity, commodity, unitPrice, packing, dateOfShipment, portOfShipment, portOfDestination, insurance)
+		modifyContract(id, effectiveDate, buyer, quantity, commodity, unitPrice, packing, dateOfShipment, portOfShipment, portOfDestination, insurance)
+		queryContract(id)
+		deleteContract(id)
+
+	}
+
+	Service SalesProcessingService {
+
+		[Operation]
+		makeNewOrder(buyId)
+		addProduct(id, quantity)
+		generateContract(packing, dateOfShipment, portOfShipment, portOfDestination, insurance, effectiveDate)
+		authorization()
+		generateOrder()
+
+		[TempProperty]
+		currentOrderLine : OrderLineProduct
+		currentOrder : Order
+
+	}
+
+	Service OrderManagementService {
+
+		[Operation]
+		createOrder()
+		modifyOrder()
+		queryOrder()
+		deleteOrder()
+
+	}
+
+	Service ProductManagementService {
+
+		[Operation]
+		createProduct(id, name, price)
+		modifyProduct(id, name, price)
+		queryProduct(id)
+		deleteProduct()
+
+	}
+
+	Service ClientManagementService {
+
+		[Operation]
+		createClient(id,name,address,contact,phoneNumber)
+		modifyClient(id,name,address,contact,phoneNumber)
+		queryClient(id)
+		deleteClient()
+
+	}
+
+	Contract ContractManagementService::createContract(id : Integer, effectiveDate : Date, buyer : String, quantity : Real, commodity : String, unitPrice : Real, packing : String, dateOfShipment : String, portOfShipment : String, portOfDestination : String, insurance : String) : Boolean {
+
+		definition:
+			contract:Contracts = Contracts.allInstance()->any(con:Contracts | con.Id = id)
+
+		precondition:
+			contract.oclIsUndefined() = true
+
+		postcondition:
+			let con:Contracts in
+			con.oclIsNew() and
+			con.Id = id and
+			con.EffectiveDate = effectiveDate and
+			con.Buyer = buyer and
+			con.Quantity = quantity and
+			con.Commodity = commodity and
+			con.UnitPrice = unitPrice and
+			con.Packing = packing and
+			con.DateOfShipment = dateOfShipment and
+			con.PortOfShipment = portOfShipment and
+			con.PortOfDestination = portOfDestination and
+			con.Insurance = insurance and
+			Contracts.allInstance()->includes(con) and
+			result = true
+	}
+
+	Contract ContractManagementService::modifyContract(id : Integer, effectiveDate : Date, buyer : String, quantity : Real, commodity : String, unitPrice : Real, packing : String, dateOfShipment : String, portOfShipment : String, portOfDestination : String, insurance : String) : Boolean {
+
+		definition:
+			con:Contracts = Contracts.allInstance()->any(contract:Contracts | contract.Id = id)
+
+		precondition:
+			con.oclIsUndefined() = false
+
+		postcondition:
+			con.Id = id and
+			con.EffectiveDate = effectiveDate and
+			con.Buyer = buyer and
+			con.Quantity = quantity and
+			con.Commodity = commodity and
+			con.UnitPrice = unitPrice and
+			con.Packing = packing and
+			con.DateOfShipment = dateOfShipment and
+			con.PortOfShipment = portOfShipment and
+			con.PortOfDestination = portOfDestination and
+			con.Insurance = insurance and
+			result = true
+	}
+
+	Contract ContractManagementService::queryContract(id : Integer) : Contracts {
+
+		definition:
+			contract:Contracts = Contracts.allInstance()->any(con:Contracts | con.Id = id)
+
+		precondition:
+			contract.oclIsUndefined() = false
+
+		postcondition:
+			result = contract
+	}
+
+	Contract ContractManagementService::deleteContract(id : Integer) : Boolean {
+
+		definition:
+			contract:Contracts = Contracts.allInstance()->any(con:Contracts | con.Id = id)
+
+		precondition:
+			contract.oclIsUndefined() = false and
+			Contracts.allInstance()->includes(contract)
+
+		postcondition:
+			Contracts.allInstance()->excludes(contract) and
+			result = true
+	}
+
+	Contract SalesProcessingService::makeNewOrder(buyId : Integer) : Boolean {
+
+		definition:
+			buyer:Client = Client.allInstance()->any(bu:Client | bu.Id = buyId)
+
+		precondition:
+			buyer.oclIsUndefined() = false and
+			Client.allInstance()->includes(buyer) and
+			(currentOrder.oclIsUndefined() = true or
+				(currentOrder.oclIsUndefined() = false and
+					currentOrder.IsCompleted = true
+				)
+			)
+
+		postcondition:
+			let o:Order in
+			o.oclIsNew() and
+			o.Buyer = buyer and
+			buyer.ContainedOrders->includes(o) and
+			o.IsCompleted = false and
+			Order.allInstance()->includes(o) and
+			self.currentOrder = o and
+			result = true
+	}
+
+	Contract SalesProcessingService::addProduct(id : Integer, quantity : Integer) : Boolean {
+
+		definition:
+			product:Product = Product.allInstance()->any(pr:Product | pr.Id = id)
+
+		precondition:
+			currentOrder.oclIsUndefined() = false and
+			currentOrder.IsComplete = false and
+			product.oclIsUndefined() = false
+
+		postcondition:
+			let olp:OrderLineProduct in
+			olp.oclIsNew() and
+			currentOrderLine = olp and
+			olp.BelongedOrder = currentOrder and
+			currentOrder.ContainedOrderLine->includes(olp) and
+			olp.Quantity = quantity and
+			olp.BelongedProduct = product and
+			olp.SubAmount = product.Price * quantity and
+			OrderLineProduct.allInstance()->includes(olp) and
+			result = true
+	}
+
+	Contract SalesProcessingService::generateContract(packing : String, dateOfShipment : Date, portOfShipment : String, portOfDestination : String, insurance : String, effectiveDate : Date) : Boolean {
+
+		precondition:
+			currentOrder.oclIsUndefined() = false and
+			currentOrder.IsComplete = false
+		postcondition:
+			let con:Contracts in
+			con.oclIsNew() and
+			con.Id = currentOrder.Id and
+			con.BelongedOrder = currentOrder and
+			con.Packing = packing and
+			con.DateOfShipment = dateOfShipment and
+			con.PortOfShipment = portOfShipment and
+			con.PortOfDestination = portOfDestination and
+			con.Insurance = insurance and
+			con.EffectiveDate = effectiveDate and
+			Contracts.allInstance()->includes(con) and
+			result = true
+
+	}
+
+	Contract SalesProcessingService::generateOrder() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract ClientManagementService::createClient(id : Integer, name : String, address : String, contact : String, phoneNumber : String) : Boolean {
+
+		definition:
+			client:Client = Client.allInstance()->any(cli:Client | cli.Id = id)
+
+		precondition:
+			client.oclIsUndefined() = true
+
+		postcondition:
+			let cli:Client in
+			cli.oclIsNew() and
+			cli.Id = id and
+			cli.Name = name and
+			cli.Address = address and
+			cli.Contact = contact and
+			cli.PhoneNumber = phoneNumber and
+			Client.allInstance()->includes(cli) and
+			result = true
+	}
+
+	Contract ClientManagementService::modifyClient(id : Integer, name : String, address : String, contact : String, phoneNumber : String) : Boolean {
+
+		definition:
+			client:Client = Client.allInstance()->any(cli:Client | cli.Id = id)
+
+		precondition:
+			client.oclIsUndefined() = false
+
+		postcondition:
+			cli.Id = id and
+			cli.Name = name and
+			cli.Address = address and
+			cli.Contact = contact and
+			cli.PhoneNumber = phoneNumber and
+			result = true
+	}
+
+	Contract ClientManagementService::queryClient(id : Integer) : Boolean {
+
+		definition:
+			cli:Client = Client.allInstance()->any(cl:Client | cl.Id = id)
+
+		precondition:
+			cli.oclIsUndefined() = false
+
+		postcondition:
+			result = cli
+	}
+
+	Contract ClientManagementService::deleteClient() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract ProductManagementService::createProduct(id : Integer, name : String, price : Real) : Boolean {
+
+		definition:
+			product:Product = Product.allInstance()->any(pr:Product | pr.Id = id)
+
+		precondition:
+			product.oclIsUndefined() = true
+
+		postcondition:
+			let pro:Product in
+			pro.oclIsNew() and
+			pro.Id = id and
+			pro.Name = name and
+			pro.Price = price and
+			Product.allInstance()->includes(pro) and
+			result = true
+	}
+
+	Contract ProductManagementService::modifyProduct(id : Integer, name : String, price : Real) : Boolean {
+
+		definition:
+			product:Product = Product.allInstance()->any(pr:Product | pr.Id = id)
+
+		precondition:
+			product.oclIsUndefined() = false
+
+		postcondition:
+			pro.Id = id and
+			pro.Name = name and
+			pro.Price = price and
+			result = true
+	}
+
+	Contract ProductManagementService::queryProduct(id : Integer) : Boolean {
+
+		definition:
+			pro:Product = Product.allInstance()->any(pr:Product | pr.Id = id)
+
+		precondition:
+			pro.oclIsUndefined() = false
+
+		postcondition:
+			result = pro
+	}
+
+	Contract ProductManagementService::deleteProduct() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract OrderManagementService::createOrder() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract OrderManagementService::modifyOrder() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract OrderManagementService::queryOrder() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract OrderManagementService::deleteOrder() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract SalesManagementSystemSystem::salesPlanManagement() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract SalesManagementSystemSystem::deliveryNotification() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract SalesManagementSystemSystem::exchangeNotification() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract SalesManagementSystemSystem::itemsPricesMaintenance() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract SalesManagementSystemSystem::postingOfAccount() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract SalesManagementSystemSystem::invoiceManagement() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract SalesManagementSystemSystem::contractTerminationAndSettlement() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract SalesManagementSystemSystem::orderTerminationAndSettlement() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract SalesManagementSystemSystem::salesCommissionManagement() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract SalesProcessingService::authorization() : Boolean {
+
+		precondition:
+			authorizationProcessing()
+		postcondition:
+			true
+	}
+
+	Contract ThirdPartyServices::authorizationProcessing() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+}
+
+DomainModel SalesManagementSystem {
+
+	@AutoCRUD Entity Contracts {
+		Id : Integer
+		Buyer : String
+		Packing : String
+		DateOfShipment : Date
+		PortOfShipment : String
+		PortOfDestination : String
+		Insurance : String
+		EffectiveDate : Date
+
+		[Refer]
+		ContractstoClient : Client ! Association
+		BelongedOrder : Order Association
+		InvoiceOfContract : Invoice Association
+	}
+
+	@AutoCRUD Entity Client {
+		Id : Integer
+		Name : String
+		Address : String
+		Contact : String
+		PhoneNumber : String
+
+		[Refer]
+		CG : ClientGroup Association
+		ContainedOrders : Order* ! Association
+	}
+
+	@AutoCRUD Entity Order {
+		Id : Integer
+		IsCompleted : Boolean
+		PaymentInformation : String
+		Amount : Real
+
+		[Refer]
+		BillOfLadingOfOrder : BillOfLading Association
+		DN : DeliveryNotification Association
+		EN : ExchangeNotification* Association
+		OT  : OrderTerm Association
+		Buyer : Client Association
+		ContainedOrderLine : OrderLineProduct* Association
+		ContractOfOrder : Contracts ! Association
+	}
+
+	@AutoCRUD Entity Invoice {
+		Title : String
+		EffecitveDate : Date
+		Amount : Real
+	}
+
+	@AutoCRUD Entity BillOfLading {
+		Id : Integer
+		Consignee : String
+		CommodityList : String
+		ContractObject : String
+		Quantity : Real
+		TotalPrice : Real
+		DeadlineForPerformance : String
+		LocationForPerformance : String
+		MethodForPerformance : String
+
+		[Refer]
+		DT : DeliveryTerm Association
+		BelongedOrder : Order ! Association
+	}
+
+	@AutoCRUD Entity DeliveryNotification {
+		EffectiveDate : Date
+		Details : String
+	}
+
+	@AutoCRUD Entity ExchangeNotification {
+		EffectiveDate : Date
+		Details : String
+	}
+
+	@AutoCRUD Entity OrderTerm {
+		Id : Integer
+		Name : String
+	}
+
+	@AutoCRUD Entity ClientGroup {
+		Id : Integer
+		Name : String
+	}
+
+	@AutoCRUD Entity DeliveryTerm {
+		Id : Integer
+		Name : String
+	}
+
+	@AutoCRUD Entity Product {
+		Id : Integer
+		Name : String
+		Price : Real
+	}
+
+	@AutoCRUD Entity OrderLineProduct {
+		Quantity : Integer
+		SubAmount : Real
+
+		[Refer]
+		BelongedProduct : Product Association
+		BelongedOrder : Order ! Association
+	}
+
+}
+
