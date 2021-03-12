@@ -1,38 +1,40 @@
 UseCaseModel SalesManagementSystem {
 
-	UC::manageOrder
-	UC::manageContract
-	UC::manageProduct
-	UC::manageClient
-	UC::salesCommissionManagement()
-	UC::salesProcessing definedBySSD(SalesProcessingSSD) relatedService(SalesProcessingService)
-	UC::salesPlanManagement()
-	UC::deliveryNotification()
-	UC::exchangeNotification()
-	UC::manageItemsPrices()
-	UC::manageInvoice()
-	UC::postingOfAccount()
-	UC::contractTerminationAndSettlement()
-	UC::orderTerminationAndSettlement()
+	UC::manageOrder "订单信息管理(CRUD)"
+	UC::manageContract "合同信息管理(CRUD)"
+	UC::manageProduct "产品信息管理(CRUD)"
+	UC::manageClient "客户信息管理(CRUD)"
+	UC::salesCommissionManagement "销售佣金管理(R&U)"
+	UC::salesProcessing "销售过程处理" definedBySSD(SalesProcessingSSD) relatedService(SalesProcessingService)
+	UC::salesPlanManagement "销售计划管理" definedBySSD(SalesPlanManagementSSD) relatedService(SalesPlanManagementService)
+	UC::deliveryNotification"发货通知" definedBySSD(DeliveryNotificationSSD) relatedService(DeliveryNotificationService)
+	UC::exchangeProcessing "退换处理" definedBySSD(ExchangeProcessingSSD) relatedService(ExchangeProcessingService)
+	UC::manageItemsPrices "产品报价(R&U)"
+	UC::manageInvoice "发票管理(CRUD)"
+	UC::postingOfAccount "过账处理"
+	UC::tradingTerminationAndSettlement "交易终止结清" definedBySSD(TradingTerminationAndSettlementSSD) relatedService(TradingTerminationAndSettlementService)
+	UC::manageDeliveryMethod "交货方式管理(CRUD)"
+	UC::manageOrderMethod "订货方式管理(CRUD)"
 
 	Actor SalesStaff("销售职员") {
 		salesProcessing
 		deliveryNotification
-		exchangeNotification
+		exchangeProcessing
 	}
 
 	Actor FinancialStaff("财务职员") {
 		manageItemsPrices
 		manageInvoice
 		postingOfAccount
-		orderTerminationAndSettlement
-		contractTerminationAndSettlement
+		tradingTerminationAndSettlement
 	}
 
 	Actor DepartmentManager("部门经理") {
 		manageClient
 		salesCommissionManagement
 		salesPlanManagement
+		manageDeliveryMethod
+		manageOrderMethod
 	}
 
 	Actor Administrator("系统管理员") {
@@ -97,11 +99,137 @@ UseCaseModel SalesManagementSystem {
 
 	}
 
+	Interaction DeliveryNotificationSSD {
+
+		[Participants: SalesStaff DeliveryNotificationService]
+
+		CallMessage::DeliveryNotificationSSDCallMessage1(generateBillOfLading DeliveryNotificationSSDCallMessage1SendingEnd -> DeliveryNotificationSSDExecution1StartEnd)
+		ReturnMessage::DeliveryNotificationSSDCallMessage1Return(DeliveryNotificationSSDExecution1FinishEnd -> DeliveryNotificationSSDCallMessage1ReturnReceivingEnd DeliveryNotificationSSDCallMessage1)
+		CallMessage::DeliveryNotificationSSDCallMessage3(generateNotification DeliveryNotificationSSDCallMessage3SendingEnd -> DeliveryNotificationSSDExecution2StartEnd)
+		ReturnMessage::DeliveryNotificationSSDCallMessage3Return(DeliveryNotificationSSDExecution2FinishEnd -> DeliveryNotificationSSDCallMessage3ReturnReceivingEnd DeliveryNotificationSSDCallMessage3)
+
+		Execution::DeliveryNotificationSSDExecution1(DeliveryNotificationService DeliveryNotificationSSDExecution1StartEnd DeliveryNotificationSSDExecution1FinishEnd)
+		Execution::DeliveryNotificationSSDExecution2(DeliveryNotificationService DeliveryNotificationSSDExecution2StartEnd DeliveryNotificationSSDExecution2FinishEnd)
+
+		MessageEnd::DeliveryNotificationSSDCallMessage1SendingEnd(SalesStaff DeliveryNotificationSSDCallMessage1)
+		ExecutionEnd::DeliveryNotificationSSDExecution1StartEnd(DeliveryNotificationService DeliveryNotificationSSDExecution1)
+		ExecutionEnd::DeliveryNotificationSSDExecution1FinishEnd(DeliveryNotificationService DeliveryNotificationSSDExecution1)
+		MessageEnd::DeliveryNotificationSSDCallMessage1ReturnReceivingEnd(SalesStaff DeliveryNotificationSSDCallMessage1Return)
+		MessageEnd::DeliveryNotificationSSDCallMessage3SendingEnd(SalesStaff DeliveryNotificationSSDCallMessage3)
+		ExecutionEnd::DeliveryNotificationSSDExecution2StartEnd(DeliveryNotificationService DeliveryNotificationSSDExecution2)
+		ExecutionEnd::DeliveryNotificationSSDExecution2FinishEnd(DeliveryNotificationService DeliveryNotificationSSDExecution2)
+		MessageEnd::DeliveryNotificationSSDCallMessage3ReturnReceivingEnd(SalesStaff DeliveryNotificationSSDCallMessage3Return)
+
+	}
+
+	Interaction ExchangeProcessingSSD {
+
+		[Participants: SalesStaff ExchangeProcessingService]
+
+		CallMessage::ExchangeProcessingSSDCallMessage1(typeChoice ExchangeProcessingSSDCallMessage1SendingEnd -> ExchangeProcessingSSDExecution1StartEnd)
+		ReturnMessage::ExchangeProcessingSSDCallMessage1Return(ExchangeProcessingSSDExecution1FinishEnd -> ExchangeProcessingSSDCallMessage1ReturnReceivingEnd ExchangeProcessingSSDCallMessage1)
+		CallMessage::ExchangeProcessingSSDCallMessage3(cancelOrder ExchangeProcessingSSDCallMessage3SendingEnd -> ExchangeProcessingSSDExecution2StartEnd)
+		ReturnMessage::ExchangeProcessingSSDCallMessage3Return(ExchangeProcessingSSDExecution2FinishEnd -> ExchangeProcessingSSDCallMessage3ReturnReceivingEnd ExchangeProcessingSSDCallMessage3)
+		CallMessage::ExchangeProcessingSSDCallMessage5(regenerateBillOfLading ExchangeProcessingSSDCallMessage5SendingEnd -> ExchangeProcessingSSDExecution3StartEnd)
+		ReturnMessage::ExchangeProcessingSSDCallMessage5Return(ExchangeProcessingSSDExecution3FinishEnd -> ExchangeProcessingSSDCallMessage5ReturnReceivingEnd ExchangeProcessingSSDCallMessage5)
+		CallMessage::ExchangeProcessingSSDCallMessage7(regenerateNotification ExchangeProcessingSSDCallMessage7SendingEnd -> ExchangeProcessingSSDExecution4StartEnd)
+		ReturnMessage::ExchangeProcessingSSDCallMessage7Return(ExchangeProcessingSSDExecution4FinishEnd -> ExchangeProcessingSSDCallMessage7ReturnReceivingEnd ExchangeProcessingSSDCallMessage7)
+
+		Execution::ExchangeProcessingSSDExecution1(ExchangeProcessingService ExchangeProcessingSSDExecution1StartEnd ExchangeProcessingSSDExecution1FinishEnd)
+		Execution::ExchangeProcessingSSDExecution2(ExchangeProcessingService ExchangeProcessingSSDExecution2StartEnd ExchangeProcessingSSDExecution2FinishEnd)
+		Execution::ExchangeProcessingSSDExecution3(ExchangeProcessingService ExchangeProcessingSSDExecution3StartEnd ExchangeProcessingSSDExecution3FinishEnd)
+		Execution::ExchangeProcessingSSDExecution4(ExchangeProcessingService ExchangeProcessingSSDExecution4StartEnd ExchangeProcessingSSDExecution4FinishEnd)
+
+		MessageEnd::ExchangeProcessingSSDCallMessage1SendingEnd(SalesStaff ExchangeProcessingSSDCallMessage1)
+		ExecutionEnd::ExchangeProcessingSSDExecution1StartEnd(ExchangeProcessingService ExchangeProcessingSSDExecution1)
+		ExecutionEnd::ExchangeProcessingSSDExecution1FinishEnd(ExchangeProcessingService ExchangeProcessingSSDExecution1)
+		MessageEnd::ExchangeProcessingSSDCallMessage1ReturnReceivingEnd(SalesStaff ExchangeProcessingSSDCallMessage1Return)
+		MessageEnd::ExchangeProcessingSSDCallMessage3SendingEnd(SalesStaff ExchangeProcessingSSDCallMessage3)
+		ExecutionEnd::ExchangeProcessingSSDExecution2StartEnd(ExchangeProcessingService ExchangeProcessingSSDExecution2)
+		ExecutionEnd::ExchangeProcessingSSDExecution2FinishEnd(ExchangeProcessingService ExchangeProcessingSSDExecution2)
+		MessageEnd::ExchangeProcessingSSDCallMessage3ReturnReceivingEnd(SalesStaff ExchangeProcessingSSDCallMessage3Return)
+		MessageEnd::ExchangeProcessingSSDCallMessage5SendingEnd(SalesStaff ExchangeProcessingSSDCallMessage5)
+		ExecutionEnd::ExchangeProcessingSSDExecution3StartEnd(ExchangeProcessingService ExchangeProcessingSSDExecution3)
+		ExecutionEnd::ExchangeProcessingSSDExecution3FinishEnd(ExchangeProcessingService ExchangeProcessingSSDExecution3)
+		MessageEnd::ExchangeProcessingSSDCallMessage5ReturnReceivingEnd(SalesStaff ExchangeProcessingSSDCallMessage5Return)
+		MessageEnd::ExchangeProcessingSSDCallMessage7SendingEnd(SalesStaff ExchangeProcessingSSDCallMessage7)
+		ExecutionEnd::ExchangeProcessingSSDExecution4StartEnd(ExchangeProcessingService ExchangeProcessingSSDExecution4)
+		ExecutionEnd::ExchangeProcessingSSDExecution4FinishEnd(ExchangeProcessingService ExchangeProcessingSSDExecution4)
+		MessageEnd::ExchangeProcessingSSDCallMessage7ReturnReceivingEnd(SalesStaff ExchangeProcessingSSDCallMessage7Return)
+
+	}
+
+	Interaction SalesPlanManagementSSD {
+
+		[Participants: DepartmentManager SalesPlanManagementService]
+
+		CallMessage::SalesPlanManagementSSDCallMessage1(makeNewPlan SalesPlanManagementSSDCallMessage1SendingEnd -> SalesPlanManagementSSDExecution1StartEnd)
+		ReturnMessage::SalesPlanManagementSSDCallMessage1Return(SalesPlanManagementSSDExecution1FinishEnd -> SalesPlanManagementSSDCallMessage1ReturnReceivingEnd SalesPlanManagementSSDCallMessage1)
+		CallMessage::SalesPlanManagementSSDCallMessage3(addItemIntoPlan SalesPlanManagementSSDCallMessage3SendingEnd -> SalesPlanManagementSSDExecution2StartEnd)
+		ReturnMessage::SalesPlanManagementSSDCallMessage3Return(SalesPlanManagementSSDExecution2FinishEnd -> SalesPlanManagementSSDCallMessage3ReturnReceivingEnd SalesPlanManagementSSDCallMessage3)
+		CallMessage::SalesPlanManagementSSDCallMessage5(generatePlan SalesPlanManagementSSDCallMessage5SendingEnd -> SalesPlanManagementSSDExecution3StartEnd)
+		ReturnMessage::SalesPlanManagementSSDCallMessage5Return(SalesPlanManagementSSDExecution3FinishEnd -> SalesPlanManagementSSDCallMessage5ReturnReceivingEnd SalesPlanManagementSSDCallMessage5)
+
+		Execution::SalesPlanManagementSSDExecution1(SalesPlanManagementService SalesPlanManagementSSDExecution1StartEnd SalesPlanManagementSSDExecution1FinishEnd)
+		Execution::SalesPlanManagementSSDExecution2(SalesPlanManagementService SalesPlanManagementSSDExecution2StartEnd SalesPlanManagementSSDExecution2FinishEnd)
+		Execution::SalesPlanManagementSSDExecution3(SalesPlanManagementService SalesPlanManagementSSDExecution3StartEnd SalesPlanManagementSSDExecution3FinishEnd)
+
+		MessageEnd::SalesPlanManagementSSDCallMessage1SendingEnd(DepartmentManager SalesPlanManagementSSDCallMessage1)
+		ExecutionEnd::SalesPlanManagementSSDExecution1StartEnd(SalesPlanManagementService SalesPlanManagementSSDExecution1)
+		ExecutionEnd::SalesPlanManagementSSDExecution1FinishEnd(SalesPlanManagementService SalesPlanManagementSSDExecution1)
+		MessageEnd::SalesPlanManagementSSDCallMessage1ReturnReceivingEnd(DepartmentManager SalesPlanManagementSSDCallMessage1Return)
+		MessageEnd::SalesPlanManagementSSDCallMessage3SendingEnd(DepartmentManager SalesPlanManagementSSDCallMessage3)
+		ExecutionEnd::SalesPlanManagementSSDExecution2StartEnd(SalesPlanManagementService SalesPlanManagementSSDExecution2)
+		ExecutionEnd::SalesPlanManagementSSDExecution2FinishEnd(SalesPlanManagementService SalesPlanManagementSSDExecution2)
+		MessageEnd::SalesPlanManagementSSDCallMessage3ReturnReceivingEnd(DepartmentManager SalesPlanManagementSSDCallMessage3Return)
+		MessageEnd::SalesPlanManagementSSDCallMessage5SendingEnd(DepartmentManager SalesPlanManagementSSDCallMessage5)
+		ExecutionEnd::SalesPlanManagementSSDExecution3StartEnd(SalesPlanManagementService SalesPlanManagementSSDExecution3)
+		ExecutionEnd::SalesPlanManagementSSDExecution3FinishEnd(SalesPlanManagementService SalesPlanManagementSSDExecution3)
+		MessageEnd::SalesPlanManagementSSDCallMessage5ReturnReceivingEnd(DepartmentManager SalesPlanManagementSSDCallMessage5Return)
+
+	}
+
+	Interaction TradingTerminationAndSettlementSSD {
+
+		[Participants: FinancialStaff TradingTerminationAndSettlementService]
+
+		CallMessage::TradingTerminationAndSettlementSSDCallMessage1(orderTerminationAndSettlement TradingTerminationAndSettlementSSDCallMessage1SendingEnd -> TradingTerminationAndSettlementSSDExecution1StartEnd)
+		ReturnMessage::TradingTerminationAndSettlementSSDCallMessage1Return(TradingTerminationAndSettlementSSDExecution1FinishEnd -> TradingTerminationAndSettlementSSDCallMessage1ReturnReceivingEnd TradingTerminationAndSettlementSSDCallMessage1)
+		CallMessage::TradingTerminationAndSettlementSSDCallMessage3(contractTerminationAndSettlement TradingTerminationAndSettlementSSDCallMessage3SendingEnd -> TradingTerminationAndSettlementSSDExecution2StartEnd)
+		ReturnMessage::TradingTerminationAndSettlementSSDCallMessage3Return(TradingTerminationAndSettlementSSDExecution2FinishEnd -> TradingTerminationAndSettlementSSDCallMessage3ReturnReceivingEnd TradingTerminationAndSettlementSSDCallMessage3)
+		CallMessage::TradingTerminationAndSettlementSSDCallMessage5(payment TradingTerminationAndSettlementSSDCallMessage5SendingEnd -> TradingTerminationAndSettlementSSDExecution3StartEnd)
+		ReturnMessage::TradingTerminationAndSettlementSSDCallMessage5Return(TradingTerminationAndSettlementSSDExecution3FinishEnd -> TradingTerminationAndSettlementSSDCallMessage5ReturnReceivingEnd TradingTerminationAndSettlementSSDCallMessage5)
+		CallMessage::TradingTerminationAndSettlementSSDCallMessage7(generateInvoice TradingTerminationAndSettlementSSDCallMessage7SendingEnd -> TradingTerminationAndSettlementSSDExecution4StartEnd)
+		ReturnMessage::TradingTerminationAndSettlementSSDCallMessage7Return(TradingTerminationAndSettlementSSDExecution4FinishEnd -> TradingTerminationAndSettlementSSDCallMessage7ReturnReceivingEnd TradingTerminationAndSettlementSSDCallMessage7)
+
+		Execution::TradingTerminationAndSettlementSSDExecution1(TradingTerminationAndSettlementService TradingTerminationAndSettlementSSDExecution1StartEnd TradingTerminationAndSettlementSSDExecution1FinishEnd)
+		Execution::TradingTerminationAndSettlementSSDExecution2(TradingTerminationAndSettlementService TradingTerminationAndSettlementSSDExecution2StartEnd TradingTerminationAndSettlementSSDExecution2FinishEnd)
+		Execution::TradingTerminationAndSettlementSSDExecution3(TradingTerminationAndSettlementService TradingTerminationAndSettlementSSDExecution3StartEnd TradingTerminationAndSettlementSSDExecution3FinishEnd)
+		Execution::TradingTerminationAndSettlementSSDExecution4(TradingTerminationAndSettlementService TradingTerminationAndSettlementSSDExecution4StartEnd TradingTerminationAndSettlementSSDExecution4FinishEnd)
+
+		MessageEnd::TradingTerminationAndSettlementSSDCallMessage1SendingEnd(FinancialStaff TradingTerminationAndSettlementSSDCallMessage1)
+		ExecutionEnd::TradingTerminationAndSettlementSSDExecution1StartEnd(TradingTerminationAndSettlementService TradingTerminationAndSettlementSSDExecution1)
+		ExecutionEnd::TradingTerminationAndSettlementSSDExecution1FinishEnd(TradingTerminationAndSettlementService TradingTerminationAndSettlementSSDExecution1)
+		MessageEnd::TradingTerminationAndSettlementSSDCallMessage1ReturnReceivingEnd(FinancialStaff TradingTerminationAndSettlementSSDCallMessage1Return)
+		MessageEnd::TradingTerminationAndSettlementSSDCallMessage3SendingEnd(FinancialStaff TradingTerminationAndSettlementSSDCallMessage3)
+		ExecutionEnd::TradingTerminationAndSettlementSSDExecution2StartEnd(TradingTerminationAndSettlementService TradingTerminationAndSettlementSSDExecution2)
+		ExecutionEnd::TradingTerminationAndSettlementSSDExecution2FinishEnd(TradingTerminationAndSettlementService TradingTerminationAndSettlementSSDExecution2)
+		MessageEnd::TradingTerminationAndSettlementSSDCallMessage3ReturnReceivingEnd(FinancialStaff TradingTerminationAndSettlementSSDCallMessage3Return)
+		MessageEnd::TradingTerminationAndSettlementSSDCallMessage5SendingEnd(FinancialStaff TradingTerminationAndSettlementSSDCallMessage5)
+		ExecutionEnd::TradingTerminationAndSettlementSSDExecution3StartEnd(TradingTerminationAndSettlementService TradingTerminationAndSettlementSSDExecution3)
+		ExecutionEnd::TradingTerminationAndSettlementSSDExecution3FinishEnd(TradingTerminationAndSettlementService TradingTerminationAndSettlementSSDExecution3)
+		MessageEnd::TradingTerminationAndSettlementSSDCallMessage5ReturnReceivingEnd(FinancialStaff TradingTerminationAndSettlementSSDCallMessage5Return)
+		MessageEnd::TradingTerminationAndSettlementSSDCallMessage7SendingEnd(FinancialStaff TradingTerminationAndSettlementSSDCallMessage7)
+		ExecutionEnd::TradingTerminationAndSettlementSSDExecution4StartEnd(TradingTerminationAndSettlementService TradingTerminationAndSettlementSSDExecution4)
+		ExecutionEnd::TradingTerminationAndSettlementSSDExecution4FinishEnd(TradingTerminationAndSettlementService TradingTerminationAndSettlementSSDExecution4)
+		MessageEnd::TradingTerminationAndSettlementSSDCallMessage7ReturnReceivingEnd(FinancialStaff TradingTerminationAndSettlementSSDCallMessage7Return)
+
+	}
+
 	Service SalesManagementSystemSystem {
 
 		[Operation]
 		salesPlanManagement()
-		deliveryNotification()
 		exchangeNotification()
 		manageItemsPrices()
 		postingOfAccount()
@@ -131,10 +259,14 @@ UseCaseModel SalesManagementSystem {
 	Service ManageClientCRUDService {
 
 		[Operation]
-		createClient(id, name, address, contact, phonenumber)
+		createClient(id, name, address, contact, phonenumber,groupId)
 		queryClient(id)
-		modifyClient(id, name, address, contact, phonenumber)
+		modifyClient(id, name, address, contact, phonenumber,groupId)
 		deleteClient(id)
+		createClientGroup()
+		queryClientGroup()
+		modifyClientGroup()
+		deleteClientGroup()
 
 	}
 
@@ -181,7 +313,7 @@ UseCaseModel SalesManagementSystem {
 	Service SalesProcessingService {
 
 		[Operation]
-		makeNewOrder(buyId)
+		makeNewOrder(buyerId)
 		addProduct(id, quantity)
 		generateContract(packing, dateOfShipment, portOfShipment, portOfDestination, insurance, effectiveDate)
 		authorization()
@@ -193,10 +325,47 @@ UseCaseModel SalesManagementSystem {
 
 	}
 
-	Contract SalesProcessingService::makeNewOrder(buyId : Integer) : Boolean {
+	Service DeliveryNotificationService {
+
+		[Operation]
+		generateBillOfLading()
+		generateNotification()
+
+	}
+
+	Service ExchangeProcessingService {
+
+		[Operation]
+		typeChoice()
+		cancelOrder()
+		regenerateBillOfLading()
+		regenerateNotification()
+
+	}
+
+	Service SalesPlanManagementService {
+
+		[Operation]
+		makeNewPlan()
+		addItemIntoPlan()
+		generatePlan()
+
+	}
+
+	Service TradingTerminationAndSettlementService {
+
+		[Operation]
+		contractTerminationAndSettlement()
+		orderTerminationAndSettlement()
+		payment()
+		generateInvoice()
+
+	}
+
+	Contract SalesProcessingService::makeNewOrder(buyerId : Integer) : Boolean {
 
 		definition:
-			buyer:Client = Client.allInstance()->any(bu:Client | bu.Id = buyId)
+			buyer:Client = Client.allInstance()->any(bu:Client | bu.Id = buyerId)
 
 		precondition:
 			buyer.oclIsUndefined() = false and
@@ -609,7 +778,7 @@ UseCaseModel SalesManagementSystem {
 	}
 
 	// entity create operation 
-	Contract  ManageClientCRUDService::createClient(id : Integer, name : String, address : String, contact : String, phonenumber : String) : Boolean {
+	Contract  ManageClientCRUDService::createClient(id : Integer, name : String, address : String, contact : String, phonenumber : String, groupId : Integer) : Boolean {
 
 		/* definition: find specific Client instance by id */
 		definition:
@@ -652,7 +821,7 @@ UseCaseModel SalesManagementSystem {
 	}
 
 	// entity modify operation 
-	Contract  ManageClientCRUDService::modifyClient(id : Integer, name : String, address : String, contact : String, phonenumber : String) : Boolean {
+	Contract  ManageClientCRUDService::modifyClient(id : Integer, name : String, address : String, contact : String, phonenumber : String, groupId : Integer) : Boolean {
 
 		/* definition: find specific Client instance by id */
 		definition:
@@ -856,6 +1025,134 @@ UseCaseModel SalesManagementSystem {
 			true
 	}
 
+	Contract ManageClientCRUDService::createClientGroup() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract ManageClientCRUDService::queryClientGroup() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract ManageClientCRUDService::modifyClientGroup() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract ManageClientCRUDService::deleteClientGroup() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract TradingTerminationAndSettlementService::orderTerminationAndSettlement() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract TradingTerminationAndSettlementService::payment() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract TradingTerminationAndSettlementService::generateInvoice() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract DeliveryNotificationService::generateBillOfLading() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract DeliveryNotificationService::generateNotification() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract ExchangeProcessingService::typeChoice() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract ExchangeProcessingService::cancelOrder() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract ExchangeProcessingService::regenerateBillOfLading() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract ExchangeProcessingService::regenerateNotification() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract SalesPlanManagementService::makeNewPlan() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract SalesPlanManagementService::addItemIntoPlan() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
+	Contract SalesPlanManagementService::generatePlan() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			true
+	}
+
 }
 
 DomainModel SalesManagementSystem {
@@ -898,7 +1195,7 @@ DomainModel SalesManagementSystem {
 		BillOfLadingOfOrder : BillOfLading Association
 		DN : DeliveryNotification Association
 		EN : ExchangeNotification* Association
-		OT  : OrderTerm Association
+		OT  : OrderMethod Association
 		Buyer : Client Association
 		ContainedOrderLine : OrderLineProduct* Association
 		ContractOfOrder : Contracts ! Association
@@ -915,15 +1212,13 @@ DomainModel SalesManagementSystem {
 		Id : Integer
 		Consignee : String
 		CommodityList : String
-		ContractObject : String
-		Quantity : Real
 		TotalPrice : Real
 		DeadlineForPerformance : String
 		LocationForPerformance : String
 		MethodForPerformance : String
 
 		[Refer]
-		DT : DeliveryTerm Association
+		DT : DeliveryMethod Association
 		BelongedOrder : Order ! Association
 	}
 
@@ -939,7 +1234,7 @@ DomainModel SalesManagementSystem {
 		Details : String
 	}
 
-	Entity OrderTerm {
+	@AutoCRUD Entity OrderMethod {
 		Id : Integer
 		Name : String
 	}
@@ -949,7 +1244,7 @@ DomainModel SalesManagementSystem {
 		Name : String
 	}
 
-	Entity DeliveryTerm {
+	@AutoCRUD Entity DeliveryMethod {
 		Id : Integer
 		Name : String
 	}
@@ -968,6 +1263,29 @@ DomainModel SalesManagementSystem {
 		[Refer]
 		BelongedProduct : Product Association
 		BelongedOrder : Order ! Association
+	}
+
+	Entity PlanLineProduct {
+		Cost : Real
+		Id : Integer
+		Expected : Integer
+		SalesCommission : Real
+
+		[Refer]
+		BelongedProduct : Product Association
+		ContainedLine : SalePlan Association
+	}
+
+	Entity SalePlan {
+		StartDate : Date
+		EndDate : Date
+		Id : Integer
+		TotalCost : Real
+		TotalPrice : Real
+		Profits : Real
+
+		[Refer]
+		SalePlantoPlanLineProduct : PlanLineProduct* ! Aggregation
 	}
 
 }
