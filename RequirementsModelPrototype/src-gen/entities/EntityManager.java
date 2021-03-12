@@ -26,11 +26,13 @@ public class EntityManager {
 	private static List<BillOfLading> BillOfLadingInstances = new LinkedList<BillOfLading>();
 	private static List<DeliveryNotification> DeliveryNotificationInstances = new LinkedList<DeliveryNotification>();
 	private static List<ExchangeNotification> ExchangeNotificationInstances = new LinkedList<ExchangeNotification>();
-	private static List<OrderTerm> OrderTermInstances = new LinkedList<OrderTerm>();
+	private static List<OrderMethod> OrderMethodInstances = new LinkedList<OrderMethod>();
 	private static List<ClientGroup> ClientGroupInstances = new LinkedList<ClientGroup>();
-	private static List<DeliveryTerm> DeliveryTermInstances = new LinkedList<DeliveryTerm>();
+	private static List<DeliveryMethod> DeliveryMethodInstances = new LinkedList<DeliveryMethod>();
 	private static List<Product> ProductInstances = new LinkedList<Product>();
 	private static List<OrderLineProduct> OrderLineProductInstances = new LinkedList<OrderLineProduct>();
+	private static List<PlanLineProduct> PlanLineProductInstances = new LinkedList<PlanLineProduct>();
+	private static List<SalePlan> SalePlanInstances = new LinkedList<SalePlan>();
 
 	
 	/* Put instances list into Map */
@@ -42,11 +44,13 @@ public class EntityManager {
 		AllInstance.put("BillOfLading", BillOfLadingInstances);
 		AllInstance.put("DeliveryNotification", DeliveryNotificationInstances);
 		AllInstance.put("ExchangeNotification", ExchangeNotificationInstances);
-		AllInstance.put("OrderTerm", OrderTermInstances);
+		AllInstance.put("OrderMethod", OrderMethodInstances);
 		AllInstance.put("ClientGroup", ClientGroupInstances);
-		AllInstance.put("DeliveryTerm", DeliveryTermInstances);
+		AllInstance.put("DeliveryMethod", DeliveryMethodInstances);
 		AllInstance.put("Product", ProductInstances);
 		AllInstance.put("OrderLineProduct", OrderLineProductInstances);
+		AllInstance.put("PlanLineProduct", PlanLineProductInstances);
+		AllInstance.put("SalePlan", SalePlanInstances);
 	} 
 		
 	/* Save State */
@@ -63,11 +67,13 @@ public class EntityManager {
 			stateSave.writeObject(BillOfLadingInstances);
 			stateSave.writeObject(DeliveryNotificationInstances);
 			stateSave.writeObject(ExchangeNotificationInstances);
-			stateSave.writeObject(OrderTermInstances);
+			stateSave.writeObject(OrderMethodInstances);
 			stateSave.writeObject(ClientGroupInstances);
-			stateSave.writeObject(DeliveryTermInstances);
+			stateSave.writeObject(DeliveryMethodInstances);
 			stateSave.writeObject(ProductInstances);
 			stateSave.writeObject(OrderLineProductInstances);
+			stateSave.writeObject(PlanLineProductInstances);
+			stateSave.writeObject(SalePlanInstances);
 			
 			stateSave.close();
 					
@@ -104,16 +110,20 @@ public class EntityManager {
 				AllInstance.put("DeliveryNotification", DeliveryNotificationInstances);
 				ExchangeNotificationInstances =  (List<ExchangeNotification>) stateLoad.readObject();
 				AllInstance.put("ExchangeNotification", ExchangeNotificationInstances);
-				OrderTermInstances =  (List<OrderTerm>) stateLoad.readObject();
-				AllInstance.put("OrderTerm", OrderTermInstances);
+				OrderMethodInstances =  (List<OrderMethod>) stateLoad.readObject();
+				AllInstance.put("OrderMethod", OrderMethodInstances);
 				ClientGroupInstances =  (List<ClientGroup>) stateLoad.readObject();
 				AllInstance.put("ClientGroup", ClientGroupInstances);
-				DeliveryTermInstances =  (List<DeliveryTerm>) stateLoad.readObject();
-				AllInstance.put("DeliveryTerm", DeliveryTermInstances);
+				DeliveryMethodInstances =  (List<DeliveryMethod>) stateLoad.readObject();
+				AllInstance.put("DeliveryMethod", DeliveryMethodInstances);
 				ProductInstances =  (List<Product>) stateLoad.readObject();
 				AllInstance.put("Product", ProductInstances);
 				OrderLineProductInstances =  (List<OrderLineProduct>) stateLoad.readObject();
 				AllInstance.put("OrderLineProduct", OrderLineProductInstances);
+				PlanLineProductInstances =  (List<PlanLineProduct>) stateLoad.readObject();
+				AllInstance.put("PlanLineProduct", PlanLineProductInstances);
+				SalePlanInstances =  (List<SalePlan>) stateLoad.readObject();
+				AllInstance.put("SalePlan", SalePlanInstances);
 				
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -352,25 +362,25 @@ public class EntityManager {
 	public static boolean deleteExchangeNotificationObjects(List<ExchangeNotification> os) {
 		return ExchangeNotificationInstances.removeAll(os);
 	}
-	public static OrderTerm createOrderTermObject() {
-		OrderTerm o = new OrderTerm();
+	public static OrderMethod createOrderMethodObject() {
+		OrderMethod o = new OrderMethod();
 		return o;
 	}
 	
-	public static boolean addOrderTermObject(OrderTerm o) {
-		return OrderTermInstances.add(o);
+	public static boolean addOrderMethodObject(OrderMethod o) {
+		return OrderMethodInstances.add(o);
 	}
 	
-	public static boolean addOrderTermObjects(List<OrderTerm> os) {
-		return OrderTermInstances.addAll(os);
+	public static boolean addOrderMethodObjects(List<OrderMethod> os) {
+		return OrderMethodInstances.addAll(os);
 	}
 	
-	public static boolean deleteOrderTermObject(OrderTerm o) {
-		return OrderTermInstances.remove(o);
+	public static boolean deleteOrderMethodObject(OrderMethod o) {
+		return OrderMethodInstances.remove(o);
 	}
 	
-	public static boolean deleteOrderTermObjects(List<OrderTerm> os) {
-		return OrderTermInstances.removeAll(os);
+	public static boolean deleteOrderMethodObjects(List<OrderMethod> os) {
+		return OrderMethodInstances.removeAll(os);
 	}
 	public static ClientGroup createClientGroupObject() {
 		ClientGroup o = new ClientGroup();
@@ -392,25 +402,25 @@ public class EntityManager {
 	public static boolean deleteClientGroupObjects(List<ClientGroup> os) {
 		return ClientGroupInstances.removeAll(os);
 	}
-	public static DeliveryTerm createDeliveryTermObject() {
-		DeliveryTerm o = new DeliveryTerm();
+	public static DeliveryMethod createDeliveryMethodObject() {
+		DeliveryMethod o = new DeliveryMethod();
 		return o;
 	}
 	
-	public static boolean addDeliveryTermObject(DeliveryTerm o) {
-		return DeliveryTermInstances.add(o);
+	public static boolean addDeliveryMethodObject(DeliveryMethod o) {
+		return DeliveryMethodInstances.add(o);
 	}
 	
-	public static boolean addDeliveryTermObjects(List<DeliveryTerm> os) {
-		return DeliveryTermInstances.addAll(os);
+	public static boolean addDeliveryMethodObjects(List<DeliveryMethod> os) {
+		return DeliveryMethodInstances.addAll(os);
 	}
 	
-	public static boolean deleteDeliveryTermObject(DeliveryTerm o) {
-		return DeliveryTermInstances.remove(o);
+	public static boolean deleteDeliveryMethodObject(DeliveryMethod o) {
+		return DeliveryMethodInstances.remove(o);
 	}
 	
-	public static boolean deleteDeliveryTermObjects(List<DeliveryTerm> os) {
-		return DeliveryTermInstances.removeAll(os);
+	public static boolean deleteDeliveryMethodObjects(List<DeliveryMethod> os) {
+		return DeliveryMethodInstances.removeAll(os);
 	}
 	public static Product createProductObject() {
 		Product o = new Product();
@@ -451,6 +461,46 @@ public class EntityManager {
 	
 	public static boolean deleteOrderLineProductObjects(List<OrderLineProduct> os) {
 		return OrderLineProductInstances.removeAll(os);
+	}
+	public static PlanLineProduct createPlanLineProductObject() {
+		PlanLineProduct o = new PlanLineProduct();
+		return o;
+	}
+	
+	public static boolean addPlanLineProductObject(PlanLineProduct o) {
+		return PlanLineProductInstances.add(o);
+	}
+	
+	public static boolean addPlanLineProductObjects(List<PlanLineProduct> os) {
+		return PlanLineProductInstances.addAll(os);
+	}
+	
+	public static boolean deletePlanLineProductObject(PlanLineProduct o) {
+		return PlanLineProductInstances.remove(o);
+	}
+	
+	public static boolean deletePlanLineProductObjects(List<PlanLineProduct> os) {
+		return PlanLineProductInstances.removeAll(os);
+	}
+	public static SalePlan createSalePlanObject() {
+		SalePlan o = new SalePlan();
+		return o;
+	}
+	
+	public static boolean addSalePlanObject(SalePlan o) {
+		return SalePlanInstances.add(o);
+	}
+	
+	public static boolean addSalePlanObjects(List<SalePlan> os) {
+		return SalePlanInstances.addAll(os);
+	}
+	
+	public static boolean deleteSalePlanObject(SalePlan o) {
+		return SalePlanInstances.remove(o);
+	}
+	
+	public static boolean deleteSalePlanObjects(List<SalePlan> os) {
+		return SalePlanInstances.removeAll(os);
 	}
   
 }

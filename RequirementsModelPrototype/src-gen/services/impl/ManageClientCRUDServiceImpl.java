@@ -43,7 +43,7 @@ public class ManageClientCRUDServiceImpl implements ManageClientCRUDService, Ser
 	
 	/* Generate buiness logic according to functional requirement */
 	@SuppressWarnings("unchecked")
-	public boolean createClient(int id, String name, String address, String contact, String phonenumber) throws PreconditionException, PostconditionException, ThirdPartyServiceException {
+	public boolean createClient(int id, String name, String address, String contact, String phonenumber, int groupId) throws PreconditionException, PostconditionException, ThirdPartyServiceException {
 		
 		
 		/* Code generated for contract definition */
@@ -153,7 +153,7 @@ public class ManageClientCRUDServiceImpl implements ManageClientCRUDService, Ser
 	 
 	
 	@SuppressWarnings("unchecked")
-	public boolean modifyClient(int id, String name, String address, String contact, String phonenumber) throws PreconditionException, PostconditionException, ThirdPartyServiceException {
+	public boolean modifyClient(int id, String name, String address, String contact, String phonenumber, int groupId) throws PreconditionException, PostconditionException, ThirdPartyServiceException {
 		
 		
 		/* Code generated for contract definition */
@@ -264,6 +264,126 @@ public class ManageClientCRUDServiceImpl implements ManageClientCRUDService, Ser
 	} 
 	 
 	static {opINVRelatedEntity.put("deleteClient", Arrays.asList("Client"));}
+	
+	@SuppressWarnings("unchecked")
+	public boolean createClientGroup() throws PreconditionException, PostconditionException, ThirdPartyServiceException {
+		
+		
+		/* previous state in post-condition*/
+
+		/* check precondition */
+		if (true) 
+		{ 
+			/* Logic here */
+			
+			
+			refresh();
+			// post-condition checking
+			if (!(true)) {
+				throw new PostconditionException();
+			}
+			
+		
+			//return primitive type
+			refresh();				
+			return true;
+		}
+		else
+		{
+			throw new PreconditionException();
+		}
+	} 
+	 
+	
+	@SuppressWarnings("unchecked")
+	public boolean queryClientGroup() throws PreconditionException, PostconditionException, ThirdPartyServiceException {
+		
+		
+		/* previous state in post-condition*/
+
+		/* check precondition */
+		if (true) 
+		{ 
+			/* Logic here */
+			
+			
+			refresh();
+			// post-condition checking
+			if (!(true)) {
+				throw new PostconditionException();
+			}
+			
+		
+			//return primitive type
+			refresh();				
+			return true;
+		}
+		else
+		{
+			throw new PreconditionException();
+		}
+	} 
+	 
+	
+	@SuppressWarnings("unchecked")
+	public boolean modifyClientGroup() throws PreconditionException, PostconditionException, ThirdPartyServiceException {
+		
+		
+		/* previous state in post-condition*/
+
+		/* check precondition */
+		if (true) 
+		{ 
+			/* Logic here */
+			
+			
+			refresh();
+			// post-condition checking
+			if (!(true)) {
+				throw new PostconditionException();
+			}
+			
+		
+			//return primitive type
+			refresh();				
+			return true;
+		}
+		else
+		{
+			throw new PreconditionException();
+		}
+	} 
+	 
+	
+	@SuppressWarnings("unchecked")
+	public boolean deleteClientGroup() throws PreconditionException, PostconditionException, ThirdPartyServiceException {
+		
+		
+		/* previous state in post-condition*/
+
+		/* check precondition */
+		if (true) 
+		{ 
+			/* Logic here */
+			
+			
+			refresh();
+			// post-condition checking
+			if (!(true)) {
+				throw new PostconditionException();
+			}
+			
+		
+			//return primitive type
+			refresh();				
+			return true;
+		}
+		else
+		{
+			throw new PreconditionException();
+		}
+	} 
+	 
 	
 	
 	

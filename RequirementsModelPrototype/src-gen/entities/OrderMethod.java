@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 
-public class OrderTerm implements Serializable {
+public class OrderMethod implements Serializable {
 	
 	/* all primary attributes */
 	private int Id;

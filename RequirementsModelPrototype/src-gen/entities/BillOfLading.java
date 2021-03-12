@@ -15,15 +15,13 @@ public class BillOfLading implements Serializable {
 	private int Id;
 	private String Consignee;
 	private String CommodityList;
-	private String ContractObject;
-	private float Quantity;
 	private float TotalPrice;
 	private String DeadlineForPerformance;
 	private String LocationForPerformance;
 	private String MethodForPerformance;
 	
 	/* all references */
-	private DeliveryTerm DT; 
+	private DeliveryMethod DT; 
 	private Order BelongedOrder; 
 	
 	/* all get and set functions */
@@ -47,20 +45,6 @@ public class BillOfLading implements Serializable {
 	
 	public void setCommodityList(String commoditylist) {
 		this.CommodityList = commoditylist;
-	}
-	public String getContractObject() {
-		return ContractObject;
-	}	
-	
-	public void setContractObject(String contractobject) {
-		this.ContractObject = contractobject;
-	}
-	public float getQuantity() {
-		return Quantity;
-	}	
-	
-	public void setQuantity(float quantity) {
-		this.Quantity = quantity;
 	}
 	public float getTotalPrice() {
 		return TotalPrice;
@@ -92,12 +76,12 @@ public class BillOfLading implements Serializable {
 	}
 	
 	/* all functions for reference*/
-	public DeliveryTerm getDT() {
+	public DeliveryMethod getDT() {
 		return DT;
 	}	
 	
-	public void setDT(DeliveryTerm deliveryterm) {
-		this.DT = deliveryterm;
+	public void setDT(DeliveryMethod deliverymethod) {
+		this.DT = deliverymethod;
 	}			
 	public Order getBelongedOrder() {
 		return BelongedOrder;

@@ -19,6 +19,12 @@ public class ServiceManager {
 	private static List<ManageBillOfLadingCRUDService> ManageBillOfLadingCRUDServiceInstances = new LinkedList<ManageBillOfLadingCRUDService>();
 	private static List<ManageProductCRUDService> ManageProductCRUDServiceInstances = new LinkedList<ManageProductCRUDService>();
 	private static List<SalesProcessingService> SalesProcessingServiceInstances = new LinkedList<SalesProcessingService>();
+	private static List<DeliveryNotificationService> DeliveryNotificationServiceInstances = new LinkedList<DeliveryNotificationService>();
+	private static List<ExchangeProcessingService> ExchangeProcessingServiceInstances = new LinkedList<ExchangeProcessingService>();
+	private static List<SalesPlanManagementService> SalesPlanManagementServiceInstances = new LinkedList<SalesPlanManagementService>();
+	private static List<TradingTerminationAndSettlementService> TradingTerminationAndSettlementServiceInstances = new LinkedList<TradingTerminationAndSettlementService>();
+	private static List<ManageOrderMethodCRUDService> ManageOrderMethodCRUDServiceInstances = new LinkedList<ManageOrderMethodCRUDService>();
+	private static List<ManageDeliveryMethodCRUDService> ManageDeliveryMethodCRUDServiceInstances = new LinkedList<ManageDeliveryMethodCRUDService>();
 	
 	static {
 		AllServiceInstance.put("SalesManagementSystemSystem", SalesManagementSystemSystemInstances);
@@ -30,6 +36,12 @@ public class ServiceManager {
 		AllServiceInstance.put("ManageBillOfLadingCRUDService", ManageBillOfLadingCRUDServiceInstances);
 		AllServiceInstance.put("ManageProductCRUDService", ManageProductCRUDServiceInstances);
 		AllServiceInstance.put("SalesProcessingService", SalesProcessingServiceInstances);
+		AllServiceInstance.put("DeliveryNotificationService", DeliveryNotificationServiceInstances);
+		AllServiceInstance.put("ExchangeProcessingService", ExchangeProcessingServiceInstances);
+		AllServiceInstance.put("SalesPlanManagementService", SalesPlanManagementServiceInstances);
+		AllServiceInstance.put("TradingTerminationAndSettlementService", TradingTerminationAndSettlementServiceInstances);
+		AllServiceInstance.put("ManageOrderMethodCRUDService", ManageOrderMethodCRUDServiceInstances);
+		AllServiceInstance.put("ManageDeliveryMethodCRUDService", ManageDeliveryMethodCRUDServiceInstances);
 	} 
 	
 	public static List getAllInstancesOf(String ClassName) {
@@ -79,6 +91,36 @@ public class ServiceManager {
 	public static SalesProcessingService createSalesProcessingService() {
 		SalesProcessingService s = new SalesProcessingServiceImpl();
 		SalesProcessingServiceInstances.add(s);
+		return s;
+	}
+	public static DeliveryNotificationService createDeliveryNotificationService() {
+		DeliveryNotificationService s = new DeliveryNotificationServiceImpl();
+		DeliveryNotificationServiceInstances.add(s);
+		return s;
+	}
+	public static ExchangeProcessingService createExchangeProcessingService() {
+		ExchangeProcessingService s = new ExchangeProcessingServiceImpl();
+		ExchangeProcessingServiceInstances.add(s);
+		return s;
+	}
+	public static SalesPlanManagementService createSalesPlanManagementService() {
+		SalesPlanManagementService s = new SalesPlanManagementServiceImpl();
+		SalesPlanManagementServiceInstances.add(s);
+		return s;
+	}
+	public static TradingTerminationAndSettlementService createTradingTerminationAndSettlementService() {
+		TradingTerminationAndSettlementService s = new TradingTerminationAndSettlementServiceImpl();
+		TradingTerminationAndSettlementServiceInstances.add(s);
+		return s;
+	}
+	public static ManageOrderMethodCRUDService createManageOrderMethodCRUDService() {
+		ManageOrderMethodCRUDService s = new ManageOrderMethodCRUDServiceImpl();
+		ManageOrderMethodCRUDServiceInstances.add(s);
+		return s;
+	}
+	public static ManageDeliveryMethodCRUDService createManageDeliveryMethodCRUDService() {
+		ManageDeliveryMethodCRUDService s = new ManageDeliveryMethodCRUDServiceImpl();
+		ManageDeliveryMethodCRUDServiceInstances.add(s);
 		return s;
 	}
 }	

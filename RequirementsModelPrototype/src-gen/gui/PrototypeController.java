@@ -74,6 +74,12 @@ public class PrototypeController implements Initializable {
 		managebillofladingcrudservice_service = ServiceManager.createManageBillOfLadingCRUDService();
 		manageproductcrudservice_service = ServiceManager.createManageProductCRUDService();
 		salesprocessingservice_service = ServiceManager.createSalesProcessingService();
+		deliverynotificationservice_service = ServiceManager.createDeliveryNotificationService();
+		exchangeprocessingservice_service = ServiceManager.createExchangeProcessingService();
+		salesplanmanagementservice_service = ServiceManager.createSalesPlanManagementService();
+		tradingterminationandsettlementservice_service = ServiceManager.createTradingTerminationAndSettlementService();
+		manageordermethodcrudservice_service = ServiceManager.createManageOrderMethodCRUDService();
+		managedeliverymethodcrudservice_service = ServiceManager.createManageDeliveryMethodCRUDService();
 				
 		this.dateformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
@@ -514,180 +520,6 @@ public class PrototypeController implements Initializable {
 		v = new VBox();
 		
 		//entities invariants
-		entities = SalesManagementSystemSystemImpl.opINVRelatedEntity.get("deliveryNotification");
-		if (entities != null) {
-			for (String opRelatedEntities : entities) {
-				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
-					
-					String invname = inv.getKey();
-					String[] invt = invname.split("_");
-					String entityName = invt[0];
-		
-					if (opRelatedEntities.equals(entityName)) {
-						Label l = new Label(invname);
-						l.setStyle("-fx-max-width: Infinity;" + 
-								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-							    "-fx-padding: 6px;" +
-							    "-fx-border-color: black;");
-						Tooltip tp = new Tooltip();
-						tp.setText(inv.getValue());
-						l.setTooltip(tp);
-						
-						op_entity_invariants_label_map.put(invname, l);
-						
-						v.getChildren().add(l);
-					}
-				}
-			}
-		} else {
-			Label l = new Label("deliveryNotification" + " is no related invariants");
-			l.setPadding(new Insets(8, 8, 8, 8));
-			v.getChildren().add(l);
-		}
-		
-		//service invariants
-		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
-			
-			String invname = inv.getKey();
-			String[] invt = invname.split("_");
-			String serviceName = invt[0];
-			
-			if (serviceName.equals("SalesManagementSystemSystem")) {
-				Label l = new Label(invname);
-				l.setStyle("-fx-max-width: Infinity;" + 
-						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-						   "-fx-padding: 6px;" +
-						   "-fx-border-color: black;");
-				Tooltip tp = new Tooltip();
-				tp.setText(inv.getValue());
-				l.setTooltip(tp);
-				
-				op_entity_invariants_label_map.put(invname, l);
-				
-				v.getChildren().add(l);
-			}
-		}
-		opInvariantPanel.put("deliveryNotification", v);
-		
-		v = new VBox();
-		
-		//entities invariants
-		entities = SalesManagementSystemSystemImpl.opINVRelatedEntity.get("exchangeNotification");
-		if (entities != null) {
-			for (String opRelatedEntities : entities) {
-				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
-					
-					String invname = inv.getKey();
-					String[] invt = invname.split("_");
-					String entityName = invt[0];
-		
-					if (opRelatedEntities.equals(entityName)) {
-						Label l = new Label(invname);
-						l.setStyle("-fx-max-width: Infinity;" + 
-								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-							    "-fx-padding: 6px;" +
-							    "-fx-border-color: black;");
-						Tooltip tp = new Tooltip();
-						tp.setText(inv.getValue());
-						l.setTooltip(tp);
-						
-						op_entity_invariants_label_map.put(invname, l);
-						
-						v.getChildren().add(l);
-					}
-				}
-			}
-		} else {
-			Label l = new Label("exchangeNotification" + " is no related invariants");
-			l.setPadding(new Insets(8, 8, 8, 8));
-			v.getChildren().add(l);
-		}
-		
-		//service invariants
-		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
-			
-			String invname = inv.getKey();
-			String[] invt = invname.split("_");
-			String serviceName = invt[0];
-			
-			if (serviceName.equals("SalesManagementSystemSystem")) {
-				Label l = new Label(invname);
-				l.setStyle("-fx-max-width: Infinity;" + 
-						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-						   "-fx-padding: 6px;" +
-						   "-fx-border-color: black;");
-				Tooltip tp = new Tooltip();
-				tp.setText(inv.getValue());
-				l.setTooltip(tp);
-				
-				op_entity_invariants_label_map.put(invname, l);
-				
-				v.getChildren().add(l);
-			}
-		}
-		opInvariantPanel.put("exchangeNotification", v);
-		
-		v = new VBox();
-		
-		//entities invariants
-		entities = SalesManagementSystemSystemImpl.opINVRelatedEntity.get("itemsPricesMaintenance");
-		if (entities != null) {
-			for (String opRelatedEntities : entities) {
-				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
-					
-					String invname = inv.getKey();
-					String[] invt = invname.split("_");
-					String entityName = invt[0];
-		
-					if (opRelatedEntities.equals(entityName)) {
-						Label l = new Label(invname);
-						l.setStyle("-fx-max-width: Infinity;" + 
-								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-							    "-fx-padding: 6px;" +
-							    "-fx-border-color: black;");
-						Tooltip tp = new Tooltip();
-						tp.setText(inv.getValue());
-						l.setTooltip(tp);
-						
-						op_entity_invariants_label_map.put(invname, l);
-						
-						v.getChildren().add(l);
-					}
-				}
-			}
-		} else {
-			Label l = new Label("itemsPricesMaintenance" + " is no related invariants");
-			l.setPadding(new Insets(8, 8, 8, 8));
-			v.getChildren().add(l);
-		}
-		
-		//service invariants
-		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
-			
-			String invname = inv.getKey();
-			String[] invt = invname.split("_");
-			String serviceName = invt[0];
-			
-			if (serviceName.equals("SalesManagementSystemSystem")) {
-				Label l = new Label(invname);
-				l.setStyle("-fx-max-width: Infinity;" + 
-						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-						   "-fx-padding: 6px;" +
-						   "-fx-border-color: black;");
-				Tooltip tp = new Tooltip();
-				tp.setText(inv.getValue());
-				l.setTooltip(tp);
-				
-				op_entity_invariants_label_map.put(invname, l);
-				
-				v.getChildren().add(l);
-			}
-		}
-		opInvariantPanel.put("itemsPricesMaintenance", v);
-		
-		v = new VBox();
-		
-		//entities invariants
 		entities = SalesManagementSystemSystemImpl.opINVRelatedEntity.get("postingOfAccount");
 		if (entities != null) {
 			for (String opRelatedEntities : entities) {
@@ -742,180 +574,6 @@ public class PrototypeController implements Initializable {
 			}
 		}
 		opInvariantPanel.put("postingOfAccount", v);
-		
-		v = new VBox();
-		
-		//entities invariants
-		entities = SalesManagementSystemSystemImpl.opINVRelatedEntity.get("invoiceManagement");
-		if (entities != null) {
-			for (String opRelatedEntities : entities) {
-				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
-					
-					String invname = inv.getKey();
-					String[] invt = invname.split("_");
-					String entityName = invt[0];
-		
-					if (opRelatedEntities.equals(entityName)) {
-						Label l = new Label(invname);
-						l.setStyle("-fx-max-width: Infinity;" + 
-								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-							    "-fx-padding: 6px;" +
-							    "-fx-border-color: black;");
-						Tooltip tp = new Tooltip();
-						tp.setText(inv.getValue());
-						l.setTooltip(tp);
-						
-						op_entity_invariants_label_map.put(invname, l);
-						
-						v.getChildren().add(l);
-					}
-				}
-			}
-		} else {
-			Label l = new Label("invoiceManagement" + " is no related invariants");
-			l.setPadding(new Insets(8, 8, 8, 8));
-			v.getChildren().add(l);
-		}
-		
-		//service invariants
-		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
-			
-			String invname = inv.getKey();
-			String[] invt = invname.split("_");
-			String serviceName = invt[0];
-			
-			if (serviceName.equals("SalesManagementSystemSystem")) {
-				Label l = new Label(invname);
-				l.setStyle("-fx-max-width: Infinity;" + 
-						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-						   "-fx-padding: 6px;" +
-						   "-fx-border-color: black;");
-				Tooltip tp = new Tooltip();
-				tp.setText(inv.getValue());
-				l.setTooltip(tp);
-				
-				op_entity_invariants_label_map.put(invname, l);
-				
-				v.getChildren().add(l);
-			}
-		}
-		opInvariantPanel.put("invoiceManagement", v);
-		
-		v = new VBox();
-		
-		//entities invariants
-		entities = SalesManagementSystemSystemImpl.opINVRelatedEntity.get("contractTerminationAndSettlement");
-		if (entities != null) {
-			for (String opRelatedEntities : entities) {
-				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
-					
-					String invname = inv.getKey();
-					String[] invt = invname.split("_");
-					String entityName = invt[0];
-		
-					if (opRelatedEntities.equals(entityName)) {
-						Label l = new Label(invname);
-						l.setStyle("-fx-max-width: Infinity;" + 
-								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-							    "-fx-padding: 6px;" +
-							    "-fx-border-color: black;");
-						Tooltip tp = new Tooltip();
-						tp.setText(inv.getValue());
-						l.setTooltip(tp);
-						
-						op_entity_invariants_label_map.put(invname, l);
-						
-						v.getChildren().add(l);
-					}
-				}
-			}
-		} else {
-			Label l = new Label("contractTerminationAndSettlement" + " is no related invariants");
-			l.setPadding(new Insets(8, 8, 8, 8));
-			v.getChildren().add(l);
-		}
-		
-		//service invariants
-		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
-			
-			String invname = inv.getKey();
-			String[] invt = invname.split("_");
-			String serviceName = invt[0];
-			
-			if (serviceName.equals("SalesManagementSystemSystem")) {
-				Label l = new Label(invname);
-				l.setStyle("-fx-max-width: Infinity;" + 
-						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-						   "-fx-padding: 6px;" +
-						   "-fx-border-color: black;");
-				Tooltip tp = new Tooltip();
-				tp.setText(inv.getValue());
-				l.setTooltip(tp);
-				
-				op_entity_invariants_label_map.put(invname, l);
-				
-				v.getChildren().add(l);
-			}
-		}
-		opInvariantPanel.put("contractTerminationAndSettlement", v);
-		
-		v = new VBox();
-		
-		//entities invariants
-		entities = SalesManagementSystemSystemImpl.opINVRelatedEntity.get("orderTerminationAndSettlement");
-		if (entities != null) {
-			for (String opRelatedEntities : entities) {
-				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
-					
-					String invname = inv.getKey();
-					String[] invt = invname.split("_");
-					String entityName = invt[0];
-		
-					if (opRelatedEntities.equals(entityName)) {
-						Label l = new Label(invname);
-						l.setStyle("-fx-max-width: Infinity;" + 
-								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-							    "-fx-padding: 6px;" +
-							    "-fx-border-color: black;");
-						Tooltip tp = new Tooltip();
-						tp.setText(inv.getValue());
-						l.setTooltip(tp);
-						
-						op_entity_invariants_label_map.put(invname, l);
-						
-						v.getChildren().add(l);
-					}
-				}
-			}
-		} else {
-			Label l = new Label("orderTerminationAndSettlement" + " is no related invariants");
-			l.setPadding(new Insets(8, 8, 8, 8));
-			v.getChildren().add(l);
-		}
-		
-		//service invariants
-		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
-			
-			String invname = inv.getKey();
-			String[] invt = invname.split("_");
-			String serviceName = invt[0];
-			
-			if (serviceName.equals("SalesManagementSystemSystem")) {
-				Label l = new Label(invname);
-				l.setStyle("-fx-max-width: Infinity;" + 
-						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-						   "-fx-padding: 6px;" +
-						   "-fx-border-color: black;");
-				Tooltip tp = new Tooltip();
-				tp.setText(inv.getValue());
-				l.setTooltip(tp);
-				
-				op_entity_invariants_label_map.put(invname, l);
-				
-				v.getChildren().add(l);
-			}
-		}
-		opInvariantPanel.put("orderTerminationAndSettlement", v);
 		
 		v = new VBox();
 		
@@ -1554,238 +1212,6 @@ public class PrototypeController implements Initializable {
 			}
 		}
 		opInvariantPanel.put("deleteInvoice", v);
-		
-		v = new VBox();
-		
-		//entities invariants
-		entities = ManageBillOfLadingCRUDServiceImpl.opINVRelatedEntity.get("createBillOfLading");
-		if (entities != null) {
-			for (String opRelatedEntities : entities) {
-				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
-					
-					String invname = inv.getKey();
-					String[] invt = invname.split("_");
-					String entityName = invt[0];
-		
-					if (opRelatedEntities.equals(entityName)) {
-						Label l = new Label(invname);
-						l.setStyle("-fx-max-width: Infinity;" + 
-								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-							    "-fx-padding: 6px;" +
-							    "-fx-border-color: black;");
-						Tooltip tp = new Tooltip();
-						tp.setText(inv.getValue());
-						l.setTooltip(tp);
-						
-						op_entity_invariants_label_map.put(invname, l);
-						
-						v.getChildren().add(l);
-					}
-				}
-			}
-		} else {
-			Label l = new Label("createBillOfLading" + " is no related invariants");
-			l.setPadding(new Insets(8, 8, 8, 8));
-			v.getChildren().add(l);
-		}
-		
-		//service invariants
-		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
-			
-			String invname = inv.getKey();
-			String[] invt = invname.split("_");
-			String serviceName = invt[0];
-			
-			if (serviceName.equals("ManageBillOfLadingCRUDService")) {
-				Label l = new Label(invname);
-				l.setStyle("-fx-max-width: Infinity;" + 
-						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-						   "-fx-padding: 6px;" +
-						   "-fx-border-color: black;");
-				Tooltip tp = new Tooltip();
-				tp.setText(inv.getValue());
-				l.setTooltip(tp);
-				
-				op_entity_invariants_label_map.put(invname, l);
-				
-				v.getChildren().add(l);
-			}
-		}
-		opInvariantPanel.put("createBillOfLading", v);
-		
-		v = new VBox();
-		
-		//entities invariants
-		entities = ManageBillOfLadingCRUDServiceImpl.opINVRelatedEntity.get("queryBillOfLading");
-		if (entities != null) {
-			for (String opRelatedEntities : entities) {
-				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
-					
-					String invname = inv.getKey();
-					String[] invt = invname.split("_");
-					String entityName = invt[0];
-		
-					if (opRelatedEntities.equals(entityName)) {
-						Label l = new Label(invname);
-						l.setStyle("-fx-max-width: Infinity;" + 
-								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-							    "-fx-padding: 6px;" +
-							    "-fx-border-color: black;");
-						Tooltip tp = new Tooltip();
-						tp.setText(inv.getValue());
-						l.setTooltip(tp);
-						
-						op_entity_invariants_label_map.put(invname, l);
-						
-						v.getChildren().add(l);
-					}
-				}
-			}
-		} else {
-			Label l = new Label("queryBillOfLading" + " is no related invariants");
-			l.setPadding(new Insets(8, 8, 8, 8));
-			v.getChildren().add(l);
-		}
-		
-		//service invariants
-		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
-			
-			String invname = inv.getKey();
-			String[] invt = invname.split("_");
-			String serviceName = invt[0];
-			
-			if (serviceName.equals("ManageBillOfLadingCRUDService")) {
-				Label l = new Label(invname);
-				l.setStyle("-fx-max-width: Infinity;" + 
-						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-						   "-fx-padding: 6px;" +
-						   "-fx-border-color: black;");
-				Tooltip tp = new Tooltip();
-				tp.setText(inv.getValue());
-				l.setTooltip(tp);
-				
-				op_entity_invariants_label_map.put(invname, l);
-				
-				v.getChildren().add(l);
-			}
-		}
-		opInvariantPanel.put("queryBillOfLading", v);
-		
-		v = new VBox();
-		
-		//entities invariants
-		entities = ManageBillOfLadingCRUDServiceImpl.opINVRelatedEntity.get("modifyBillOfLading");
-		if (entities != null) {
-			for (String opRelatedEntities : entities) {
-				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
-					
-					String invname = inv.getKey();
-					String[] invt = invname.split("_");
-					String entityName = invt[0];
-		
-					if (opRelatedEntities.equals(entityName)) {
-						Label l = new Label(invname);
-						l.setStyle("-fx-max-width: Infinity;" + 
-								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-							    "-fx-padding: 6px;" +
-							    "-fx-border-color: black;");
-						Tooltip tp = new Tooltip();
-						tp.setText(inv.getValue());
-						l.setTooltip(tp);
-						
-						op_entity_invariants_label_map.put(invname, l);
-						
-						v.getChildren().add(l);
-					}
-				}
-			}
-		} else {
-			Label l = new Label("modifyBillOfLading" + " is no related invariants");
-			l.setPadding(new Insets(8, 8, 8, 8));
-			v.getChildren().add(l);
-		}
-		
-		//service invariants
-		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
-			
-			String invname = inv.getKey();
-			String[] invt = invname.split("_");
-			String serviceName = invt[0];
-			
-			if (serviceName.equals("ManageBillOfLadingCRUDService")) {
-				Label l = new Label(invname);
-				l.setStyle("-fx-max-width: Infinity;" + 
-						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-						   "-fx-padding: 6px;" +
-						   "-fx-border-color: black;");
-				Tooltip tp = new Tooltip();
-				tp.setText(inv.getValue());
-				l.setTooltip(tp);
-				
-				op_entity_invariants_label_map.put(invname, l);
-				
-				v.getChildren().add(l);
-			}
-		}
-		opInvariantPanel.put("modifyBillOfLading", v);
-		
-		v = new VBox();
-		
-		//entities invariants
-		entities = ManageBillOfLadingCRUDServiceImpl.opINVRelatedEntity.get("deleteBillOfLading");
-		if (entities != null) {
-			for (String opRelatedEntities : entities) {
-				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
-					
-					String invname = inv.getKey();
-					String[] invt = invname.split("_");
-					String entityName = invt[0];
-		
-					if (opRelatedEntities.equals(entityName)) {
-						Label l = new Label(invname);
-						l.setStyle("-fx-max-width: Infinity;" + 
-								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-							    "-fx-padding: 6px;" +
-							    "-fx-border-color: black;");
-						Tooltip tp = new Tooltip();
-						tp.setText(inv.getValue());
-						l.setTooltip(tp);
-						
-						op_entity_invariants_label_map.put(invname, l);
-						
-						v.getChildren().add(l);
-					}
-				}
-			}
-		} else {
-			Label l = new Label("deleteBillOfLading" + " is no related invariants");
-			l.setPadding(new Insets(8, 8, 8, 8));
-			v.getChildren().add(l);
-		}
-		
-		//service invariants
-		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
-			
-			String invname = inv.getKey();
-			String[] invt = invname.split("_");
-			String serviceName = invt[0];
-			
-			if (serviceName.equals("ManageBillOfLadingCRUDService")) {
-				Label l = new Label(invname);
-				l.setStyle("-fx-max-width: Infinity;" + 
-						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
-						   "-fx-padding: 6px;" +
-						   "-fx-border-color: black;");
-				Tooltip tp = new Tooltip();
-				tp.setText(inv.getValue());
-				l.setTooltip(tp);
-				
-				op_entity_invariants_label_map.put(invname, l);
-				
-				v.getChildren().add(l);
-			}
-		}
-		opInvariantPanel.put("deleteBillOfLading", v);
 		
 		v = new VBox();
 		
@@ -2486,6 +1912,702 @@ public class PrototypeController implements Initializable {
 		v = new VBox();
 		
 		//entities invariants
+		entities = ManageBillOfLadingCRUDServiceImpl.opINVRelatedEntity.get("createBillOfLading");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("createBillOfLading" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ManageBillOfLadingCRUDService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("createBillOfLading", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ManageBillOfLadingCRUDServiceImpl.opINVRelatedEntity.get("queryBillOfLading");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("queryBillOfLading" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ManageBillOfLadingCRUDService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("queryBillOfLading", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ManageBillOfLadingCRUDServiceImpl.opINVRelatedEntity.get("modifyBillOfLading");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("modifyBillOfLading" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ManageBillOfLadingCRUDService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("modifyBillOfLading", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ManageBillOfLadingCRUDServiceImpl.opINVRelatedEntity.get("deleteBillOfLading");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("deleteBillOfLading" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ManageBillOfLadingCRUDService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("deleteBillOfLading", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ManageOrderMethodCRUDServiceImpl.opINVRelatedEntity.get("createOrderMethod");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("createOrderMethod" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ManageOrderMethodCRUDService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("createOrderMethod", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ManageOrderMethodCRUDServiceImpl.opINVRelatedEntity.get("queryOrderMethod");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("queryOrderMethod" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ManageOrderMethodCRUDService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("queryOrderMethod", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ManageOrderMethodCRUDServiceImpl.opINVRelatedEntity.get("modifyOrderMethod");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("modifyOrderMethod" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ManageOrderMethodCRUDService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("modifyOrderMethod", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ManageOrderMethodCRUDServiceImpl.opINVRelatedEntity.get("deleteOrderMethod");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("deleteOrderMethod" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ManageOrderMethodCRUDService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("deleteOrderMethod", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ManageDeliveryMethodCRUDServiceImpl.opINVRelatedEntity.get("createDeliveryMethod");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("createDeliveryMethod" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ManageDeliveryMethodCRUDService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("createDeliveryMethod", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ManageDeliveryMethodCRUDServiceImpl.opINVRelatedEntity.get("queryDeliveryMethod");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("queryDeliveryMethod" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ManageDeliveryMethodCRUDService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("queryDeliveryMethod", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ManageDeliveryMethodCRUDServiceImpl.opINVRelatedEntity.get("modifyDeliveryMethod");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("modifyDeliveryMethod" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ManageDeliveryMethodCRUDService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("modifyDeliveryMethod", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ManageDeliveryMethodCRUDServiceImpl.opINVRelatedEntity.get("deleteDeliveryMethod");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("deleteDeliveryMethod" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ManageDeliveryMethodCRUDService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("deleteDeliveryMethod", v);
+		
+		v = new VBox();
+		
+		//entities invariants
 		entities = SalesManagementSystemSystemImpl.opINVRelatedEntity.get("manageItemsPrices");
 		if (entities != null) {
 			for (String opRelatedEntities : entities) {
@@ -2540,6 +2662,992 @@ public class PrototypeController implements Initializable {
 			}
 		}
 		opInvariantPanel.put("manageItemsPrices", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ManageClientCRUDServiceImpl.opINVRelatedEntity.get("createClientGroup");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("createClientGroup" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ManageClientCRUDService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("createClientGroup", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ManageClientCRUDServiceImpl.opINVRelatedEntity.get("queryClientGroup");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("queryClientGroup" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ManageClientCRUDService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("queryClientGroup", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ManageClientCRUDServiceImpl.opINVRelatedEntity.get("modifyClientGroup");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("modifyClientGroup" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ManageClientCRUDService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("modifyClientGroup", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ManageClientCRUDServiceImpl.opINVRelatedEntity.get("deleteClientGroup");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("deleteClientGroup" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ManageClientCRUDService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("deleteClientGroup", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = TradingTerminationAndSettlementServiceImpl.opINVRelatedEntity.get("orderTerminationAndSettlement");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("orderTerminationAndSettlement" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("TradingTerminationAndSettlementService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("orderTerminationAndSettlement", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = TradingTerminationAndSettlementServiceImpl.opINVRelatedEntity.get("contractTerminationAndSettlement");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("contractTerminationAndSettlement" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("TradingTerminationAndSettlementService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("contractTerminationAndSettlement", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = TradingTerminationAndSettlementServiceImpl.opINVRelatedEntity.get("payment");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("payment" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("TradingTerminationAndSettlementService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("payment", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = TradingTerminationAndSettlementServiceImpl.opINVRelatedEntity.get("generateInvoice");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("generateInvoice" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("TradingTerminationAndSettlementService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("generateInvoice", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = DeliveryNotificationServiceImpl.opINVRelatedEntity.get("generateBillOfLading");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("generateBillOfLading" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("DeliveryNotificationService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("generateBillOfLading", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = DeliveryNotificationServiceImpl.opINVRelatedEntity.get("generateNotification");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("generateNotification" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("DeliveryNotificationService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("generateNotification", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ExchangeProcessingServiceImpl.opINVRelatedEntity.get("typeChoice");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("typeChoice" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ExchangeProcessingService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("typeChoice", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ExchangeProcessingServiceImpl.opINVRelatedEntity.get("cancelOrder");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("cancelOrder" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ExchangeProcessingService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("cancelOrder", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ExchangeProcessingServiceImpl.opINVRelatedEntity.get("regenerateBillOfLading");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("regenerateBillOfLading" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ExchangeProcessingService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("regenerateBillOfLading", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = ExchangeProcessingServiceImpl.opINVRelatedEntity.get("regenerateNotification");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("regenerateNotification" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("ExchangeProcessingService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("regenerateNotification", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = SalesPlanManagementServiceImpl.opINVRelatedEntity.get("makeNewPlan");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("makeNewPlan" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("SalesPlanManagementService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("makeNewPlan", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = SalesPlanManagementServiceImpl.opINVRelatedEntity.get("addItemIntoPlan");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("addItemIntoPlan" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("SalesPlanManagementService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("addItemIntoPlan", v);
+		
+		v = new VBox();
+		
+		//entities invariants
+		entities = SalesPlanManagementServiceImpl.opINVRelatedEntity.get("generatePlan");
+		if (entities != null) {
+			for (String opRelatedEntities : entities) {
+				for (Entry<String, String> inv : entity_invariants_map.entrySet()) {
+					
+					String invname = inv.getKey();
+					String[] invt = invname.split("_");
+					String entityName = invt[0];
+		
+					if (opRelatedEntities.equals(entityName)) {
+						Label l = new Label(invname);
+						l.setStyle("-fx-max-width: Infinity;" + 
+								"-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+							    "-fx-padding: 6px;" +
+							    "-fx-border-color: black;");
+						Tooltip tp = new Tooltip();
+						tp.setText(inv.getValue());
+						l.setTooltip(tp);
+						
+						op_entity_invariants_label_map.put(invname, l);
+						
+						v.getChildren().add(l);
+					}
+				}
+			}
+		} else {
+			Label l = new Label("generatePlan" + " is no related invariants");
+			l.setPadding(new Insets(8, 8, 8, 8));
+			v.getChildren().add(l);
+		}
+		
+		//service invariants
+		for (Entry<String, String> inv : service_invariants_map.entrySet()) {
+			
+			String invname = inv.getKey();
+			String[] invt = invname.split("_");
+			String serviceName = invt[0];
+			
+			if (serviceName.equals("SalesPlanManagementService")) {
+				Label l = new Label(invname);
+				l.setStyle("-fx-max-width: Infinity;" + 
+						   "-fx-background-color: linear-gradient(to right, #7FFF00 0%, #F0FFFF 100%);" +
+						   "-fx-padding: 6px;" +
+						   "-fx-border-color: black;");
+				Tooltip tp = new Tooltip();
+				tp.setText(inv.getValue());
+				l.setTooltip(tp);
+				
+				op_entity_invariants_label_map.put(invname, l);
+				
+				v.getChildren().add(l);
+			}
+		}
+		opInvariantPanel.put("generatePlan", v);
 		
 		
 	}
@@ -3069,24 +4177,6 @@ public class PrototypeController implements Initializable {
 		    }
 		});	
 		tableBillOfLading.getColumns().add(tableBillOfLading_CommodityList);
-		TableColumn<Map<String, String>, String> tableBillOfLading_ContractObject = new TableColumn<Map<String, String>, String>("ContractObject");
-		tableBillOfLading_ContractObject.setMinWidth("ContractObject".length()*10);
-		tableBillOfLading_ContractObject.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
-			@Override
-		    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
-		        return new ReadOnlyStringWrapper(data.getValue().get("ContractObject"));
-		    }
-		});	
-		tableBillOfLading.getColumns().add(tableBillOfLading_ContractObject);
-		TableColumn<Map<String, String>, String> tableBillOfLading_Quantity = new TableColumn<Map<String, String>, String>("Quantity");
-		tableBillOfLading_Quantity.setMinWidth("Quantity".length()*10);
-		tableBillOfLading_Quantity.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
-			@Override
-		    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
-		        return new ReadOnlyStringWrapper(data.getValue().get("Quantity"));
-		    }
-		});	
-		tableBillOfLading.getColumns().add(tableBillOfLading_Quantity);
 		TableColumn<Map<String, String>, String> tableBillOfLading_TotalPrice = new TableColumn<Map<String, String>, String>("TotalPrice");
 		tableBillOfLading_TotalPrice.setMinWidth("TotalPrice".length()*10);
 		tableBillOfLading_TotalPrice.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
@@ -3140,11 +4230,6 @@ public class PrototypeController implements Initializable {
 				unit.put("CommodityList", String.valueOf(r.getCommodityList()));
 			else
 				unit.put("CommodityList", "");
-			if (r.getContractObject() != null)
-				unit.put("ContractObject", String.valueOf(r.getContractObject()));
-			else
-				unit.put("ContractObject", "");
-			unit.put("Quantity", String.valueOf(r.getQuantity()));
 			unit.put("TotalPrice", String.valueOf(r.getTotalPrice()));
 			if (r.getDeadlineForPerformance() != null)
 				unit.put("DeadlineForPerformance", String.valueOf(r.getDeadlineForPerformance()));
@@ -3313,34 +4398,34 @@ public class PrototypeController implements Initializable {
 		tableExchangeNotification.setItems(dataExchangeNotification);
 		allObjectTables.put("ExchangeNotification", tableExchangeNotification);
 		
-		TableView<Map<String, String>> tableOrderTerm = new TableView<Map<String, String>>();
+		TableView<Map<String, String>> tableOrderMethod = new TableView<Map<String, String>>();
 
 		//super entity attribute column
 						
 		//attributes table column
-		TableColumn<Map<String, String>, String> tableOrderTerm_Id = new TableColumn<Map<String, String>, String>("Id");
-		tableOrderTerm_Id.setMinWidth("Id".length()*10);
-		tableOrderTerm_Id.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+		TableColumn<Map<String, String>, String> tableOrderMethod_Id = new TableColumn<Map<String, String>, String>("Id");
+		tableOrderMethod_Id.setMinWidth("Id".length()*10);
+		tableOrderMethod_Id.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
 			@Override
 		    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
 		        return new ReadOnlyStringWrapper(data.getValue().get("Id"));
 		    }
 		});	
-		tableOrderTerm.getColumns().add(tableOrderTerm_Id);
-		TableColumn<Map<String, String>, String> tableOrderTerm_Name = new TableColumn<Map<String, String>, String>("Name");
-		tableOrderTerm_Name.setMinWidth("Name".length()*10);
-		tableOrderTerm_Name.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+		tableOrderMethod.getColumns().add(tableOrderMethod_Id);
+		TableColumn<Map<String, String>, String> tableOrderMethod_Name = new TableColumn<Map<String, String>, String>("Name");
+		tableOrderMethod_Name.setMinWidth("Name".length()*10);
+		tableOrderMethod_Name.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
 			@Override
 		    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
 		        return new ReadOnlyStringWrapper(data.getValue().get("Name"));
 		    }
 		});	
-		tableOrderTerm.getColumns().add(tableOrderTerm_Name);
+		tableOrderMethod.getColumns().add(tableOrderMethod_Name);
 		
 		//table data
-		ObservableList<Map<String, String>> dataOrderTerm = FXCollections.observableArrayList();
-		List<OrderTerm> rsOrderTerm = EntityManager.getAllInstancesOf("OrderTerm");
-		for (OrderTerm r : rsOrderTerm) {
+		ObservableList<Map<String, String>> dataOrderMethod = FXCollections.observableArrayList();
+		List<OrderMethod> rsOrderMethod = EntityManager.getAllInstancesOf("OrderMethod");
+		for (OrderMethod r : rsOrderMethod) {
 			//table entry
 			Map<String, String> unit = new HashMap<String, String>();
 			
@@ -3350,23 +4435,23 @@ public class PrototypeController implements Initializable {
 			else
 				unit.put("Name", "");
 
-			dataOrderTerm.add(unit);
+			dataOrderMethod.add(unit);
 		}
 		
-		tableOrderTerm.getSelectionModel().selectedIndexProperty().addListener(
+		tableOrderMethod.getSelectionModel().selectedIndexProperty().addListener(
 							 (observable, oldValue, newValue) ->  { 
 							 										 //get selected index
-							 										 objectindex = tableOrderTerm.getSelectionModel().getSelectedIndex();
+							 										 objectindex = tableOrderMethod.getSelectionModel().getSelectedIndex();
 							 			 				 			 System.out.println("select: " + objectindex);
 
 							 			 				 			 //update association object information
 							 			 				 			 if (objectindex != -1)
-										 			 					 updateAssociation("OrderTerm", objectindex);
+										 			 					 updateAssociation("OrderMethod", objectindex);
 							 			 				 			 
 							 			 				 		  });
 		
-		tableOrderTerm.setItems(dataOrderTerm);
-		allObjectTables.put("OrderTerm", tableOrderTerm);
+		tableOrderMethod.setItems(dataOrderMethod);
+		allObjectTables.put("OrderMethod", tableOrderMethod);
 		
 		TableView<Map<String, String>> tableClientGroup = new TableView<Map<String, String>>();
 
@@ -3423,34 +4508,34 @@ public class PrototypeController implements Initializable {
 		tableClientGroup.setItems(dataClientGroup);
 		allObjectTables.put("ClientGroup", tableClientGroup);
 		
-		TableView<Map<String, String>> tableDeliveryTerm = new TableView<Map<String, String>>();
+		TableView<Map<String, String>> tableDeliveryMethod = new TableView<Map<String, String>>();
 
 		//super entity attribute column
 						
 		//attributes table column
-		TableColumn<Map<String, String>, String> tableDeliveryTerm_Id = new TableColumn<Map<String, String>, String>("Id");
-		tableDeliveryTerm_Id.setMinWidth("Id".length()*10);
-		tableDeliveryTerm_Id.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+		TableColumn<Map<String, String>, String> tableDeliveryMethod_Id = new TableColumn<Map<String, String>, String>("Id");
+		tableDeliveryMethod_Id.setMinWidth("Id".length()*10);
+		tableDeliveryMethod_Id.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
 			@Override
 		    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
 		        return new ReadOnlyStringWrapper(data.getValue().get("Id"));
 		    }
 		});	
-		tableDeliveryTerm.getColumns().add(tableDeliveryTerm_Id);
-		TableColumn<Map<String, String>, String> tableDeliveryTerm_Name = new TableColumn<Map<String, String>, String>("Name");
-		tableDeliveryTerm_Name.setMinWidth("Name".length()*10);
-		tableDeliveryTerm_Name.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+		tableDeliveryMethod.getColumns().add(tableDeliveryMethod_Id);
+		TableColumn<Map<String, String>, String> tableDeliveryMethod_Name = new TableColumn<Map<String, String>, String>("Name");
+		tableDeliveryMethod_Name.setMinWidth("Name".length()*10);
+		tableDeliveryMethod_Name.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
 			@Override
 		    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
 		        return new ReadOnlyStringWrapper(data.getValue().get("Name"));
 		    }
 		});	
-		tableDeliveryTerm.getColumns().add(tableDeliveryTerm_Name);
+		tableDeliveryMethod.getColumns().add(tableDeliveryMethod_Name);
 		
 		//table data
-		ObservableList<Map<String, String>> dataDeliveryTerm = FXCollections.observableArrayList();
-		List<DeliveryTerm> rsDeliveryTerm = EntityManager.getAllInstancesOf("DeliveryTerm");
-		for (DeliveryTerm r : rsDeliveryTerm) {
+		ObservableList<Map<String, String>> dataDeliveryMethod = FXCollections.observableArrayList();
+		List<DeliveryMethod> rsDeliveryMethod = EntityManager.getAllInstancesOf("DeliveryMethod");
+		for (DeliveryMethod r : rsDeliveryMethod) {
 			//table entry
 			Map<String, String> unit = new HashMap<String, String>();
 			
@@ -3460,23 +4545,23 @@ public class PrototypeController implements Initializable {
 			else
 				unit.put("Name", "");
 
-			dataDeliveryTerm.add(unit);
+			dataDeliveryMethod.add(unit);
 		}
 		
-		tableDeliveryTerm.getSelectionModel().selectedIndexProperty().addListener(
+		tableDeliveryMethod.getSelectionModel().selectedIndexProperty().addListener(
 							 (observable, oldValue, newValue) ->  { 
 							 										 //get selected index
-							 										 objectindex = tableDeliveryTerm.getSelectionModel().getSelectedIndex();
+							 										 objectindex = tableDeliveryMethod.getSelectionModel().getSelectedIndex();
 							 			 				 			 System.out.println("select: " + objectindex);
 
 							 			 				 			 //update association object information
 							 			 				 			 if (objectindex != -1)
-										 			 					 updateAssociation("DeliveryTerm", objectindex);
+										 			 					 updateAssociation("DeliveryMethod", objectindex);
 							 			 				 			 
 							 			 				 		  });
 		
-		tableDeliveryTerm.setItems(dataDeliveryTerm);
-		allObjectTables.put("DeliveryTerm", tableDeliveryTerm);
+		tableDeliveryMethod.setItems(dataDeliveryMethod);
+		allObjectTables.put("DeliveryMethod", tableDeliveryMethod);
 		
 		TableView<Map<String, String>> tableProduct = new TableView<Map<String, String>>();
 
@@ -3604,6 +4689,176 @@ public class PrototypeController implements Initializable {
 		
 		tableOrderLineProduct.setItems(dataOrderLineProduct);
 		allObjectTables.put("OrderLineProduct", tableOrderLineProduct);
+		
+		TableView<Map<String, String>> tablePlanLineProduct = new TableView<Map<String, String>>();
+
+		//super entity attribute column
+						
+		//attributes table column
+		TableColumn<Map<String, String>, String> tablePlanLineProduct_Cost = new TableColumn<Map<String, String>, String>("Cost");
+		tablePlanLineProduct_Cost.setMinWidth("Cost".length()*10);
+		tablePlanLineProduct_Cost.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+			@Override
+		    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+		        return new ReadOnlyStringWrapper(data.getValue().get("Cost"));
+		    }
+		});	
+		tablePlanLineProduct.getColumns().add(tablePlanLineProduct_Cost);
+		TableColumn<Map<String, String>, String> tablePlanLineProduct_Id = new TableColumn<Map<String, String>, String>("Id");
+		tablePlanLineProduct_Id.setMinWidth("Id".length()*10);
+		tablePlanLineProduct_Id.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+			@Override
+		    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+		        return new ReadOnlyStringWrapper(data.getValue().get("Id"));
+		    }
+		});	
+		tablePlanLineProduct.getColumns().add(tablePlanLineProduct_Id);
+		TableColumn<Map<String, String>, String> tablePlanLineProduct_Expected = new TableColumn<Map<String, String>, String>("Expected");
+		tablePlanLineProduct_Expected.setMinWidth("Expected".length()*10);
+		tablePlanLineProduct_Expected.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+			@Override
+		    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+		        return new ReadOnlyStringWrapper(data.getValue().get("Expected"));
+		    }
+		});	
+		tablePlanLineProduct.getColumns().add(tablePlanLineProduct_Expected);
+		TableColumn<Map<String, String>, String> tablePlanLineProduct_SalesCommission = new TableColumn<Map<String, String>, String>("SalesCommission");
+		tablePlanLineProduct_SalesCommission.setMinWidth("SalesCommission".length()*10);
+		tablePlanLineProduct_SalesCommission.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+			@Override
+		    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+		        return new ReadOnlyStringWrapper(data.getValue().get("SalesCommission"));
+		    }
+		});	
+		tablePlanLineProduct.getColumns().add(tablePlanLineProduct_SalesCommission);
+		
+		//table data
+		ObservableList<Map<String, String>> dataPlanLineProduct = FXCollections.observableArrayList();
+		List<PlanLineProduct> rsPlanLineProduct = EntityManager.getAllInstancesOf("PlanLineProduct");
+		for (PlanLineProduct r : rsPlanLineProduct) {
+			//table entry
+			Map<String, String> unit = new HashMap<String, String>();
+			
+			unit.put("Cost", String.valueOf(r.getCost()));
+			unit.put("Id", String.valueOf(r.getId()));
+			unit.put("Expected", String.valueOf(r.getExpected()));
+			unit.put("SalesCommission", String.valueOf(r.getSalesCommission()));
+
+			dataPlanLineProduct.add(unit);
+		}
+		
+		tablePlanLineProduct.getSelectionModel().selectedIndexProperty().addListener(
+							 (observable, oldValue, newValue) ->  { 
+							 										 //get selected index
+							 										 objectindex = tablePlanLineProduct.getSelectionModel().getSelectedIndex();
+							 			 				 			 System.out.println("select: " + objectindex);
+
+							 			 				 			 //update association object information
+							 			 				 			 if (objectindex != -1)
+										 			 					 updateAssociation("PlanLineProduct", objectindex);
+							 			 				 			 
+							 			 				 		  });
+		
+		tablePlanLineProduct.setItems(dataPlanLineProduct);
+		allObjectTables.put("PlanLineProduct", tablePlanLineProduct);
+		
+		TableView<Map<String, String>> tableSalePlan = new TableView<Map<String, String>>();
+
+		//super entity attribute column
+						
+		//attributes table column
+		TableColumn<Map<String, String>, String> tableSalePlan_StartDate = new TableColumn<Map<String, String>, String>("StartDate");
+		tableSalePlan_StartDate.setMinWidth("StartDate".length()*10);
+		tableSalePlan_StartDate.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+			@Override
+		    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+		        return new ReadOnlyStringWrapper(data.getValue().get("StartDate"));
+		    }
+		});	
+		tableSalePlan.getColumns().add(tableSalePlan_StartDate);
+		TableColumn<Map<String, String>, String> tableSalePlan_EndDate = new TableColumn<Map<String, String>, String>("EndDate");
+		tableSalePlan_EndDate.setMinWidth("EndDate".length()*10);
+		tableSalePlan_EndDate.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+			@Override
+		    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+		        return new ReadOnlyStringWrapper(data.getValue().get("EndDate"));
+		    }
+		});	
+		tableSalePlan.getColumns().add(tableSalePlan_EndDate);
+		TableColumn<Map<String, String>, String> tableSalePlan_Id = new TableColumn<Map<String, String>, String>("Id");
+		tableSalePlan_Id.setMinWidth("Id".length()*10);
+		tableSalePlan_Id.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+			@Override
+		    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+		        return new ReadOnlyStringWrapper(data.getValue().get("Id"));
+		    }
+		});	
+		tableSalePlan.getColumns().add(tableSalePlan_Id);
+		TableColumn<Map<String, String>, String> tableSalePlan_TotalCost = new TableColumn<Map<String, String>, String>("TotalCost");
+		tableSalePlan_TotalCost.setMinWidth("TotalCost".length()*10);
+		tableSalePlan_TotalCost.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+			@Override
+		    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+		        return new ReadOnlyStringWrapper(data.getValue().get("TotalCost"));
+		    }
+		});	
+		tableSalePlan.getColumns().add(tableSalePlan_TotalCost);
+		TableColumn<Map<String, String>, String> tableSalePlan_TotalPrice = new TableColumn<Map<String, String>, String>("TotalPrice");
+		tableSalePlan_TotalPrice.setMinWidth("TotalPrice".length()*10);
+		tableSalePlan_TotalPrice.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+			@Override
+		    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+		        return new ReadOnlyStringWrapper(data.getValue().get("TotalPrice"));
+		    }
+		});	
+		tableSalePlan.getColumns().add(tableSalePlan_TotalPrice);
+		TableColumn<Map<String, String>, String> tableSalePlan_Profits = new TableColumn<Map<String, String>, String>("Profits");
+		tableSalePlan_Profits.setMinWidth("Profits".length()*10);
+		tableSalePlan_Profits.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+			@Override
+		    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+		        return new ReadOnlyStringWrapper(data.getValue().get("Profits"));
+		    }
+		});	
+		tableSalePlan.getColumns().add(tableSalePlan_Profits);
+		
+		//table data
+		ObservableList<Map<String, String>> dataSalePlan = FXCollections.observableArrayList();
+		List<SalePlan> rsSalePlan = EntityManager.getAllInstancesOf("SalePlan");
+		for (SalePlan r : rsSalePlan) {
+			//table entry
+			Map<String, String> unit = new HashMap<String, String>();
+			
+			if (r.getStartDate() != null)
+				unit.put("StartDate", r.getStartDate().format(dateformatter));
+			else
+				unit.put("StartDate", "");
+			if (r.getEndDate() != null)
+				unit.put("EndDate", r.getEndDate().format(dateformatter));
+			else
+				unit.put("EndDate", "");
+			unit.put("Id", String.valueOf(r.getId()));
+			unit.put("TotalCost", String.valueOf(r.getTotalCost()));
+			unit.put("TotalPrice", String.valueOf(r.getTotalPrice()));
+			unit.put("Profits", String.valueOf(r.getProfits()));
+
+			dataSalePlan.add(unit);
+		}
+		
+		tableSalePlan.getSelectionModel().selectedIndexProperty().addListener(
+							 (observable, oldValue, newValue) ->  { 
+							 										 //get selected index
+							 										 objectindex = tableSalePlan.getSelectionModel().getSelectedIndex();
+							 			 				 			 System.out.println("select: " + objectindex);
+
+							 			 				 			 //update association object information
+							 			 				 			 if (objectindex != -1)
+										 			 					 updateAssociation("SalePlan", objectindex);
+							 			 				 			 
+							 			 				 		  });
+		
+		tableSalePlan.setItems(dataSalePlan);
+		allObjectTables.put("SalePlan", tableSalePlan);
 		
 
 		
@@ -3734,11 +4989,6 @@ public class PrototypeController implements Initializable {
 					unit.put("CommodityList", String.valueOf(r.getCommodityList()));
 				else
 					unit.put("CommodityList", "");
-				if (r.getContractObject() != null)
-					unit.put("ContractObject", String.valueOf(r.getContractObject()));
-				else
-					unit.put("ContractObject", "");
-				unit.put("Quantity", String.valueOf(r.getQuantity()));
 				unit.put("TotalPrice", String.valueOf(r.getTotalPrice()));
 				if (r.getDeadlineForPerformance() != null)
 					unit.put("DeadlineForPerformance", String.valueOf(r.getDeadlineForPerformance()));
@@ -3797,9 +5047,9 @@ public class PrototypeController implements Initializable {
 			
 			allObjectTables.get("ExchangeNotification").setItems(dataExchangeNotification);
 	}
-	public void updateOrderTermTable(List<OrderTerm> rsOrderTerm) {
-			ObservableList<Map<String, String>> dataOrderTerm = FXCollections.observableArrayList();
-			for (OrderTerm r : rsOrderTerm) {
+	public void updateOrderMethodTable(List<OrderMethod> rsOrderMethod) {
+			ObservableList<Map<String, String>> dataOrderMethod = FXCollections.observableArrayList();
+			for (OrderMethod r : rsOrderMethod) {
 				Map<String, String> unit = new HashMap<String, String>();
 				
 				
@@ -3808,10 +5058,10 @@ public class PrototypeController implements Initializable {
 					unit.put("Name", String.valueOf(r.getName()));
 				else
 					unit.put("Name", "");
-				dataOrderTerm.add(unit);
+				dataOrderMethod.add(unit);
 			}
 			
-			allObjectTables.get("OrderTerm").setItems(dataOrderTerm);
+			allObjectTables.get("OrderMethod").setItems(dataOrderMethod);
 	}
 	public void updateClientGroupTable(List<ClientGroup> rsClientGroup) {
 			ObservableList<Map<String, String>> dataClientGroup = FXCollections.observableArrayList();
@@ -3829,9 +5079,9 @@ public class PrototypeController implements Initializable {
 			
 			allObjectTables.get("ClientGroup").setItems(dataClientGroup);
 	}
-	public void updateDeliveryTermTable(List<DeliveryTerm> rsDeliveryTerm) {
-			ObservableList<Map<String, String>> dataDeliveryTerm = FXCollections.observableArrayList();
-			for (DeliveryTerm r : rsDeliveryTerm) {
+	public void updateDeliveryMethodTable(List<DeliveryMethod> rsDeliveryMethod) {
+			ObservableList<Map<String, String>> dataDeliveryMethod = FXCollections.observableArrayList();
+			for (DeliveryMethod r : rsDeliveryMethod) {
 				Map<String, String> unit = new HashMap<String, String>();
 				
 				
@@ -3840,10 +5090,10 @@ public class PrototypeController implements Initializable {
 					unit.put("Name", String.valueOf(r.getName()));
 				else
 					unit.put("Name", "");
-				dataDeliveryTerm.add(unit);
+				dataDeliveryMethod.add(unit);
 			}
 			
-			allObjectTables.get("DeliveryTerm").setItems(dataDeliveryTerm);
+			allObjectTables.get("DeliveryMethod").setItems(dataDeliveryMethod);
 	}
 	public void updateProductTable(List<Product> rsProduct) {
 			ObservableList<Map<String, String>> dataProduct = FXCollections.observableArrayList();
@@ -3875,6 +5125,44 @@ public class PrototypeController implements Initializable {
 			}
 			
 			allObjectTables.get("OrderLineProduct").setItems(dataOrderLineProduct);
+	}
+	public void updatePlanLineProductTable(List<PlanLineProduct> rsPlanLineProduct) {
+			ObservableList<Map<String, String>> dataPlanLineProduct = FXCollections.observableArrayList();
+			for (PlanLineProduct r : rsPlanLineProduct) {
+				Map<String, String> unit = new HashMap<String, String>();
+				
+				
+				unit.put("Cost", String.valueOf(r.getCost()));
+				unit.put("Id", String.valueOf(r.getId()));
+				unit.put("Expected", String.valueOf(r.getExpected()));
+				unit.put("SalesCommission", String.valueOf(r.getSalesCommission()));
+				dataPlanLineProduct.add(unit);
+			}
+			
+			allObjectTables.get("PlanLineProduct").setItems(dataPlanLineProduct);
+	}
+	public void updateSalePlanTable(List<SalePlan> rsSalePlan) {
+			ObservableList<Map<String, String>> dataSalePlan = FXCollections.observableArrayList();
+			for (SalePlan r : rsSalePlan) {
+				Map<String, String> unit = new HashMap<String, String>();
+				
+				
+				if (r.getStartDate() != null)
+					unit.put("StartDate", r.getStartDate().format(dateformatter));
+				else
+					unit.put("StartDate", "");
+				if (r.getEndDate() != null)
+					unit.put("EndDate", r.getEndDate().format(dateformatter));
+				else
+					unit.put("EndDate", "");
+				unit.put("Id", String.valueOf(r.getId()));
+				unit.put("TotalCost", String.valueOf(r.getTotalCost()));
+				unit.put("TotalPrice", String.valueOf(r.getTotalPrice()));
+				unit.put("Profits", String.valueOf(r.getProfits()));
+				dataSalePlan.add(unit);
+			}
+			
+			allObjectTables.get("SalePlan").setItems(dataSalePlan);
 	}
 	
 	/* 
@@ -4007,11 +5295,6 @@ public class PrototypeController implements Initializable {
 					unit.put("CommodityList", String.valueOf(r.getCommodityList()));
 				else
 					unit.put("CommodityList", "");
-				if (r.getContractObject() != null)
-					unit.put("ContractObject", String.valueOf(r.getContractObject()));
-				else
-					unit.put("ContractObject", "");
-				unit.put("Quantity", String.valueOf(r.getQuantity()));
 				unit.put("TotalPrice", String.valueOf(r.getTotalPrice()));
 				if (r.getDeadlineForPerformance() != null)
 					unit.put("DeadlineForPerformance", String.valueOf(r.getDeadlineForPerformance()));
@@ -4072,10 +5355,10 @@ public class PrototypeController implements Initializable {
 			
 			allObjectTables.get("ExchangeNotification").setItems(dataExchangeNotification);
 	}
-	public void updateOrderTermTable() {
-			ObservableList<Map<String, String>> dataOrderTerm = FXCollections.observableArrayList();
-			List<OrderTerm> rsOrderTerm = EntityManager.getAllInstancesOf("OrderTerm");
-			for (OrderTerm r : rsOrderTerm) {
+	public void updateOrderMethodTable() {
+			ObservableList<Map<String, String>> dataOrderMethod = FXCollections.observableArrayList();
+			List<OrderMethod> rsOrderMethod = EntityManager.getAllInstancesOf("OrderMethod");
+			for (OrderMethod r : rsOrderMethod) {
 				Map<String, String> unit = new HashMap<String, String>();
 
 
@@ -4084,10 +5367,10 @@ public class PrototypeController implements Initializable {
 					unit.put("Name", String.valueOf(r.getName()));
 				else
 					unit.put("Name", "");
-				dataOrderTerm.add(unit);
+				dataOrderMethod.add(unit);
 			}
 			
-			allObjectTables.get("OrderTerm").setItems(dataOrderTerm);
+			allObjectTables.get("OrderMethod").setItems(dataOrderMethod);
 	}
 	public void updateClientGroupTable() {
 			ObservableList<Map<String, String>> dataClientGroup = FXCollections.observableArrayList();
@@ -4106,10 +5389,10 @@ public class PrototypeController implements Initializable {
 			
 			allObjectTables.get("ClientGroup").setItems(dataClientGroup);
 	}
-	public void updateDeliveryTermTable() {
-			ObservableList<Map<String, String>> dataDeliveryTerm = FXCollections.observableArrayList();
-			List<DeliveryTerm> rsDeliveryTerm = EntityManager.getAllInstancesOf("DeliveryTerm");
-			for (DeliveryTerm r : rsDeliveryTerm) {
+	public void updateDeliveryMethodTable() {
+			ObservableList<Map<String, String>> dataDeliveryMethod = FXCollections.observableArrayList();
+			List<DeliveryMethod> rsDeliveryMethod = EntityManager.getAllInstancesOf("DeliveryMethod");
+			for (DeliveryMethod r : rsDeliveryMethod) {
 				Map<String, String> unit = new HashMap<String, String>();
 
 
@@ -4118,10 +5401,10 @@ public class PrototypeController implements Initializable {
 					unit.put("Name", String.valueOf(r.getName()));
 				else
 					unit.put("Name", "");
-				dataDeliveryTerm.add(unit);
+				dataDeliveryMethod.add(unit);
 			}
 			
-			allObjectTables.get("DeliveryTerm").setItems(dataDeliveryTerm);
+			allObjectTables.get("DeliveryMethod").setItems(dataDeliveryMethod);
 	}
 	public void updateProductTable() {
 			ObservableList<Map<String, String>> dataProduct = FXCollections.observableArrayList();
@@ -4156,6 +5439,46 @@ public class PrototypeController implements Initializable {
 			
 			allObjectTables.get("OrderLineProduct").setItems(dataOrderLineProduct);
 	}
+	public void updatePlanLineProductTable() {
+			ObservableList<Map<String, String>> dataPlanLineProduct = FXCollections.observableArrayList();
+			List<PlanLineProduct> rsPlanLineProduct = EntityManager.getAllInstancesOf("PlanLineProduct");
+			for (PlanLineProduct r : rsPlanLineProduct) {
+				Map<String, String> unit = new HashMap<String, String>();
+
+
+				unit.put("Cost", String.valueOf(r.getCost()));
+				unit.put("Id", String.valueOf(r.getId()));
+				unit.put("Expected", String.valueOf(r.getExpected()));
+				unit.put("SalesCommission", String.valueOf(r.getSalesCommission()));
+				dataPlanLineProduct.add(unit);
+			}
+			
+			allObjectTables.get("PlanLineProduct").setItems(dataPlanLineProduct);
+	}
+	public void updateSalePlanTable() {
+			ObservableList<Map<String, String>> dataSalePlan = FXCollections.observableArrayList();
+			List<SalePlan> rsSalePlan = EntityManager.getAllInstancesOf("SalePlan");
+			for (SalePlan r : rsSalePlan) {
+				Map<String, String> unit = new HashMap<String, String>();
+
+
+				if (r.getStartDate() != null)
+					unit.put("StartDate", r.getStartDate().format(dateformatter));
+				else
+					unit.put("StartDate", "");
+				if (r.getEndDate() != null)
+					unit.put("EndDate", r.getEndDate().format(dateformatter));
+				else
+					unit.put("EndDate", "");
+				unit.put("Id", String.valueOf(r.getId()));
+				unit.put("TotalCost", String.valueOf(r.getTotalCost()));
+				unit.put("TotalPrice", String.valueOf(r.getTotalPrice()));
+				unit.put("Profits", String.valueOf(r.getProfits()));
+				dataSalePlan.add(unit);
+			}
+			
+			allObjectTables.get("SalePlan").setItems(dataSalePlan);
+	}
 	
 	public void classStatisicBingding() {
 	
@@ -4174,16 +5497,20 @@ public class PrototypeController implements Initializable {
 	 	 classInfodata.add(deliverynotification);
 	 	 exchangenotification = new ClassInfo("ExchangeNotification", EntityManager.getAllInstancesOf("ExchangeNotification").size());
 	 	 classInfodata.add(exchangenotification);
-	 	 orderterm = new ClassInfo("OrderTerm", EntityManager.getAllInstancesOf("OrderTerm").size());
-	 	 classInfodata.add(orderterm);
+	 	 ordermethod = new ClassInfo("OrderMethod", EntityManager.getAllInstancesOf("OrderMethod").size());
+	 	 classInfodata.add(ordermethod);
 	 	 clientgroup = new ClassInfo("ClientGroup", EntityManager.getAllInstancesOf("ClientGroup").size());
 	 	 classInfodata.add(clientgroup);
-	 	 deliveryterm = new ClassInfo("DeliveryTerm", EntityManager.getAllInstancesOf("DeliveryTerm").size());
-	 	 classInfodata.add(deliveryterm);
+	 	 deliverymethod = new ClassInfo("DeliveryMethod", EntityManager.getAllInstancesOf("DeliveryMethod").size());
+	 	 classInfodata.add(deliverymethod);
 	 	 product = new ClassInfo("Product", EntityManager.getAllInstancesOf("Product").size());
 	 	 classInfodata.add(product);
 	 	 orderlineproduct = new ClassInfo("OrderLineProduct", EntityManager.getAllInstancesOf("OrderLineProduct").size());
 	 	 classInfodata.add(orderlineproduct);
+	 	 planlineproduct = new ClassInfo("PlanLineProduct", EntityManager.getAllInstancesOf("PlanLineProduct").size());
+	 	 classInfodata.add(planlineproduct);
+	 	 saleplan = new ClassInfo("SalePlan", EntityManager.getAllInstancesOf("SalePlan").size());
+	 	 classInfodata.add(saleplan);
 	 	 
 		 class_statisic.setItems(classInfodata);
 		 
@@ -4227,11 +5554,13 @@ public class PrototypeController implements Initializable {
 	 	 billoflading.setNumber(EntityManager.getAllInstancesOf("BillOfLading").size());
 	 	 deliverynotification.setNumber(EntityManager.getAllInstancesOf("DeliveryNotification").size());
 	 	 exchangenotification.setNumber(EntityManager.getAllInstancesOf("ExchangeNotification").size());
-	 	 orderterm.setNumber(EntityManager.getAllInstancesOf("OrderTerm").size());
+	 	 ordermethod.setNumber(EntityManager.getAllInstancesOf("OrderMethod").size());
 	 	 clientgroup.setNumber(EntityManager.getAllInstancesOf("ClientGroup").size());
-	 	 deliveryterm.setNumber(EntityManager.getAllInstancesOf("DeliveryTerm").size());
+	 	 deliverymethod.setNumber(EntityManager.getAllInstancesOf("DeliveryMethod").size());
 	 	 product.setNumber(EntityManager.getAllInstancesOf("Product").size());
 	 	 orderlineproduct.setNumber(EntityManager.getAllInstancesOf("OrderLineProduct").size());
+	 	 planlineproduct.setNumber(EntityManager.getAllInstancesOf("PlanLineProduct").size());
+	 	 saleplan.setNumber(EntityManager.getAllInstancesOf("SalePlan").size());
 		
 	}
 	
@@ -4267,7 +5596,7 @@ public class PrototypeController implements Initializable {
 		Order_association_data.add(Order_associatition_DN);
 		AssociationInfo Order_associatition_EN = new AssociationInfo("Order", "ExchangeNotification", "EN", true);
 		Order_association_data.add(Order_associatition_EN);
-		AssociationInfo Order_associatition_OT = new AssociationInfo("Order", "OrderTerm", "OT", false);
+		AssociationInfo Order_associatition_OT = new AssociationInfo("Order", "OrderMethod", "OT", false);
 		Order_association_data.add(Order_associatition_OT);
 		AssociationInfo Order_associatition_Buyer = new AssociationInfo("Order", "Client", "Buyer", false);
 		Order_association_data.add(Order_associatition_Buyer);
@@ -4283,7 +5612,7 @@ public class PrototypeController implements Initializable {
 		allassociationData.put("Invoice", Invoice_association_data);
 		
 		ObservableList<AssociationInfo> BillOfLading_association_data = FXCollections.observableArrayList();
-		AssociationInfo BillOfLading_associatition_DT = new AssociationInfo("BillOfLading", "DeliveryTerm", "DT", false);
+		AssociationInfo BillOfLading_associatition_DT = new AssociationInfo("BillOfLading", "DeliveryMethod", "DT", false);
 		BillOfLading_association_data.add(BillOfLading_associatition_DT);
 		AssociationInfo BillOfLading_associatition_BelongedOrder = new AssociationInfo("BillOfLading", "Order", "BelongedOrder", false);
 		BillOfLading_association_data.add(BillOfLading_associatition_BelongedOrder);
@@ -4298,17 +5627,17 @@ public class PrototypeController implements Initializable {
 		
 		allassociationData.put("ExchangeNotification", ExchangeNotification_association_data);
 		
-		ObservableList<AssociationInfo> OrderTerm_association_data = FXCollections.observableArrayList();
+		ObservableList<AssociationInfo> OrderMethod_association_data = FXCollections.observableArrayList();
 		
-		allassociationData.put("OrderTerm", OrderTerm_association_data);
+		allassociationData.put("OrderMethod", OrderMethod_association_data);
 		
 		ObservableList<AssociationInfo> ClientGroup_association_data = FXCollections.observableArrayList();
 		
 		allassociationData.put("ClientGroup", ClientGroup_association_data);
 		
-		ObservableList<AssociationInfo> DeliveryTerm_association_data = FXCollections.observableArrayList();
+		ObservableList<AssociationInfo> DeliveryMethod_association_data = FXCollections.observableArrayList();
 		
-		allassociationData.put("DeliveryTerm", DeliveryTerm_association_data);
+		allassociationData.put("DeliveryMethod", DeliveryMethod_association_data);
 		
 		ObservableList<AssociationInfo> Product_association_data = FXCollections.observableArrayList();
 		
@@ -4321,6 +5650,20 @@ public class PrototypeController implements Initializable {
 		OrderLineProduct_association_data.add(OrderLineProduct_associatition_BelongedOrder);
 		
 		allassociationData.put("OrderLineProduct", OrderLineProduct_association_data);
+		
+		ObservableList<AssociationInfo> PlanLineProduct_association_data = FXCollections.observableArrayList();
+		AssociationInfo PlanLineProduct_associatition_BelongedProduct = new AssociationInfo("PlanLineProduct", "Product", "BelongedProduct", false);
+		PlanLineProduct_association_data.add(PlanLineProduct_associatition_BelongedProduct);
+		AssociationInfo PlanLineProduct_associatition_ContainedLine = new AssociationInfo("PlanLineProduct", "SalePlan", "ContainedLine", false);
+		PlanLineProduct_association_data.add(PlanLineProduct_associatition_ContainedLine);
+		
+		allassociationData.put("PlanLineProduct", PlanLineProduct_association_data);
+		
+		ObservableList<AssociationInfo> SalePlan_association_data = FXCollections.observableArrayList();
+		AssociationInfo SalePlan_associatition_SalePlantoPlanLineProduct = new AssociationInfo("SalePlan", "PlanLineProduct", "SalePlantoPlanLineProduct", true);
+		SalePlan_association_data.add(SalePlan_associatition_SalePlantoPlanLineProduct);
+		
+		allassociationData.put("SalePlan", SalePlan_association_data);
 		
 		
 		association_statisic.getSelectionModel().selectedItemProperty().addListener(
@@ -4376,7 +5719,7 @@ public class PrototypeController implements Initializable {
 		
 		//definition map
 		definitions_map = new HashMap<String, String>();
-		definitions_map.put("makeNewOrder", "buyer:Client = Client.allInstance()->any(bu:Client | bu.Id = buyId)\r\r\n");
+		definitions_map.put("makeNewOrder", "buyer:Client = Client.allInstance()->any(bu:Client | bu.Id = buyerId)\r\r\n");
 		definitions_map.put("addProduct", "product:Product = Product.allInstance()->any(pr:Product | pr.Id = id)\r\r\n");
 		definitions_map.put("createContracts", "contracts:Contracts = Contracts.allInstance()->any(con:Contracts | con.Id = id)\r\r\n");
 		definitions_map.put("queryContracts", "contracts:Contracts = Contracts.allInstance()->any(con:Contracts | con.Id = id)\r\r\n");
@@ -4386,10 +5729,6 @@ public class PrototypeController implements Initializable {
 		definitions_map.put("queryInvoice", "invoice:Invoice = Invoice.allInstance()->any(invo:Invoice | invo.Id = id)\r\r\n");
 		definitions_map.put("modifyInvoice", "invoice:Invoice = Invoice.allInstance()->any(invo:Invoice | invo.Id = id)\r\r\n");
 		definitions_map.put("deleteInvoice", "invoice:Invoice = Invoice.allInstance()->any(invo:Invoice | invo.Id = id)\r\r\n");
-		definitions_map.put("createBillOfLading", "billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)\r\r\n");
-		definitions_map.put("queryBillOfLading", "billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)\r\r\n");
-		definitions_map.put("modifyBillOfLading", "billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)\r\r\n");
-		definitions_map.put("deleteBillOfLading", "billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)\r\r\n");
 		definitions_map.put("createClient", "client:Client = Client.allInstance()->any(cli:Client | cli.Id = id)\r\r\n");
 		definitions_map.put("queryClient", "client:Client = Client.allInstance()->any(cli:Client | cli.Id = id)\r\r\n");
 		definitions_map.put("modifyClient", "client:Client = Client.allInstance()->any(cli:Client | cli.Id = id)\r\r\n");
@@ -4402,21 +5741,27 @@ public class PrototypeController implements Initializable {
 		definitions_map.put("queryProduct", "product:Product = Product.allInstance()->any(pro:Product | pro.Id = id)\r\r\n");
 		definitions_map.put("modifyProduct", "product:Product = Product.allInstance()->any(pro:Product | pro.Id = id)\r\r\n");
 		definitions_map.put("deleteProduct", "product:Product = Product.allInstance()->any(pro:Product | pro.Id = id)\r\r\n");
+		definitions_map.put("createBillOfLading", "billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)\r\r\n");
+		definitions_map.put("queryBillOfLading", "billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)\r\r\n");
+		definitions_map.put("modifyBillOfLading", "billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)\r\r\n");
+		definitions_map.put("deleteBillOfLading", "billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)\r\r\n");
+		definitions_map.put("createOrderMethod", "ordermethod:OrderMethod = OrderMethod.allInstance()->any(ord:OrderMethod | ord.Id = id)\r\r\n");
+		definitions_map.put("queryOrderMethod", "ordermethod:OrderMethod = OrderMethod.allInstance()->any(ord:OrderMethod | ord.Id = id)\r\r\n");
+		definitions_map.put("modifyOrderMethod", "ordermethod:OrderMethod = OrderMethod.allInstance()->any(ord:OrderMethod | ord.Id = id)\r\r\n");
+		definitions_map.put("deleteOrderMethod", "ordermethod:OrderMethod = OrderMethod.allInstance()->any(ord:OrderMethod | ord.Id = id)\r\r\n");
+		definitions_map.put("createDeliveryMethod", "deliverymethod:DeliveryMethod = DeliveryMethod.allInstance()->any(del:DeliveryMethod | del.Id = id)\r\r\n");
+		definitions_map.put("queryDeliveryMethod", "deliverymethod:DeliveryMethod = DeliveryMethod.allInstance()->any(del:DeliveryMethod | del.Id = id)\r\r\n");
+		definitions_map.put("modifyDeliveryMethod", "deliverymethod:DeliveryMethod = DeliveryMethod.allInstance()->any(del:DeliveryMethod | del.Id = id)\r\r\n");
+		definitions_map.put("deleteDeliveryMethod", "deliverymethod:DeliveryMethod = DeliveryMethod.allInstance()->any(del:DeliveryMethod | del.Id = id)\r\r\n");
 		
 		//precondition map
 		preconditions_map = new HashMap<String, String>();
 		preconditions_map.put("makeNewOrder", "buyer.oclIsUndefined() = false and\nClient.allInstance()->includes(buyer) and\n(currentOrder.oclIsUndefined() = true or\n(currentOrder.oclIsUndefined() = false and\ncurrentOrder.IsCompleted = true\n)\n)\n");
 		preconditions_map.put("addProduct", "currentOrder.oclIsUndefined() = false and\ncurrentOrder.IsCompleted = false and\nproduct.oclIsUndefined() = false\n");
-		preconditions_map.put("generateContract", "currentOrder.oclIsUndefined() = false and\ncurrentOrder.IsComplete = false\n");
+		preconditions_map.put("generateContract", "currentOrder.oclIsUndefined() = false and\ncurrentOrder.IsCompleted = false\n");
 		preconditions_map.put("generateOrder", "true");
 		preconditions_map.put("salesPlanManagement", "true");
-		preconditions_map.put("deliveryNotification", "true");
-		preconditions_map.put("exchangeNotification", "true");
-		preconditions_map.put("itemsPricesMaintenance", "true");
 		preconditions_map.put("postingOfAccount", "true");
-		preconditions_map.put("invoiceManagement", "true");
-		preconditions_map.put("contractTerminationAndSettlement", "true");
-		preconditions_map.put("orderTerminationAndSettlement", "true");
 		preconditions_map.put("salesCommissionManagement", "true");
 		preconditions_map.put("authorization", "authorizationProcessing()");
 		preconditions_map.put("authorizationProcessing", "true");
@@ -4428,10 +5773,6 @@ public class PrototypeController implements Initializable {
 		preconditions_map.put("queryInvoice", "invoice.oclIsUndefined() = false");
 		preconditions_map.put("modifyInvoice", "invoice.oclIsUndefined() = false");
 		preconditions_map.put("deleteInvoice", "invoice.oclIsUndefined() = false and\nInvoice.allInstance()->includes(invoice)\n");
-		preconditions_map.put("createBillOfLading", "billoflading.oclIsUndefined() = true");
-		preconditions_map.put("queryBillOfLading", "billoflading.oclIsUndefined() = false");
-		preconditions_map.put("modifyBillOfLading", "billoflading.oclIsUndefined() = false");
-		preconditions_map.put("deleteBillOfLading", "billoflading.oclIsUndefined() = false and\nBillOfLading.allInstance()->includes(billoflading)\n");
 		preconditions_map.put("createClient", "client.oclIsUndefined() = true");
 		preconditions_map.put("queryClient", "client.oclIsUndefined() = false");
 		preconditions_map.put("modifyClient", "client.oclIsUndefined() = false");
@@ -4444,25 +5785,48 @@ public class PrototypeController implements Initializable {
 		preconditions_map.put("queryProduct", "product.oclIsUndefined() = false");
 		preconditions_map.put("modifyProduct", "product.oclIsUndefined() = false");
 		preconditions_map.put("deleteProduct", "product.oclIsUndefined() = false and\nProduct.allInstance()->includes(product)\n");
+		preconditions_map.put("createBillOfLading", "billoflading.oclIsUndefined() = true");
+		preconditions_map.put("queryBillOfLading", "billoflading.oclIsUndefined() = false");
+		preconditions_map.put("modifyBillOfLading", "billoflading.oclIsUndefined() = false");
+		preconditions_map.put("deleteBillOfLading", "billoflading.oclIsUndefined() = false and\nBillOfLading.allInstance()->includes(billoflading)\n");
+		preconditions_map.put("createOrderMethod", "ordermethod.oclIsUndefined() = true");
+		preconditions_map.put("queryOrderMethod", "ordermethod.oclIsUndefined() = false");
+		preconditions_map.put("modifyOrderMethod", "ordermethod.oclIsUndefined() = false");
+		preconditions_map.put("deleteOrderMethod", "ordermethod.oclIsUndefined() = false and\nOrderMethod.allInstance()->includes(ordermethod)\n");
+		preconditions_map.put("createDeliveryMethod", "deliverymethod.oclIsUndefined() = true");
+		preconditions_map.put("queryDeliveryMethod", "deliverymethod.oclIsUndefined() = false");
+		preconditions_map.put("modifyDeliveryMethod", "deliverymethod.oclIsUndefined() = false");
+		preconditions_map.put("deleteDeliveryMethod", "deliverymethod.oclIsUndefined() = false and\nDeliveryMethod.allInstance()->includes(deliverymethod)\n");
 		preconditions_map.put("manageItemsPrices", "true");
+		preconditions_map.put("createClientGroup", "true");
+		preconditions_map.put("queryClientGroup", "true");
+		preconditions_map.put("modifyClientGroup", "true");
+		preconditions_map.put("deleteClientGroup", "true");
+		preconditions_map.put("orderTerminationAndSettlement", "true");
+		preconditions_map.put("contractTerminationAndSettlement", "true");
+		preconditions_map.put("payment", "true");
+		preconditions_map.put("generateInvoice", "true");
+		preconditions_map.put("generateBillOfLading", "true");
+		preconditions_map.put("generateNotification", "true");
+		preconditions_map.put("typeChoice", "true");
+		preconditions_map.put("cancelOrder", "true");
+		preconditions_map.put("regenerateBillOfLading", "true");
+		preconditions_map.put("regenerateNotification", "true");
+		preconditions_map.put("makeNewPlan", "true");
+		preconditions_map.put("addItemIntoPlan", "true");
+		preconditions_map.put("generatePlan", "true");
 		
 		//postcondition map
 		postconditions_map = new HashMap<String, String>();
 		postconditions_map.put("makeNewOrder", "let o:Order ino.oclIsNew() and\no.Buyer = buyer and\nbuyer.ContainedOrders->includes(o) and\no.IsCompleted = false and\nOrder.allInstance()->includes(o) and\nself.currentOrder = o and\nresult = true\n");
 		postconditions_map.put("addProduct", "let olp:OrderLineProduct inolp.oclIsNew() and\ncurrentOrderLine = olp and\nolp.BelongedOrder = currentOrder and\ncurrentOrder.ContainedOrderLine->includes(olp) and\nolp.Quantity = quantity and\nolp.BelongedProduct = product and\nolp.SubAmount = product.Price * quantity and\nOrderLineProduct.allInstance()->includes(olp) and\nresult = true\n");
 		postconditions_map.put("generateContract", "let con:Contracts incon.oclIsNew() and\ncon.Id = currentOrder.Id and\ncon.BelongedOrder = currentOrder and\ncon.Packing = packing and\ncon.DateOfShipment = dateOfShipment and\ncon.PortOfShipment = portOfShipment and\ncon.PortOfDestination = portOfDestination and\ncon.Insurance = insurance and\ncon.EffectiveDate = effectiveDate and\nContracts.allInstance()->includes(con) and\nresult = true\n");
-		postconditions_map.put("generateOrder", "true");
-		postconditions_map.put("salesPlanManagement", "true");
-		postconditions_map.put("deliveryNotification", "true");
-		postconditions_map.put("exchangeNotification", "true");
-		postconditions_map.put("itemsPricesMaintenance", "true");
-		postconditions_map.put("postingOfAccount", "true");
-		postconditions_map.put("invoiceManagement", "true");
-		postconditions_map.put("contractTerminationAndSettlement", "true");
-		postconditions_map.put("orderTerminationAndSettlement", "true");
-		postconditions_map.put("salesCommissionManagement", "true");
-		postconditions_map.put("authorization", "true");
-		postconditions_map.put("authorizationProcessing", "true");
+		postconditions_map.put("generateOrder", "result = true");
+		postconditions_map.put("salesPlanManagement", "result = true");
+		postconditions_map.put("postingOfAccount", "result = true");
+		postconditions_map.put("salesCommissionManagement", "result = true");
+		postconditions_map.put("authorization", "result = true");
+		postconditions_map.put("authorizationProcessing", "result = true");
 		postconditions_map.put("createContracts", "let con:Contracts incon.oclIsNew() and\ncon.Id = id and\ncon.Buyer = buyer and\ncon.Packing = packing and\ncon.DateOfShipment = dateofshipment and\ncon.PortOfShipment = portofshipment and\ncon.PortOfDestination = portofdestination and\ncon.Insurance = insurance and\ncon.EffectiveDate = effectivedate and\nContracts.allInstance()->includes(con) and\nresult = true\n");
 		postconditions_map.put("queryContracts", "result = contracts");
 		postconditions_map.put("modifyContracts", "contracts.Id = id and\ncontracts.Buyer = buyer and\ncontracts.Packing = packing and\ncontracts.DateOfShipment = dateofshipment and\ncontracts.PortOfShipment = portofshipment and\ncontracts.PortOfDestination = portofdestination and\ncontracts.Insurance = insurance and\ncontracts.EffectiveDate = effectivedate and\nresult = true\n");
@@ -4471,10 +5835,6 @@ public class PrototypeController implements Initializable {
 		postconditions_map.put("queryInvoice", "result = invoice");
 		postconditions_map.put("modifyInvoice", "invoice.Id = id and\ninvoice.Title = title and\ninvoice.EffecitveDate = effecitvedate and\ninvoice.Amount = amount and\nresult = true\n");
 		postconditions_map.put("deleteInvoice", "Invoice.allInstance()->excludes(invoice) and\nresult = true\n");
-		postconditions_map.put("createBillOfLading", "let bil:BillOfLading inbil.oclIsNew() and\nbil.Id = id and\nbil.Consignee = consignee and\nbil.CommodityList = commoditylist and\nbil.ContractObject = contractobject and\nbil.Quantity = quantity and\nbil.TotalPrice = totalprice and\nbil.DeadlineForPerformance = deadlineforperformance and\nbil.LocationForPerformance = locationforperformance and\nbil.MethodForPerformance = methodforperformance and\nBillOfLading.allInstance()->includes(bil) and\nresult = true\n");
-		postconditions_map.put("queryBillOfLading", "result = billoflading");
-		postconditions_map.put("modifyBillOfLading", "billoflading.Id = id and\nbilloflading.Consignee = consignee and\nbilloflading.CommodityList = commoditylist and\nbilloflading.ContractObject = contractobject and\nbilloflading.Quantity = quantity and\nbilloflading.TotalPrice = totalprice and\nbilloflading.DeadlineForPerformance = deadlineforperformance and\nbilloflading.LocationForPerformance = locationforperformance and\nbilloflading.MethodForPerformance = methodforperformance and\nresult = true\n");
-		postconditions_map.put("deleteBillOfLading", "BillOfLading.allInstance()->excludes(billoflading) and\nresult = true\n");
 		postconditions_map.put("createClient", "let cli:Client incli.oclIsNew() and\ncli.Id = id and\ncli.Name = name and\ncli.Address = address and\ncli.Contact = contact and\ncli.PhoneNumber = phonenumber and\nClient.allInstance()->includes(cli) and\nresult = true\n");
 		postconditions_map.put("queryClient", "result = client");
 		postconditions_map.put("modifyClient", "client.Id = id and\nclient.Name = name and\nclient.Address = address and\nclient.Contact = contact and\nclient.PhoneNumber = phonenumber and\nresult = true\n");
@@ -4487,7 +5847,36 @@ public class PrototypeController implements Initializable {
 		postconditions_map.put("queryProduct", "result = product");
 		postconditions_map.put("modifyProduct", "product.Id = id and\nproduct.Name = name and\nproduct.Price = price and\nresult = true\n");
 		postconditions_map.put("deleteProduct", "Product.allInstance()->excludes(product) and\nresult = true\n");
-		postconditions_map.put("manageItemsPrices", "true");
+		postconditions_map.put("createBillOfLading", "let bil:BillOfLading inbil.oclIsNew() and\nbil.Id = id and\nbil.Consignee = consignee and\nbil.CommodityList = commoditylist and\nbil.TotalPrice = totalprice and\nbil.DeadlineForPerformance = deadlineforperformance and\nbil.LocationForPerformance = locationforperformance and\nbil.MethodForPerformance = methodforperformance and\nBillOfLading.allInstance()->includes(bil) and\nresult = true\n");
+		postconditions_map.put("queryBillOfLading", "result = billoflading");
+		postconditions_map.put("modifyBillOfLading", "billoflading.Id = id and\nbilloflading.Consignee = consignee and\nbilloflading.CommodityList = commoditylist and\nbilloflading.TotalPrice = totalprice and\nbilloflading.DeadlineForPerformance = deadlineforperformance and\nbilloflading.LocationForPerformance = locationforperformance and\nbilloflading.MethodForPerformance = methodforperformance and\nresult = true\n");
+		postconditions_map.put("deleteBillOfLading", "BillOfLading.allInstance()->excludes(billoflading) and\nresult = true\n");
+		postconditions_map.put("createOrderMethod", "let ord:OrderMethod inord.oclIsNew() and\nord.Id = id and\nord.Name = name and\nOrderMethod.allInstance()->includes(ord) and\nresult = true\n");
+		postconditions_map.put("queryOrderMethod", "result = ordermethod");
+		postconditions_map.put("modifyOrderMethod", "ordermethod.Id = id and\nordermethod.Name = name and\nresult = true\n");
+		postconditions_map.put("deleteOrderMethod", "OrderMethod.allInstance()->excludes(ordermethod) and\nresult = true\n");
+		postconditions_map.put("createDeliveryMethod", "let del:DeliveryMethod indel.oclIsNew() and\ndel.Id = id and\ndel.Name = name and\nDeliveryMethod.allInstance()->includes(del) and\nresult = true\n");
+		postconditions_map.put("queryDeliveryMethod", "result = deliverymethod");
+		postconditions_map.put("modifyDeliveryMethod", "deliverymethod.Id = id and\ndeliverymethod.Name = name and\nresult = true\n");
+		postconditions_map.put("deleteDeliveryMethod", "DeliveryMethod.allInstance()->excludes(deliverymethod) and\nresult = true\n");
+		postconditions_map.put("manageItemsPrices", "result = true");
+		postconditions_map.put("createClientGroup", "result = true");
+		postconditions_map.put("queryClientGroup", "result = true");
+		postconditions_map.put("modifyClientGroup", "result = true");
+		postconditions_map.put("deleteClientGroup", "result = true");
+		postconditions_map.put("orderTerminationAndSettlement", "result = true");
+		postconditions_map.put("contractTerminationAndSettlement", "result = true");
+		postconditions_map.put("payment", "result = true");
+		postconditions_map.put("generateInvoice", "result = true");
+		postconditions_map.put("generateBillOfLading", "result = true");
+		postconditions_map.put("generateNotification", "result = true");
+		postconditions_map.put("typeChoice", "result = true");
+		postconditions_map.put("cancelOrder", "result = true");
+		postconditions_map.put("regenerateBillOfLading", "result = true");
+		postconditions_map.put("regenerateNotification", "result = true");
+		postconditions_map.put("makeNewPlan", "result = true");
+		postconditions_map.put("addItemIntoPlan", "result = true");
+		postconditions_map.put("generatePlan", "result = true");
 		
 		//service invariants map
 		service_invariants_map = new LinkedHashMap<String, String>();
@@ -4508,15 +5897,15 @@ public class PrototypeController implements Initializable {
 		 makeNewOrder.setPadding(new Insets(8, 8, 8, 8));
 		 
 		 ObservableList<Node> makeNewOrder_content = makeNewOrder.getChildren();
-		 Label makeNewOrder_buyId_label = new Label("buyId:");
-		 makeNewOrder_buyId_label.setMinWidth(Region.USE_PREF_SIZE);
-		 makeNewOrder_content.add(makeNewOrder_buyId_label);
-		 GridPane.setConstraints(makeNewOrder_buyId_label, 0, 0);
+		 Label makeNewOrder_buyerId_label = new Label("buyerId:");
+		 makeNewOrder_buyerId_label.setMinWidth(Region.USE_PREF_SIZE);
+		 makeNewOrder_content.add(makeNewOrder_buyerId_label);
+		 GridPane.setConstraints(makeNewOrder_buyerId_label, 0, 0);
 		 
-		 makeNewOrder_buyId_t = new TextField();
-		 makeNewOrder_content.add(makeNewOrder_buyId_t);
-		 makeNewOrder_buyId_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(makeNewOrder_buyId_t, 1, 0);
+		 makeNewOrder_buyerId_t = new TextField();
+		 makeNewOrder_content.add(makeNewOrder_buyerId_t);
+		 makeNewOrder_buyerId_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(makeNewOrder_buyerId_t, 1, 0);
 		 operationPanels.put("makeNewOrder", makeNewOrder);
 		 
 		 // ==================== GridPane_addProduct ====================
@@ -4635,45 +6024,6 @@ public class PrototypeController implements Initializable {
 		 GridPane.setConstraints(salesPlanManagement_label, 0, 0);
 		 operationPanels.put("salesPlanManagement", salesPlanManagement);
 		 
-		 // ==================== GridPane_deliveryNotification ====================
-		 GridPane deliveryNotification = new GridPane();
-		 deliveryNotification.setHgap(4);
-		 deliveryNotification.setVgap(6);
-		 deliveryNotification.setPadding(new Insets(8, 8, 8, 8));
-		 
-		 ObservableList<Node> deliveryNotification_content = deliveryNotification.getChildren();
-		 Label deliveryNotification_label = new Label("This operation is no intput parameters..");
-		 deliveryNotification_label.setMinWidth(Region.USE_PREF_SIZE);
-		 deliveryNotification_content.add(deliveryNotification_label);
-		 GridPane.setConstraints(deliveryNotification_label, 0, 0);
-		 operationPanels.put("deliveryNotification", deliveryNotification);
-		 
-		 // ==================== GridPane_exchangeNotification ====================
-		 GridPane exchangeNotification = new GridPane();
-		 exchangeNotification.setHgap(4);
-		 exchangeNotification.setVgap(6);
-		 exchangeNotification.setPadding(new Insets(8, 8, 8, 8));
-		 
-		 ObservableList<Node> exchangeNotification_content = exchangeNotification.getChildren();
-		 Label exchangeNotification_label = new Label("This operation is no intput parameters..");
-		 exchangeNotification_label.setMinWidth(Region.USE_PREF_SIZE);
-		 exchangeNotification_content.add(exchangeNotification_label);
-		 GridPane.setConstraints(exchangeNotification_label, 0, 0);
-		 operationPanels.put("exchangeNotification", exchangeNotification);
-		 
-		 // ==================== GridPane_itemsPricesMaintenance ====================
-		 GridPane itemsPricesMaintenance = new GridPane();
-		 itemsPricesMaintenance.setHgap(4);
-		 itemsPricesMaintenance.setVgap(6);
-		 itemsPricesMaintenance.setPadding(new Insets(8, 8, 8, 8));
-		 
-		 ObservableList<Node> itemsPricesMaintenance_content = itemsPricesMaintenance.getChildren();
-		 Label itemsPricesMaintenance_label = new Label("This operation is no intput parameters..");
-		 itemsPricesMaintenance_label.setMinWidth(Region.USE_PREF_SIZE);
-		 itemsPricesMaintenance_content.add(itemsPricesMaintenance_label);
-		 GridPane.setConstraints(itemsPricesMaintenance_label, 0, 0);
-		 operationPanels.put("itemsPricesMaintenance", itemsPricesMaintenance);
-		 
 		 // ==================== GridPane_postingOfAccount ====================
 		 GridPane postingOfAccount = new GridPane();
 		 postingOfAccount.setHgap(4);
@@ -4686,45 +6036,6 @@ public class PrototypeController implements Initializable {
 		 postingOfAccount_content.add(postingOfAccount_label);
 		 GridPane.setConstraints(postingOfAccount_label, 0, 0);
 		 operationPanels.put("postingOfAccount", postingOfAccount);
-		 
-		 // ==================== GridPane_invoiceManagement ====================
-		 GridPane invoiceManagement = new GridPane();
-		 invoiceManagement.setHgap(4);
-		 invoiceManagement.setVgap(6);
-		 invoiceManagement.setPadding(new Insets(8, 8, 8, 8));
-		 
-		 ObservableList<Node> invoiceManagement_content = invoiceManagement.getChildren();
-		 Label invoiceManagement_label = new Label("This operation is no intput parameters..");
-		 invoiceManagement_label.setMinWidth(Region.USE_PREF_SIZE);
-		 invoiceManagement_content.add(invoiceManagement_label);
-		 GridPane.setConstraints(invoiceManagement_label, 0, 0);
-		 operationPanels.put("invoiceManagement", invoiceManagement);
-		 
-		 // ==================== GridPane_contractTerminationAndSettlement ====================
-		 GridPane contractTerminationAndSettlement = new GridPane();
-		 contractTerminationAndSettlement.setHgap(4);
-		 contractTerminationAndSettlement.setVgap(6);
-		 contractTerminationAndSettlement.setPadding(new Insets(8, 8, 8, 8));
-		 
-		 ObservableList<Node> contractTerminationAndSettlement_content = contractTerminationAndSettlement.getChildren();
-		 Label contractTerminationAndSettlement_label = new Label("This operation is no intput parameters..");
-		 contractTerminationAndSettlement_label.setMinWidth(Region.USE_PREF_SIZE);
-		 contractTerminationAndSettlement_content.add(contractTerminationAndSettlement_label);
-		 GridPane.setConstraints(contractTerminationAndSettlement_label, 0, 0);
-		 operationPanels.put("contractTerminationAndSettlement", contractTerminationAndSettlement);
-		 
-		 // ==================== GridPane_orderTerminationAndSettlement ====================
-		 GridPane orderTerminationAndSettlement = new GridPane();
-		 orderTerminationAndSettlement.setHgap(4);
-		 orderTerminationAndSettlement.setVgap(6);
-		 orderTerminationAndSettlement.setPadding(new Insets(8, 8, 8, 8));
-		 
-		 ObservableList<Node> orderTerminationAndSettlement_content = orderTerminationAndSettlement.getChildren();
-		 Label orderTerminationAndSettlement_label = new Label("This operation is no intput parameters..");
-		 orderTerminationAndSettlement_label.setMinWidth(Region.USE_PREF_SIZE);
-		 orderTerminationAndSettlement_content.add(orderTerminationAndSettlement_label);
-		 GridPane.setConstraints(orderTerminationAndSettlement_label, 0, 0);
-		 operationPanels.put("orderTerminationAndSettlement", orderTerminationAndSettlement);
 		 
 		 // ==================== GridPane_salesCommissionManagement ====================
 		 GridPane salesCommissionManagement = new GridPane();
@@ -5089,222 +6400,6 @@ public class PrototypeController implements Initializable {
 		 GridPane.setConstraints(deleteInvoice_id_t, 1, 0);
 		 operationPanels.put("deleteInvoice", deleteInvoice);
 		 
-		 // ==================== GridPane_createBillOfLading ====================
-		 GridPane createBillOfLading = new GridPane();
-		 createBillOfLading.setHgap(4);
-		 createBillOfLading.setVgap(6);
-		 createBillOfLading.setPadding(new Insets(8, 8, 8, 8));
-		 
-		 ObservableList<Node> createBillOfLading_content = createBillOfLading.getChildren();
-		 Label createBillOfLading_id_label = new Label("id:");
-		 createBillOfLading_id_label.setMinWidth(Region.USE_PREF_SIZE);
-		 createBillOfLading_content.add(createBillOfLading_id_label);
-		 GridPane.setConstraints(createBillOfLading_id_label, 0, 0);
-		 
-		 createBillOfLading_id_t = new TextField();
-		 createBillOfLading_content.add(createBillOfLading_id_t);
-		 createBillOfLading_id_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(createBillOfLading_id_t, 1, 0);
-		 Label createBillOfLading_consignee_label = new Label("consignee:");
-		 createBillOfLading_consignee_label.setMinWidth(Region.USE_PREF_SIZE);
-		 createBillOfLading_content.add(createBillOfLading_consignee_label);
-		 GridPane.setConstraints(createBillOfLading_consignee_label, 0, 1);
-		 
-		 createBillOfLading_consignee_t = new TextField();
-		 createBillOfLading_content.add(createBillOfLading_consignee_t);
-		 createBillOfLading_consignee_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(createBillOfLading_consignee_t, 1, 1);
-		 Label createBillOfLading_commoditylist_label = new Label("commoditylist:");
-		 createBillOfLading_commoditylist_label.setMinWidth(Region.USE_PREF_SIZE);
-		 createBillOfLading_content.add(createBillOfLading_commoditylist_label);
-		 GridPane.setConstraints(createBillOfLading_commoditylist_label, 0, 2);
-		 
-		 createBillOfLading_commoditylist_t = new TextField();
-		 createBillOfLading_content.add(createBillOfLading_commoditylist_t);
-		 createBillOfLading_commoditylist_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(createBillOfLading_commoditylist_t, 1, 2);
-		 Label createBillOfLading_contractobject_label = new Label("contractobject:");
-		 createBillOfLading_contractobject_label.setMinWidth(Region.USE_PREF_SIZE);
-		 createBillOfLading_content.add(createBillOfLading_contractobject_label);
-		 GridPane.setConstraints(createBillOfLading_contractobject_label, 0, 3);
-		 
-		 createBillOfLading_contractobject_t = new TextField();
-		 createBillOfLading_content.add(createBillOfLading_contractobject_t);
-		 createBillOfLading_contractobject_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(createBillOfLading_contractobject_t, 1, 3);
-		 Label createBillOfLading_quantity_label = new Label("quantity:");
-		 createBillOfLading_quantity_label.setMinWidth(Region.USE_PREF_SIZE);
-		 createBillOfLading_content.add(createBillOfLading_quantity_label);
-		 GridPane.setConstraints(createBillOfLading_quantity_label, 0, 4);
-		 
-		 createBillOfLading_quantity_t = new TextField();
-		 createBillOfLading_content.add(createBillOfLading_quantity_t);
-		 createBillOfLading_quantity_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(createBillOfLading_quantity_t, 1, 4);
-		 Label createBillOfLading_totalprice_label = new Label("totalprice:");
-		 createBillOfLading_totalprice_label.setMinWidth(Region.USE_PREF_SIZE);
-		 createBillOfLading_content.add(createBillOfLading_totalprice_label);
-		 GridPane.setConstraints(createBillOfLading_totalprice_label, 0, 5);
-		 
-		 createBillOfLading_totalprice_t = new TextField();
-		 createBillOfLading_content.add(createBillOfLading_totalprice_t);
-		 createBillOfLading_totalprice_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(createBillOfLading_totalprice_t, 1, 5);
-		 Label createBillOfLading_deadlineforperformance_label = new Label("deadlineforperformance:");
-		 createBillOfLading_deadlineforperformance_label.setMinWidth(Region.USE_PREF_SIZE);
-		 createBillOfLading_content.add(createBillOfLading_deadlineforperformance_label);
-		 GridPane.setConstraints(createBillOfLading_deadlineforperformance_label, 0, 6);
-		 
-		 createBillOfLading_deadlineforperformance_t = new TextField();
-		 createBillOfLading_content.add(createBillOfLading_deadlineforperformance_t);
-		 createBillOfLading_deadlineforperformance_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(createBillOfLading_deadlineforperformance_t, 1, 6);
-		 Label createBillOfLading_locationforperformance_label = new Label("locationforperformance:");
-		 createBillOfLading_locationforperformance_label.setMinWidth(Region.USE_PREF_SIZE);
-		 createBillOfLading_content.add(createBillOfLading_locationforperformance_label);
-		 GridPane.setConstraints(createBillOfLading_locationforperformance_label, 0, 7);
-		 
-		 createBillOfLading_locationforperformance_t = new TextField();
-		 createBillOfLading_content.add(createBillOfLading_locationforperformance_t);
-		 createBillOfLading_locationforperformance_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(createBillOfLading_locationforperformance_t, 1, 7);
-		 Label createBillOfLading_methodforperformance_label = new Label("methodforperformance:");
-		 createBillOfLading_methodforperformance_label.setMinWidth(Region.USE_PREF_SIZE);
-		 createBillOfLading_content.add(createBillOfLading_methodforperformance_label);
-		 GridPane.setConstraints(createBillOfLading_methodforperformance_label, 0, 8);
-		 
-		 createBillOfLading_methodforperformance_t = new TextField();
-		 createBillOfLading_content.add(createBillOfLading_methodforperformance_t);
-		 createBillOfLading_methodforperformance_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(createBillOfLading_methodforperformance_t, 1, 8);
-		 operationPanels.put("createBillOfLading", createBillOfLading);
-		 
-		 // ==================== GridPane_queryBillOfLading ====================
-		 GridPane queryBillOfLading = new GridPane();
-		 queryBillOfLading.setHgap(4);
-		 queryBillOfLading.setVgap(6);
-		 queryBillOfLading.setPadding(new Insets(8, 8, 8, 8));
-		 
-		 ObservableList<Node> queryBillOfLading_content = queryBillOfLading.getChildren();
-		 Label queryBillOfLading_id_label = new Label("id:");
-		 queryBillOfLading_id_label.setMinWidth(Region.USE_PREF_SIZE);
-		 queryBillOfLading_content.add(queryBillOfLading_id_label);
-		 GridPane.setConstraints(queryBillOfLading_id_label, 0, 0);
-		 
-		 queryBillOfLading_id_t = new TextField();
-		 queryBillOfLading_content.add(queryBillOfLading_id_t);
-		 queryBillOfLading_id_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(queryBillOfLading_id_t, 1, 0);
-		 operationPanels.put("queryBillOfLading", queryBillOfLading);
-		 
-		 // ==================== GridPane_modifyBillOfLading ====================
-		 GridPane modifyBillOfLading = new GridPane();
-		 modifyBillOfLading.setHgap(4);
-		 modifyBillOfLading.setVgap(6);
-		 modifyBillOfLading.setPadding(new Insets(8, 8, 8, 8));
-		 
-		 ObservableList<Node> modifyBillOfLading_content = modifyBillOfLading.getChildren();
-		 Label modifyBillOfLading_id_label = new Label("id:");
-		 modifyBillOfLading_id_label.setMinWidth(Region.USE_PREF_SIZE);
-		 modifyBillOfLading_content.add(modifyBillOfLading_id_label);
-		 GridPane.setConstraints(modifyBillOfLading_id_label, 0, 0);
-		 
-		 modifyBillOfLading_id_t = new TextField();
-		 modifyBillOfLading_content.add(modifyBillOfLading_id_t);
-		 modifyBillOfLading_id_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(modifyBillOfLading_id_t, 1, 0);
-		 Label modifyBillOfLading_consignee_label = new Label("consignee:");
-		 modifyBillOfLading_consignee_label.setMinWidth(Region.USE_PREF_SIZE);
-		 modifyBillOfLading_content.add(modifyBillOfLading_consignee_label);
-		 GridPane.setConstraints(modifyBillOfLading_consignee_label, 0, 1);
-		 
-		 modifyBillOfLading_consignee_t = new TextField();
-		 modifyBillOfLading_content.add(modifyBillOfLading_consignee_t);
-		 modifyBillOfLading_consignee_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(modifyBillOfLading_consignee_t, 1, 1);
-		 Label modifyBillOfLading_commoditylist_label = new Label("commoditylist:");
-		 modifyBillOfLading_commoditylist_label.setMinWidth(Region.USE_PREF_SIZE);
-		 modifyBillOfLading_content.add(modifyBillOfLading_commoditylist_label);
-		 GridPane.setConstraints(modifyBillOfLading_commoditylist_label, 0, 2);
-		 
-		 modifyBillOfLading_commoditylist_t = new TextField();
-		 modifyBillOfLading_content.add(modifyBillOfLading_commoditylist_t);
-		 modifyBillOfLading_commoditylist_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(modifyBillOfLading_commoditylist_t, 1, 2);
-		 Label modifyBillOfLading_contractobject_label = new Label("contractobject:");
-		 modifyBillOfLading_contractobject_label.setMinWidth(Region.USE_PREF_SIZE);
-		 modifyBillOfLading_content.add(modifyBillOfLading_contractobject_label);
-		 GridPane.setConstraints(modifyBillOfLading_contractobject_label, 0, 3);
-		 
-		 modifyBillOfLading_contractobject_t = new TextField();
-		 modifyBillOfLading_content.add(modifyBillOfLading_contractobject_t);
-		 modifyBillOfLading_contractobject_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(modifyBillOfLading_contractobject_t, 1, 3);
-		 Label modifyBillOfLading_quantity_label = new Label("quantity:");
-		 modifyBillOfLading_quantity_label.setMinWidth(Region.USE_PREF_SIZE);
-		 modifyBillOfLading_content.add(modifyBillOfLading_quantity_label);
-		 GridPane.setConstraints(modifyBillOfLading_quantity_label, 0, 4);
-		 
-		 modifyBillOfLading_quantity_t = new TextField();
-		 modifyBillOfLading_content.add(modifyBillOfLading_quantity_t);
-		 modifyBillOfLading_quantity_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(modifyBillOfLading_quantity_t, 1, 4);
-		 Label modifyBillOfLading_totalprice_label = new Label("totalprice:");
-		 modifyBillOfLading_totalprice_label.setMinWidth(Region.USE_PREF_SIZE);
-		 modifyBillOfLading_content.add(modifyBillOfLading_totalprice_label);
-		 GridPane.setConstraints(modifyBillOfLading_totalprice_label, 0, 5);
-		 
-		 modifyBillOfLading_totalprice_t = new TextField();
-		 modifyBillOfLading_content.add(modifyBillOfLading_totalprice_t);
-		 modifyBillOfLading_totalprice_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(modifyBillOfLading_totalprice_t, 1, 5);
-		 Label modifyBillOfLading_deadlineforperformance_label = new Label("deadlineforperformance:");
-		 modifyBillOfLading_deadlineforperformance_label.setMinWidth(Region.USE_PREF_SIZE);
-		 modifyBillOfLading_content.add(modifyBillOfLading_deadlineforperformance_label);
-		 GridPane.setConstraints(modifyBillOfLading_deadlineforperformance_label, 0, 6);
-		 
-		 modifyBillOfLading_deadlineforperformance_t = new TextField();
-		 modifyBillOfLading_content.add(modifyBillOfLading_deadlineforperformance_t);
-		 modifyBillOfLading_deadlineforperformance_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(modifyBillOfLading_deadlineforperformance_t, 1, 6);
-		 Label modifyBillOfLading_locationforperformance_label = new Label("locationforperformance:");
-		 modifyBillOfLading_locationforperformance_label.setMinWidth(Region.USE_PREF_SIZE);
-		 modifyBillOfLading_content.add(modifyBillOfLading_locationforperformance_label);
-		 GridPane.setConstraints(modifyBillOfLading_locationforperformance_label, 0, 7);
-		 
-		 modifyBillOfLading_locationforperformance_t = new TextField();
-		 modifyBillOfLading_content.add(modifyBillOfLading_locationforperformance_t);
-		 modifyBillOfLading_locationforperformance_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(modifyBillOfLading_locationforperformance_t, 1, 7);
-		 Label modifyBillOfLading_methodforperformance_label = new Label("methodforperformance:");
-		 modifyBillOfLading_methodforperformance_label.setMinWidth(Region.USE_PREF_SIZE);
-		 modifyBillOfLading_content.add(modifyBillOfLading_methodforperformance_label);
-		 GridPane.setConstraints(modifyBillOfLading_methodforperformance_label, 0, 8);
-		 
-		 modifyBillOfLading_methodforperformance_t = new TextField();
-		 modifyBillOfLading_content.add(modifyBillOfLading_methodforperformance_t);
-		 modifyBillOfLading_methodforperformance_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(modifyBillOfLading_methodforperformance_t, 1, 8);
-		 operationPanels.put("modifyBillOfLading", modifyBillOfLading);
-		 
-		 // ==================== GridPane_deleteBillOfLading ====================
-		 GridPane deleteBillOfLading = new GridPane();
-		 deleteBillOfLading.setHgap(4);
-		 deleteBillOfLading.setVgap(6);
-		 deleteBillOfLading.setPadding(new Insets(8, 8, 8, 8));
-		 
-		 ObservableList<Node> deleteBillOfLading_content = deleteBillOfLading.getChildren();
-		 Label deleteBillOfLading_id_label = new Label("id:");
-		 deleteBillOfLading_id_label.setMinWidth(Region.USE_PREF_SIZE);
-		 deleteBillOfLading_content.add(deleteBillOfLading_id_label);
-		 GridPane.setConstraints(deleteBillOfLading_id_label, 0, 0);
-		 
-		 deleteBillOfLading_id_t = new TextField();
-		 deleteBillOfLading_content.add(deleteBillOfLading_id_t);
-		 deleteBillOfLading_id_t.setMinWidth(Region.USE_PREF_SIZE);
-		 GridPane.setConstraints(deleteBillOfLading_id_t, 1, 0);
-		 operationPanels.put("deleteBillOfLading", deleteBillOfLading);
-		 
 		 // ==================== GridPane_createClient ====================
 		 GridPane createClient = new GridPane();
 		 createClient.setHgap(4);
@@ -5357,6 +6452,15 @@ public class PrototypeController implements Initializable {
 		 createClient_content.add(createClient_phonenumber_t);
 		 createClient_phonenumber_t.setMinWidth(Region.USE_PREF_SIZE);
 		 GridPane.setConstraints(createClient_phonenumber_t, 1, 4);
+		 Label createClient_groupId_label = new Label("groupId:");
+		 createClient_groupId_label.setMinWidth(Region.USE_PREF_SIZE);
+		 createClient_content.add(createClient_groupId_label);
+		 GridPane.setConstraints(createClient_groupId_label, 0, 5);
+		 
+		 createClient_groupId_t = new TextField();
+		 createClient_content.add(createClient_groupId_t);
+		 createClient_groupId_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(createClient_groupId_t, 1, 5);
 		 operationPanels.put("createClient", createClient);
 		 
 		 // ==================== GridPane_queryClient ====================
@@ -5429,6 +6533,15 @@ public class PrototypeController implements Initializable {
 		 modifyClient_content.add(modifyClient_phonenumber_t);
 		 modifyClient_phonenumber_t.setMinWidth(Region.USE_PREF_SIZE);
 		 GridPane.setConstraints(modifyClient_phonenumber_t, 1, 4);
+		 Label modifyClient_groupId_label = new Label("groupId:");
+		 modifyClient_groupId_label.setMinWidth(Region.USE_PREF_SIZE);
+		 modifyClient_content.add(modifyClient_groupId_label);
+		 GridPane.setConstraints(modifyClient_groupId_label, 0, 5);
+		 
+		 modifyClient_groupId_t = new TextField();
+		 modifyClient_content.add(modifyClient_groupId_t);
+		 modifyClient_groupId_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(modifyClient_groupId_t, 1, 5);
 		 operationPanels.put("modifyClient", modifyClient);
 		 
 		 // ==================== GridPane_deleteClient ====================
@@ -5683,6 +6796,366 @@ public class PrototypeController implements Initializable {
 		 GridPane.setConstraints(deleteProduct_id_t, 1, 0);
 		 operationPanels.put("deleteProduct", deleteProduct);
 		 
+		 // ==================== GridPane_createBillOfLading ====================
+		 GridPane createBillOfLading = new GridPane();
+		 createBillOfLading.setHgap(4);
+		 createBillOfLading.setVgap(6);
+		 createBillOfLading.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> createBillOfLading_content = createBillOfLading.getChildren();
+		 Label createBillOfLading_id_label = new Label("id:");
+		 createBillOfLading_id_label.setMinWidth(Region.USE_PREF_SIZE);
+		 createBillOfLading_content.add(createBillOfLading_id_label);
+		 GridPane.setConstraints(createBillOfLading_id_label, 0, 0);
+		 
+		 createBillOfLading_id_t = new TextField();
+		 createBillOfLading_content.add(createBillOfLading_id_t);
+		 createBillOfLading_id_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(createBillOfLading_id_t, 1, 0);
+		 Label createBillOfLading_consignee_label = new Label("consignee:");
+		 createBillOfLading_consignee_label.setMinWidth(Region.USE_PREF_SIZE);
+		 createBillOfLading_content.add(createBillOfLading_consignee_label);
+		 GridPane.setConstraints(createBillOfLading_consignee_label, 0, 1);
+		 
+		 createBillOfLading_consignee_t = new TextField();
+		 createBillOfLading_content.add(createBillOfLading_consignee_t);
+		 createBillOfLading_consignee_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(createBillOfLading_consignee_t, 1, 1);
+		 Label createBillOfLading_commoditylist_label = new Label("commoditylist:");
+		 createBillOfLading_commoditylist_label.setMinWidth(Region.USE_PREF_SIZE);
+		 createBillOfLading_content.add(createBillOfLading_commoditylist_label);
+		 GridPane.setConstraints(createBillOfLading_commoditylist_label, 0, 2);
+		 
+		 createBillOfLading_commoditylist_t = new TextField();
+		 createBillOfLading_content.add(createBillOfLading_commoditylist_t);
+		 createBillOfLading_commoditylist_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(createBillOfLading_commoditylist_t, 1, 2);
+		 Label createBillOfLading_totalprice_label = new Label("totalprice:");
+		 createBillOfLading_totalprice_label.setMinWidth(Region.USE_PREF_SIZE);
+		 createBillOfLading_content.add(createBillOfLading_totalprice_label);
+		 GridPane.setConstraints(createBillOfLading_totalprice_label, 0, 3);
+		 
+		 createBillOfLading_totalprice_t = new TextField();
+		 createBillOfLading_content.add(createBillOfLading_totalprice_t);
+		 createBillOfLading_totalprice_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(createBillOfLading_totalprice_t, 1, 3);
+		 Label createBillOfLading_deadlineforperformance_label = new Label("deadlineforperformance:");
+		 createBillOfLading_deadlineforperformance_label.setMinWidth(Region.USE_PREF_SIZE);
+		 createBillOfLading_content.add(createBillOfLading_deadlineforperformance_label);
+		 GridPane.setConstraints(createBillOfLading_deadlineforperformance_label, 0, 4);
+		 
+		 createBillOfLading_deadlineforperformance_t = new TextField();
+		 createBillOfLading_content.add(createBillOfLading_deadlineforperformance_t);
+		 createBillOfLading_deadlineforperformance_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(createBillOfLading_deadlineforperformance_t, 1, 4);
+		 Label createBillOfLading_locationforperformance_label = new Label("locationforperformance:");
+		 createBillOfLading_locationforperformance_label.setMinWidth(Region.USE_PREF_SIZE);
+		 createBillOfLading_content.add(createBillOfLading_locationforperformance_label);
+		 GridPane.setConstraints(createBillOfLading_locationforperformance_label, 0, 5);
+		 
+		 createBillOfLading_locationforperformance_t = new TextField();
+		 createBillOfLading_content.add(createBillOfLading_locationforperformance_t);
+		 createBillOfLading_locationforperformance_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(createBillOfLading_locationforperformance_t, 1, 5);
+		 Label createBillOfLading_methodforperformance_label = new Label("methodforperformance:");
+		 createBillOfLading_methodforperformance_label.setMinWidth(Region.USE_PREF_SIZE);
+		 createBillOfLading_content.add(createBillOfLading_methodforperformance_label);
+		 GridPane.setConstraints(createBillOfLading_methodforperformance_label, 0, 6);
+		 
+		 createBillOfLading_methodforperformance_t = new TextField();
+		 createBillOfLading_content.add(createBillOfLading_methodforperformance_t);
+		 createBillOfLading_methodforperformance_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(createBillOfLading_methodforperformance_t, 1, 6);
+		 operationPanels.put("createBillOfLading", createBillOfLading);
+		 
+		 // ==================== GridPane_queryBillOfLading ====================
+		 GridPane queryBillOfLading = new GridPane();
+		 queryBillOfLading.setHgap(4);
+		 queryBillOfLading.setVgap(6);
+		 queryBillOfLading.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> queryBillOfLading_content = queryBillOfLading.getChildren();
+		 Label queryBillOfLading_id_label = new Label("id:");
+		 queryBillOfLading_id_label.setMinWidth(Region.USE_PREF_SIZE);
+		 queryBillOfLading_content.add(queryBillOfLading_id_label);
+		 GridPane.setConstraints(queryBillOfLading_id_label, 0, 0);
+		 
+		 queryBillOfLading_id_t = new TextField();
+		 queryBillOfLading_content.add(queryBillOfLading_id_t);
+		 queryBillOfLading_id_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(queryBillOfLading_id_t, 1, 0);
+		 operationPanels.put("queryBillOfLading", queryBillOfLading);
+		 
+		 // ==================== GridPane_modifyBillOfLading ====================
+		 GridPane modifyBillOfLading = new GridPane();
+		 modifyBillOfLading.setHgap(4);
+		 modifyBillOfLading.setVgap(6);
+		 modifyBillOfLading.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> modifyBillOfLading_content = modifyBillOfLading.getChildren();
+		 Label modifyBillOfLading_id_label = new Label("id:");
+		 modifyBillOfLading_id_label.setMinWidth(Region.USE_PREF_SIZE);
+		 modifyBillOfLading_content.add(modifyBillOfLading_id_label);
+		 GridPane.setConstraints(modifyBillOfLading_id_label, 0, 0);
+		 
+		 modifyBillOfLading_id_t = new TextField();
+		 modifyBillOfLading_content.add(modifyBillOfLading_id_t);
+		 modifyBillOfLading_id_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(modifyBillOfLading_id_t, 1, 0);
+		 Label modifyBillOfLading_consignee_label = new Label("consignee:");
+		 modifyBillOfLading_consignee_label.setMinWidth(Region.USE_PREF_SIZE);
+		 modifyBillOfLading_content.add(modifyBillOfLading_consignee_label);
+		 GridPane.setConstraints(modifyBillOfLading_consignee_label, 0, 1);
+		 
+		 modifyBillOfLading_consignee_t = new TextField();
+		 modifyBillOfLading_content.add(modifyBillOfLading_consignee_t);
+		 modifyBillOfLading_consignee_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(modifyBillOfLading_consignee_t, 1, 1);
+		 Label modifyBillOfLading_commoditylist_label = new Label("commoditylist:");
+		 modifyBillOfLading_commoditylist_label.setMinWidth(Region.USE_PREF_SIZE);
+		 modifyBillOfLading_content.add(modifyBillOfLading_commoditylist_label);
+		 GridPane.setConstraints(modifyBillOfLading_commoditylist_label, 0, 2);
+		 
+		 modifyBillOfLading_commoditylist_t = new TextField();
+		 modifyBillOfLading_content.add(modifyBillOfLading_commoditylist_t);
+		 modifyBillOfLading_commoditylist_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(modifyBillOfLading_commoditylist_t, 1, 2);
+		 Label modifyBillOfLading_totalprice_label = new Label("totalprice:");
+		 modifyBillOfLading_totalprice_label.setMinWidth(Region.USE_PREF_SIZE);
+		 modifyBillOfLading_content.add(modifyBillOfLading_totalprice_label);
+		 GridPane.setConstraints(modifyBillOfLading_totalprice_label, 0, 3);
+		 
+		 modifyBillOfLading_totalprice_t = new TextField();
+		 modifyBillOfLading_content.add(modifyBillOfLading_totalprice_t);
+		 modifyBillOfLading_totalprice_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(modifyBillOfLading_totalprice_t, 1, 3);
+		 Label modifyBillOfLading_deadlineforperformance_label = new Label("deadlineforperformance:");
+		 modifyBillOfLading_deadlineforperformance_label.setMinWidth(Region.USE_PREF_SIZE);
+		 modifyBillOfLading_content.add(modifyBillOfLading_deadlineforperformance_label);
+		 GridPane.setConstraints(modifyBillOfLading_deadlineforperformance_label, 0, 4);
+		 
+		 modifyBillOfLading_deadlineforperformance_t = new TextField();
+		 modifyBillOfLading_content.add(modifyBillOfLading_deadlineforperformance_t);
+		 modifyBillOfLading_deadlineforperformance_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(modifyBillOfLading_deadlineforperformance_t, 1, 4);
+		 Label modifyBillOfLading_locationforperformance_label = new Label("locationforperformance:");
+		 modifyBillOfLading_locationforperformance_label.setMinWidth(Region.USE_PREF_SIZE);
+		 modifyBillOfLading_content.add(modifyBillOfLading_locationforperformance_label);
+		 GridPane.setConstraints(modifyBillOfLading_locationforperformance_label, 0, 5);
+		 
+		 modifyBillOfLading_locationforperformance_t = new TextField();
+		 modifyBillOfLading_content.add(modifyBillOfLading_locationforperformance_t);
+		 modifyBillOfLading_locationforperformance_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(modifyBillOfLading_locationforperformance_t, 1, 5);
+		 Label modifyBillOfLading_methodforperformance_label = new Label("methodforperformance:");
+		 modifyBillOfLading_methodforperformance_label.setMinWidth(Region.USE_PREF_SIZE);
+		 modifyBillOfLading_content.add(modifyBillOfLading_methodforperformance_label);
+		 GridPane.setConstraints(modifyBillOfLading_methodforperformance_label, 0, 6);
+		 
+		 modifyBillOfLading_methodforperformance_t = new TextField();
+		 modifyBillOfLading_content.add(modifyBillOfLading_methodforperformance_t);
+		 modifyBillOfLading_methodforperformance_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(modifyBillOfLading_methodforperformance_t, 1, 6);
+		 operationPanels.put("modifyBillOfLading", modifyBillOfLading);
+		 
+		 // ==================== GridPane_deleteBillOfLading ====================
+		 GridPane deleteBillOfLading = new GridPane();
+		 deleteBillOfLading.setHgap(4);
+		 deleteBillOfLading.setVgap(6);
+		 deleteBillOfLading.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> deleteBillOfLading_content = deleteBillOfLading.getChildren();
+		 Label deleteBillOfLading_id_label = new Label("id:");
+		 deleteBillOfLading_id_label.setMinWidth(Region.USE_PREF_SIZE);
+		 deleteBillOfLading_content.add(deleteBillOfLading_id_label);
+		 GridPane.setConstraints(deleteBillOfLading_id_label, 0, 0);
+		 
+		 deleteBillOfLading_id_t = new TextField();
+		 deleteBillOfLading_content.add(deleteBillOfLading_id_t);
+		 deleteBillOfLading_id_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(deleteBillOfLading_id_t, 1, 0);
+		 operationPanels.put("deleteBillOfLading", deleteBillOfLading);
+		 
+		 // ==================== GridPane_createOrderMethod ====================
+		 GridPane createOrderMethod = new GridPane();
+		 createOrderMethod.setHgap(4);
+		 createOrderMethod.setVgap(6);
+		 createOrderMethod.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> createOrderMethod_content = createOrderMethod.getChildren();
+		 Label createOrderMethod_id_label = new Label("id:");
+		 createOrderMethod_id_label.setMinWidth(Region.USE_PREF_SIZE);
+		 createOrderMethod_content.add(createOrderMethod_id_label);
+		 GridPane.setConstraints(createOrderMethod_id_label, 0, 0);
+		 
+		 createOrderMethod_id_t = new TextField();
+		 createOrderMethod_content.add(createOrderMethod_id_t);
+		 createOrderMethod_id_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(createOrderMethod_id_t, 1, 0);
+		 Label createOrderMethod_name_label = new Label("name:");
+		 createOrderMethod_name_label.setMinWidth(Region.USE_PREF_SIZE);
+		 createOrderMethod_content.add(createOrderMethod_name_label);
+		 GridPane.setConstraints(createOrderMethod_name_label, 0, 1);
+		 
+		 createOrderMethod_name_t = new TextField();
+		 createOrderMethod_content.add(createOrderMethod_name_t);
+		 createOrderMethod_name_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(createOrderMethod_name_t, 1, 1);
+		 operationPanels.put("createOrderMethod", createOrderMethod);
+		 
+		 // ==================== GridPane_queryOrderMethod ====================
+		 GridPane queryOrderMethod = new GridPane();
+		 queryOrderMethod.setHgap(4);
+		 queryOrderMethod.setVgap(6);
+		 queryOrderMethod.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> queryOrderMethod_content = queryOrderMethod.getChildren();
+		 Label queryOrderMethod_id_label = new Label("id:");
+		 queryOrderMethod_id_label.setMinWidth(Region.USE_PREF_SIZE);
+		 queryOrderMethod_content.add(queryOrderMethod_id_label);
+		 GridPane.setConstraints(queryOrderMethod_id_label, 0, 0);
+		 
+		 queryOrderMethod_id_t = new TextField();
+		 queryOrderMethod_content.add(queryOrderMethod_id_t);
+		 queryOrderMethod_id_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(queryOrderMethod_id_t, 1, 0);
+		 operationPanels.put("queryOrderMethod", queryOrderMethod);
+		 
+		 // ==================== GridPane_modifyOrderMethod ====================
+		 GridPane modifyOrderMethod = new GridPane();
+		 modifyOrderMethod.setHgap(4);
+		 modifyOrderMethod.setVgap(6);
+		 modifyOrderMethod.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> modifyOrderMethod_content = modifyOrderMethod.getChildren();
+		 Label modifyOrderMethod_id_label = new Label("id:");
+		 modifyOrderMethod_id_label.setMinWidth(Region.USE_PREF_SIZE);
+		 modifyOrderMethod_content.add(modifyOrderMethod_id_label);
+		 GridPane.setConstraints(modifyOrderMethod_id_label, 0, 0);
+		 
+		 modifyOrderMethod_id_t = new TextField();
+		 modifyOrderMethod_content.add(modifyOrderMethod_id_t);
+		 modifyOrderMethod_id_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(modifyOrderMethod_id_t, 1, 0);
+		 Label modifyOrderMethod_name_label = new Label("name:");
+		 modifyOrderMethod_name_label.setMinWidth(Region.USE_PREF_SIZE);
+		 modifyOrderMethod_content.add(modifyOrderMethod_name_label);
+		 GridPane.setConstraints(modifyOrderMethod_name_label, 0, 1);
+		 
+		 modifyOrderMethod_name_t = new TextField();
+		 modifyOrderMethod_content.add(modifyOrderMethod_name_t);
+		 modifyOrderMethod_name_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(modifyOrderMethod_name_t, 1, 1);
+		 operationPanels.put("modifyOrderMethod", modifyOrderMethod);
+		 
+		 // ==================== GridPane_deleteOrderMethod ====================
+		 GridPane deleteOrderMethod = new GridPane();
+		 deleteOrderMethod.setHgap(4);
+		 deleteOrderMethod.setVgap(6);
+		 deleteOrderMethod.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> deleteOrderMethod_content = deleteOrderMethod.getChildren();
+		 Label deleteOrderMethod_id_label = new Label("id:");
+		 deleteOrderMethod_id_label.setMinWidth(Region.USE_PREF_SIZE);
+		 deleteOrderMethod_content.add(deleteOrderMethod_id_label);
+		 GridPane.setConstraints(deleteOrderMethod_id_label, 0, 0);
+		 
+		 deleteOrderMethod_id_t = new TextField();
+		 deleteOrderMethod_content.add(deleteOrderMethod_id_t);
+		 deleteOrderMethod_id_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(deleteOrderMethod_id_t, 1, 0);
+		 operationPanels.put("deleteOrderMethod", deleteOrderMethod);
+		 
+		 // ==================== GridPane_createDeliveryMethod ====================
+		 GridPane createDeliveryMethod = new GridPane();
+		 createDeliveryMethod.setHgap(4);
+		 createDeliveryMethod.setVgap(6);
+		 createDeliveryMethod.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> createDeliveryMethod_content = createDeliveryMethod.getChildren();
+		 Label createDeliveryMethod_id_label = new Label("id:");
+		 createDeliveryMethod_id_label.setMinWidth(Region.USE_PREF_SIZE);
+		 createDeliveryMethod_content.add(createDeliveryMethod_id_label);
+		 GridPane.setConstraints(createDeliveryMethod_id_label, 0, 0);
+		 
+		 createDeliveryMethod_id_t = new TextField();
+		 createDeliveryMethod_content.add(createDeliveryMethod_id_t);
+		 createDeliveryMethod_id_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(createDeliveryMethod_id_t, 1, 0);
+		 Label createDeliveryMethod_name_label = new Label("name:");
+		 createDeliveryMethod_name_label.setMinWidth(Region.USE_PREF_SIZE);
+		 createDeliveryMethod_content.add(createDeliveryMethod_name_label);
+		 GridPane.setConstraints(createDeliveryMethod_name_label, 0, 1);
+		 
+		 createDeliveryMethod_name_t = new TextField();
+		 createDeliveryMethod_content.add(createDeliveryMethod_name_t);
+		 createDeliveryMethod_name_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(createDeliveryMethod_name_t, 1, 1);
+		 operationPanels.put("createDeliveryMethod", createDeliveryMethod);
+		 
+		 // ==================== GridPane_queryDeliveryMethod ====================
+		 GridPane queryDeliveryMethod = new GridPane();
+		 queryDeliveryMethod.setHgap(4);
+		 queryDeliveryMethod.setVgap(6);
+		 queryDeliveryMethod.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> queryDeliveryMethod_content = queryDeliveryMethod.getChildren();
+		 Label queryDeliveryMethod_id_label = new Label("id:");
+		 queryDeliveryMethod_id_label.setMinWidth(Region.USE_PREF_SIZE);
+		 queryDeliveryMethod_content.add(queryDeliveryMethod_id_label);
+		 GridPane.setConstraints(queryDeliveryMethod_id_label, 0, 0);
+		 
+		 queryDeliveryMethod_id_t = new TextField();
+		 queryDeliveryMethod_content.add(queryDeliveryMethod_id_t);
+		 queryDeliveryMethod_id_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(queryDeliveryMethod_id_t, 1, 0);
+		 operationPanels.put("queryDeliveryMethod", queryDeliveryMethod);
+		 
+		 // ==================== GridPane_modifyDeliveryMethod ====================
+		 GridPane modifyDeliveryMethod = new GridPane();
+		 modifyDeliveryMethod.setHgap(4);
+		 modifyDeliveryMethod.setVgap(6);
+		 modifyDeliveryMethod.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> modifyDeliveryMethod_content = modifyDeliveryMethod.getChildren();
+		 Label modifyDeliveryMethod_id_label = new Label("id:");
+		 modifyDeliveryMethod_id_label.setMinWidth(Region.USE_PREF_SIZE);
+		 modifyDeliveryMethod_content.add(modifyDeliveryMethod_id_label);
+		 GridPane.setConstraints(modifyDeliveryMethod_id_label, 0, 0);
+		 
+		 modifyDeliveryMethod_id_t = new TextField();
+		 modifyDeliveryMethod_content.add(modifyDeliveryMethod_id_t);
+		 modifyDeliveryMethod_id_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(modifyDeliveryMethod_id_t, 1, 0);
+		 Label modifyDeliveryMethod_name_label = new Label("name:");
+		 modifyDeliveryMethod_name_label.setMinWidth(Region.USE_PREF_SIZE);
+		 modifyDeliveryMethod_content.add(modifyDeliveryMethod_name_label);
+		 GridPane.setConstraints(modifyDeliveryMethod_name_label, 0, 1);
+		 
+		 modifyDeliveryMethod_name_t = new TextField();
+		 modifyDeliveryMethod_content.add(modifyDeliveryMethod_name_t);
+		 modifyDeliveryMethod_name_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(modifyDeliveryMethod_name_t, 1, 1);
+		 operationPanels.put("modifyDeliveryMethod", modifyDeliveryMethod);
+		 
+		 // ==================== GridPane_deleteDeliveryMethod ====================
+		 GridPane deleteDeliveryMethod = new GridPane();
+		 deleteDeliveryMethod.setHgap(4);
+		 deleteDeliveryMethod.setVgap(6);
+		 deleteDeliveryMethod.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> deleteDeliveryMethod_content = deleteDeliveryMethod.getChildren();
+		 Label deleteDeliveryMethod_id_label = new Label("id:");
+		 deleteDeliveryMethod_id_label.setMinWidth(Region.USE_PREF_SIZE);
+		 deleteDeliveryMethod_content.add(deleteDeliveryMethod_id_label);
+		 GridPane.setConstraints(deleteDeliveryMethod_id_label, 0, 0);
+		 
+		 deleteDeliveryMethod_id_t = new TextField();
+		 deleteDeliveryMethod_content.add(deleteDeliveryMethod_id_t);
+		 deleteDeliveryMethod_id_t.setMinWidth(Region.USE_PREF_SIZE);
+		 GridPane.setConstraints(deleteDeliveryMethod_id_t, 1, 0);
+		 operationPanels.put("deleteDeliveryMethod", deleteDeliveryMethod);
+		 
 		 // ==================== GridPane_manageItemsPrices ====================
 		 GridPane manageItemsPrices = new GridPane();
 		 manageItemsPrices.setHgap(4);
@@ -5695,6 +7168,227 @@ public class PrototypeController implements Initializable {
 		 manageItemsPrices_content.add(manageItemsPrices_label);
 		 GridPane.setConstraints(manageItemsPrices_label, 0, 0);
 		 operationPanels.put("manageItemsPrices", manageItemsPrices);
+		 
+		 // ==================== GridPane_createClientGroup ====================
+		 GridPane createClientGroup = new GridPane();
+		 createClientGroup.setHgap(4);
+		 createClientGroup.setVgap(6);
+		 createClientGroup.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> createClientGroup_content = createClientGroup.getChildren();
+		 Label createClientGroup_label = new Label("This operation is no intput parameters..");
+		 createClientGroup_label.setMinWidth(Region.USE_PREF_SIZE);
+		 createClientGroup_content.add(createClientGroup_label);
+		 GridPane.setConstraints(createClientGroup_label, 0, 0);
+		 operationPanels.put("createClientGroup", createClientGroup);
+		 
+		 // ==================== GridPane_queryClientGroup ====================
+		 GridPane queryClientGroup = new GridPane();
+		 queryClientGroup.setHgap(4);
+		 queryClientGroup.setVgap(6);
+		 queryClientGroup.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> queryClientGroup_content = queryClientGroup.getChildren();
+		 Label queryClientGroup_label = new Label("This operation is no intput parameters..");
+		 queryClientGroup_label.setMinWidth(Region.USE_PREF_SIZE);
+		 queryClientGroup_content.add(queryClientGroup_label);
+		 GridPane.setConstraints(queryClientGroup_label, 0, 0);
+		 operationPanels.put("queryClientGroup", queryClientGroup);
+		 
+		 // ==================== GridPane_modifyClientGroup ====================
+		 GridPane modifyClientGroup = new GridPane();
+		 modifyClientGroup.setHgap(4);
+		 modifyClientGroup.setVgap(6);
+		 modifyClientGroup.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> modifyClientGroup_content = modifyClientGroup.getChildren();
+		 Label modifyClientGroup_label = new Label("This operation is no intput parameters..");
+		 modifyClientGroup_label.setMinWidth(Region.USE_PREF_SIZE);
+		 modifyClientGroup_content.add(modifyClientGroup_label);
+		 GridPane.setConstraints(modifyClientGroup_label, 0, 0);
+		 operationPanels.put("modifyClientGroup", modifyClientGroup);
+		 
+		 // ==================== GridPane_deleteClientGroup ====================
+		 GridPane deleteClientGroup = new GridPane();
+		 deleteClientGroup.setHgap(4);
+		 deleteClientGroup.setVgap(6);
+		 deleteClientGroup.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> deleteClientGroup_content = deleteClientGroup.getChildren();
+		 Label deleteClientGroup_label = new Label("This operation is no intput parameters..");
+		 deleteClientGroup_label.setMinWidth(Region.USE_PREF_SIZE);
+		 deleteClientGroup_content.add(deleteClientGroup_label);
+		 GridPane.setConstraints(deleteClientGroup_label, 0, 0);
+		 operationPanels.put("deleteClientGroup", deleteClientGroup);
+		 
+		 // ==================== GridPane_orderTerminationAndSettlement ====================
+		 GridPane orderTerminationAndSettlement = new GridPane();
+		 orderTerminationAndSettlement.setHgap(4);
+		 orderTerminationAndSettlement.setVgap(6);
+		 orderTerminationAndSettlement.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> orderTerminationAndSettlement_content = orderTerminationAndSettlement.getChildren();
+		 Label orderTerminationAndSettlement_label = new Label("This operation is no intput parameters..");
+		 orderTerminationAndSettlement_label.setMinWidth(Region.USE_PREF_SIZE);
+		 orderTerminationAndSettlement_content.add(orderTerminationAndSettlement_label);
+		 GridPane.setConstraints(orderTerminationAndSettlement_label, 0, 0);
+		 operationPanels.put("orderTerminationAndSettlement", orderTerminationAndSettlement);
+		 
+		 // ==================== GridPane_contractTerminationAndSettlement ====================
+		 GridPane contractTerminationAndSettlement = new GridPane();
+		 contractTerminationAndSettlement.setHgap(4);
+		 contractTerminationAndSettlement.setVgap(6);
+		 contractTerminationAndSettlement.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> contractTerminationAndSettlement_content = contractTerminationAndSettlement.getChildren();
+		 Label contractTerminationAndSettlement_label = new Label("This operation is no intput parameters..");
+		 contractTerminationAndSettlement_label.setMinWidth(Region.USE_PREF_SIZE);
+		 contractTerminationAndSettlement_content.add(contractTerminationAndSettlement_label);
+		 GridPane.setConstraints(contractTerminationAndSettlement_label, 0, 0);
+		 operationPanels.put("contractTerminationAndSettlement", contractTerminationAndSettlement);
+		 
+		 // ==================== GridPane_payment ====================
+		 GridPane payment = new GridPane();
+		 payment.setHgap(4);
+		 payment.setVgap(6);
+		 payment.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> payment_content = payment.getChildren();
+		 Label payment_label = new Label("This operation is no intput parameters..");
+		 payment_label.setMinWidth(Region.USE_PREF_SIZE);
+		 payment_content.add(payment_label);
+		 GridPane.setConstraints(payment_label, 0, 0);
+		 operationPanels.put("payment", payment);
+		 
+		 // ==================== GridPane_generateInvoice ====================
+		 GridPane generateInvoice = new GridPane();
+		 generateInvoice.setHgap(4);
+		 generateInvoice.setVgap(6);
+		 generateInvoice.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> generateInvoice_content = generateInvoice.getChildren();
+		 Label generateInvoice_label = new Label("This operation is no intput parameters..");
+		 generateInvoice_label.setMinWidth(Region.USE_PREF_SIZE);
+		 generateInvoice_content.add(generateInvoice_label);
+		 GridPane.setConstraints(generateInvoice_label, 0, 0);
+		 operationPanels.put("generateInvoice", generateInvoice);
+		 
+		 // ==================== GridPane_generateBillOfLading ====================
+		 GridPane generateBillOfLading = new GridPane();
+		 generateBillOfLading.setHgap(4);
+		 generateBillOfLading.setVgap(6);
+		 generateBillOfLading.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> generateBillOfLading_content = generateBillOfLading.getChildren();
+		 Label generateBillOfLading_label = new Label("This operation is no intput parameters..");
+		 generateBillOfLading_label.setMinWidth(Region.USE_PREF_SIZE);
+		 generateBillOfLading_content.add(generateBillOfLading_label);
+		 GridPane.setConstraints(generateBillOfLading_label, 0, 0);
+		 operationPanels.put("generateBillOfLading", generateBillOfLading);
+		 
+		 // ==================== GridPane_generateNotification ====================
+		 GridPane generateNotification = new GridPane();
+		 generateNotification.setHgap(4);
+		 generateNotification.setVgap(6);
+		 generateNotification.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> generateNotification_content = generateNotification.getChildren();
+		 Label generateNotification_label = new Label("This operation is no intput parameters..");
+		 generateNotification_label.setMinWidth(Region.USE_PREF_SIZE);
+		 generateNotification_content.add(generateNotification_label);
+		 GridPane.setConstraints(generateNotification_label, 0, 0);
+		 operationPanels.put("generateNotification", generateNotification);
+		 
+		 // ==================== GridPane_typeChoice ====================
+		 GridPane typeChoice = new GridPane();
+		 typeChoice.setHgap(4);
+		 typeChoice.setVgap(6);
+		 typeChoice.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> typeChoice_content = typeChoice.getChildren();
+		 Label typeChoice_label = new Label("This operation is no intput parameters..");
+		 typeChoice_label.setMinWidth(Region.USE_PREF_SIZE);
+		 typeChoice_content.add(typeChoice_label);
+		 GridPane.setConstraints(typeChoice_label, 0, 0);
+		 operationPanels.put("typeChoice", typeChoice);
+		 
+		 // ==================== GridPane_cancelOrder ====================
+		 GridPane cancelOrder = new GridPane();
+		 cancelOrder.setHgap(4);
+		 cancelOrder.setVgap(6);
+		 cancelOrder.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> cancelOrder_content = cancelOrder.getChildren();
+		 Label cancelOrder_label = new Label("This operation is no intput parameters..");
+		 cancelOrder_label.setMinWidth(Region.USE_PREF_SIZE);
+		 cancelOrder_content.add(cancelOrder_label);
+		 GridPane.setConstraints(cancelOrder_label, 0, 0);
+		 operationPanels.put("cancelOrder", cancelOrder);
+		 
+		 // ==================== GridPane_regenerateBillOfLading ====================
+		 GridPane regenerateBillOfLading = new GridPane();
+		 regenerateBillOfLading.setHgap(4);
+		 regenerateBillOfLading.setVgap(6);
+		 regenerateBillOfLading.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> regenerateBillOfLading_content = regenerateBillOfLading.getChildren();
+		 Label regenerateBillOfLading_label = new Label("This operation is no intput parameters..");
+		 regenerateBillOfLading_label.setMinWidth(Region.USE_PREF_SIZE);
+		 regenerateBillOfLading_content.add(regenerateBillOfLading_label);
+		 GridPane.setConstraints(regenerateBillOfLading_label, 0, 0);
+		 operationPanels.put("regenerateBillOfLading", regenerateBillOfLading);
+		 
+		 // ==================== GridPane_regenerateNotification ====================
+		 GridPane regenerateNotification = new GridPane();
+		 regenerateNotification.setHgap(4);
+		 regenerateNotification.setVgap(6);
+		 regenerateNotification.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> regenerateNotification_content = regenerateNotification.getChildren();
+		 Label regenerateNotification_label = new Label("This operation is no intput parameters..");
+		 regenerateNotification_label.setMinWidth(Region.USE_PREF_SIZE);
+		 regenerateNotification_content.add(regenerateNotification_label);
+		 GridPane.setConstraints(regenerateNotification_label, 0, 0);
+		 operationPanels.put("regenerateNotification", regenerateNotification);
+		 
+		 // ==================== GridPane_makeNewPlan ====================
+		 GridPane makeNewPlan = new GridPane();
+		 makeNewPlan.setHgap(4);
+		 makeNewPlan.setVgap(6);
+		 makeNewPlan.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> makeNewPlan_content = makeNewPlan.getChildren();
+		 Label makeNewPlan_label = new Label("This operation is no intput parameters..");
+		 makeNewPlan_label.setMinWidth(Region.USE_PREF_SIZE);
+		 makeNewPlan_content.add(makeNewPlan_label);
+		 GridPane.setConstraints(makeNewPlan_label, 0, 0);
+		 operationPanels.put("makeNewPlan", makeNewPlan);
+		 
+		 // ==================== GridPane_addItemIntoPlan ====================
+		 GridPane addItemIntoPlan = new GridPane();
+		 addItemIntoPlan.setHgap(4);
+		 addItemIntoPlan.setVgap(6);
+		 addItemIntoPlan.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> addItemIntoPlan_content = addItemIntoPlan.getChildren();
+		 Label addItemIntoPlan_label = new Label("This operation is no intput parameters..");
+		 addItemIntoPlan_label.setMinWidth(Region.USE_PREF_SIZE);
+		 addItemIntoPlan_content.add(addItemIntoPlan_label);
+		 GridPane.setConstraints(addItemIntoPlan_label, 0, 0);
+		 operationPanels.put("addItemIntoPlan", addItemIntoPlan);
+		 
+		 // ==================== GridPane_generatePlan ====================
+		 GridPane generatePlan = new GridPane();
+		 generatePlan.setHgap(4);
+		 generatePlan.setVgap(6);
+		 generatePlan.setPadding(new Insets(8, 8, 8, 8));
+		 
+		 ObservableList<Node> generatePlan_content = generatePlan.getChildren();
+		 Label generatePlan_label = new Label("This operation is no intput parameters..");
+		 generatePlan_label.setMinWidth(Region.USE_PREF_SIZE);
+		 generatePlan_content.add(generatePlan_label);
+		 GridPane.setConstraints(generatePlan_label, 0, 0);
+		 operationPanels.put("generatePlan", generatePlan);
 		 
 	}	
 
@@ -5709,11 +7403,23 @@ public class PrototypeController implements Initializable {
 					 	new TreeItem<String>("authorization"),
 					 	new TreeItem<String>("generateOrder")
 				 		));	
+			TreeItem<String> subTreeRoot_deliveryNotification = new TreeItem<String>("deliveryNotification");
+			subTreeRoot_deliveryNotification.getChildren().addAll(Arrays.asList(			 		    
+					 	new TreeItem<String>("generateBillOfLading"),
+					 	new TreeItem<String>("generateNotification")
+				 		));	
+			TreeItem<String> subTreeRoot_exchangeProcessing = new TreeItem<String>("exchangeProcessing");
+			subTreeRoot_exchangeProcessing.getChildren().addAll(Arrays.asList(			 		    
+					 	new TreeItem<String>("typeChoice"),
+					 	new TreeItem<String>("cancelOrder"),
+					 	new TreeItem<String>("regenerateBillOfLading"),
+					 	new TreeItem<String>("regenerateNotification")
+				 		));	
 		
 		treeRootsalesstaff.getChildren().addAll(Arrays.asList(
 			subTreeRoot_salesProcessing,
-			new TreeItem<String>("deliveryNotification"),
-			new TreeItem<String>("exchangeNotification")
+			subTreeRoot_deliveryNotification,
+			subTreeRoot_exchangeProcessing
 			));
 		
 		treeRootsalesstaff.setExpanded(true);
@@ -5786,13 +7492,19 @@ public class PrototypeController implements Initializable {
 				 	new TreeItem<String>("deleteInvoice")
 				 	));
 				
+			TreeItem<String> subTreeRoot_tradingTerminationAndSettlement = new TreeItem<String>("tradingTerminationAndSettlement");
+			subTreeRoot_tradingTerminationAndSettlement.getChildren().addAll(Arrays.asList(			 		    
+					 	new TreeItem<String>("contractTerminationAndSettlement"),
+					 	new TreeItem<String>("orderTerminationAndSettlement"),
+					 	new TreeItem<String>("payment"),
+					 	new TreeItem<String>("generateInvoice")
+				 		));	
 		
 		treeRootfinancialstaff.getChildren().addAll(Arrays.asList(
 			new TreeItem<String>("manageItemsPrices"),
 			subTreeRoot_manageInvoice,
 			new TreeItem<String>("postingOfAccount"),
-			new TreeItem<String>("orderTerminationAndSettlement"),
-			new TreeItem<String>("contractTerminationAndSettlement")
+			subTreeRoot_tradingTerminationAndSettlement
 			));
 		
 		treeRootfinancialstaff.setExpanded(true);
@@ -5862,14 +7574,42 @@ public class PrototypeController implements Initializable {
 				 	new TreeItem<String>("createClient"),
 				 	new TreeItem<String>("queryClient"),
 				 	new TreeItem<String>("modifyClient"),
-				 	new TreeItem<String>("deleteClient")
+				 	new TreeItem<String>("deleteClient"),
+				 	new TreeItem<String>("createClientGroup"),
+				 	new TreeItem<String>("queryClientGroup"),
+				 	new TreeItem<String>("modifyClientGroup"),
+				 	new TreeItem<String>("deleteClientGroup")
+				 	));
+				
+			TreeItem<String> subTreeRoot_salesPlanManagement = new TreeItem<String>("salesPlanManagement");
+			subTreeRoot_salesPlanManagement.getChildren().addAll(Arrays.asList(			 		    
+					 	new TreeItem<String>("makeNewPlan"),
+					 	new TreeItem<String>("addItemIntoPlan"),
+					 	new TreeItem<String>("generatePlan")
+				 		));	
+			TreeItem<String> subTreeRoot_manageDeliveryMethod = new TreeItem<String>("manageDeliveryMethod");
+			subTreeRoot_manageDeliveryMethod.getChildren().addAll(Arrays.asList(
+				 	new TreeItem<String>("createDeliveryMethod"),
+				 	new TreeItem<String>("queryDeliveryMethod"),
+				 	new TreeItem<String>("modifyDeliveryMethod"),
+				 	new TreeItem<String>("deleteDeliveryMethod")
+				 	));
+				
+			TreeItem<String> subTreeRoot_manageOrderMethod = new TreeItem<String>("manageOrderMethod");
+			subTreeRoot_manageOrderMethod.getChildren().addAll(Arrays.asList(
+				 	new TreeItem<String>("createOrderMethod"),
+				 	new TreeItem<String>("queryOrderMethod"),
+				 	new TreeItem<String>("modifyOrderMethod"),
+				 	new TreeItem<String>("deleteOrderMethod")
 				 	));
 				
 		
 		treeRootdepartmentmanager.getChildren().addAll(Arrays.asList(
 			subTreeRoot_manageClient,
 			new TreeItem<String>("salesCommissionManagement"),
-			new TreeItem<String>("salesPlanManagement")
+			subTreeRoot_salesPlanManagement,
+			subTreeRoot_manageDeliveryMethod,
+			subTreeRoot_manageOrderMethod
 			));
 		
 		treeRootdepartmentmanager.setExpanded(true);
@@ -6040,13 +7780,7 @@ public class PrototypeController implements Initializable {
 		case "generateContract" : generateContract(); break;
 		case "generateOrder" : generateOrder(); break;
 		case "salesPlanManagement" : salesPlanManagement(); break;
-		case "deliveryNotification" : deliveryNotification(); break;
-		case "exchangeNotification" : exchangeNotification(); break;
-		case "itemsPricesMaintenance" : itemsPricesMaintenance(); break;
 		case "postingOfAccount" : postingOfAccount(); break;
-		case "invoiceManagement" : invoiceManagement(); break;
-		case "contractTerminationAndSettlement" : contractTerminationAndSettlement(); break;
-		case "orderTerminationAndSettlement" : orderTerminationAndSettlement(); break;
 		case "salesCommissionManagement" : salesCommissionManagement(); break;
 		case "authorization" : authorization(); break;
 		case "authorizationProcessing" : authorizationProcessing(); break;
@@ -6058,10 +7792,6 @@ public class PrototypeController implements Initializable {
 		case "queryInvoice" : queryInvoice(); break;
 		case "modifyInvoice" : modifyInvoice(); break;
 		case "deleteInvoice" : deleteInvoice(); break;
-		case "createBillOfLading" : createBillOfLading(); break;
-		case "queryBillOfLading" : queryBillOfLading(); break;
-		case "modifyBillOfLading" : modifyBillOfLading(); break;
-		case "deleteBillOfLading" : deleteBillOfLading(); break;
 		case "createClient" : createClient(); break;
 		case "queryClient" : queryClient(); break;
 		case "modifyClient" : modifyClient(); break;
@@ -6074,7 +7804,36 @@ public class PrototypeController implements Initializable {
 		case "queryProduct" : queryProduct(); break;
 		case "modifyProduct" : modifyProduct(); break;
 		case "deleteProduct" : deleteProduct(); break;
+		case "createBillOfLading" : createBillOfLading(); break;
+		case "queryBillOfLading" : queryBillOfLading(); break;
+		case "modifyBillOfLading" : modifyBillOfLading(); break;
+		case "deleteBillOfLading" : deleteBillOfLading(); break;
+		case "createOrderMethod" : createOrderMethod(); break;
+		case "queryOrderMethod" : queryOrderMethod(); break;
+		case "modifyOrderMethod" : modifyOrderMethod(); break;
+		case "deleteOrderMethod" : deleteOrderMethod(); break;
+		case "createDeliveryMethod" : createDeliveryMethod(); break;
+		case "queryDeliveryMethod" : queryDeliveryMethod(); break;
+		case "modifyDeliveryMethod" : modifyDeliveryMethod(); break;
+		case "deleteDeliveryMethod" : deleteDeliveryMethod(); break;
 		case "manageItemsPrices" : manageItemsPrices(); break;
+		case "createClientGroup" : createClientGroup(); break;
+		case "queryClientGroup" : queryClientGroup(); break;
+		case "modifyClientGroup" : modifyClientGroup(); break;
+		case "deleteClientGroup" : deleteClientGroup(); break;
+		case "orderTerminationAndSettlement" : orderTerminationAndSettlement(); break;
+		case "contractTerminationAndSettlement" : contractTerminationAndSettlement(); break;
+		case "payment" : payment(); break;
+		case "generateInvoice" : generateInvoice(); break;
+		case "generateBillOfLading" : generateBillOfLading(); break;
+		case "generateNotification" : generateNotification(); break;
+		case "typeChoice" : typeChoice(); break;
+		case "cancelOrder" : cancelOrder(); break;
+		case "regenerateBillOfLading" : regenerateBillOfLading(); break;
+		case "regenerateNotification" : regenerateNotification(); break;
+		case "makeNewPlan" : makeNewPlan(); break;
+		case "addItemIntoPlan" : addItemIntoPlan(); break;
+		case "generatePlan" : generatePlan(); break;
 		
 		}
 		
@@ -6184,7 +7943,7 @@ public class PrototypeController implements Initializable {
 			//invoke op with parameters
 			//return value is primitive type, bind result to label.
 			String result = String.valueOf(salesprocessingservice_service.makeNewOrder(
-			Integer.valueOf(makeNewOrder_buyId_t.getText())
+			Integer.valueOf(makeNewOrder_buyerId_t.getText())
 			));	
 			Label l = new Label(result);
 			l.setPadding(new Insets(8, 8, 8, 8));
@@ -6413,144 +8172,6 @@ public class PrototypeController implements Initializable {
 				thirdpartyServiceUnSat();
 		}
 	}
-	public void deliveryNotification() {
-		
-		System.out.println("execute deliveryNotification");
-		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
-		log.appendText(time + " -- execute operation: deliveryNotification in service: SalesManagementSystemSystem ");
-		
-		try {
-			//invoke op with parameters
-			//return value is primitive type, bind result to label.
-			String result = String.valueOf(salesmanagementsystemsystem_service.deliveryNotification(
-			));	
-			Label l = new Label(result);
-			l.setPadding(new Insets(8, 8, 8, 8));
-			operation_return_pane.setContent(l);
-		    log.appendText(" -- success!\n");
-		    //set pre- and post-conditions text area color
-		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    //contract evaluation result
-		    precondition_pane.setText("Precondition: True");
-		    postcondition_pane.setText("Postcondition: True");
-		    
-		    
-		} catch (PreconditionException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (PostconditionException e) {
-			log.appendText(" -- failed!\n");
-			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
-			postcondition_pane.setText("Postcondition: False");
-			postconditionUnSat();
-			
-		} catch (NumberFormatException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (Exception e ) {		
-			if (e instanceof ThirdPartyServiceException)
-				thirdpartyServiceUnSat();
-		}
-	}
-	public void exchangeNotification() {
-		
-		System.out.println("execute exchangeNotification");
-		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
-		log.appendText(time + " -- execute operation: exchangeNotification in service: SalesManagementSystemSystem ");
-		
-		try {
-			//invoke op with parameters
-			//return value is primitive type, bind result to label.
-			String result = String.valueOf(salesmanagementsystemsystem_service.exchangeNotification(
-			));	
-			Label l = new Label(result);
-			l.setPadding(new Insets(8, 8, 8, 8));
-			operation_return_pane.setContent(l);
-		    log.appendText(" -- success!\n");
-		    //set pre- and post-conditions text area color
-		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    //contract evaluation result
-		    precondition_pane.setText("Precondition: True");
-		    postcondition_pane.setText("Postcondition: True");
-		    
-		    
-		} catch (PreconditionException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (PostconditionException e) {
-			log.appendText(" -- failed!\n");
-			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
-			postcondition_pane.setText("Postcondition: False");
-			postconditionUnSat();
-			
-		} catch (NumberFormatException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (Exception e ) {		
-			if (e instanceof ThirdPartyServiceException)
-				thirdpartyServiceUnSat();
-		}
-	}
-	public void itemsPricesMaintenance() {
-		
-		System.out.println("execute itemsPricesMaintenance");
-		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
-		log.appendText(time + " -- execute operation: itemsPricesMaintenance in service: SalesManagementSystemSystem ");
-		
-		try {
-			//invoke op with parameters
-			//return value is primitive type, bind result to label.
-			String result = String.valueOf(salesmanagementsystemsystem_service.itemsPricesMaintenance(
-			));	
-			Label l = new Label(result);
-			l.setPadding(new Insets(8, 8, 8, 8));
-			operation_return_pane.setContent(l);
-		    log.appendText(" -- success!\n");
-		    //set pre- and post-conditions text area color
-		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    //contract evaluation result
-		    precondition_pane.setText("Precondition: True");
-		    postcondition_pane.setText("Postcondition: True");
-		    
-		    
-		} catch (PreconditionException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (PostconditionException e) {
-			log.appendText(" -- failed!\n");
-			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
-			postcondition_pane.setText("Postcondition: False");
-			postconditionUnSat();
-			
-		} catch (NumberFormatException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (Exception e ) {		
-			if (e instanceof ThirdPartyServiceException)
-				thirdpartyServiceUnSat();
-		}
-	}
 	public void postingOfAccount() {
 		
 		System.out.println("execute postingOfAccount");
@@ -6561,144 +8182,6 @@ public class PrototypeController implements Initializable {
 			//invoke op with parameters
 			//return value is primitive type, bind result to label.
 			String result = String.valueOf(salesmanagementsystemsystem_service.postingOfAccount(
-			));	
-			Label l = new Label(result);
-			l.setPadding(new Insets(8, 8, 8, 8));
-			operation_return_pane.setContent(l);
-		    log.appendText(" -- success!\n");
-		    //set pre- and post-conditions text area color
-		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    //contract evaluation result
-		    precondition_pane.setText("Precondition: True");
-		    postcondition_pane.setText("Postcondition: True");
-		    
-		    
-		} catch (PreconditionException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (PostconditionException e) {
-			log.appendText(" -- failed!\n");
-			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
-			postcondition_pane.setText("Postcondition: False");
-			postconditionUnSat();
-			
-		} catch (NumberFormatException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (Exception e ) {		
-			if (e instanceof ThirdPartyServiceException)
-				thirdpartyServiceUnSat();
-		}
-	}
-	public void invoiceManagement() {
-		
-		System.out.println("execute invoiceManagement");
-		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
-		log.appendText(time + " -- execute operation: invoiceManagement in service: SalesManagementSystemSystem ");
-		
-		try {
-			//invoke op with parameters
-			//return value is primitive type, bind result to label.
-			String result = String.valueOf(salesmanagementsystemsystem_service.invoiceManagement(
-			));	
-			Label l = new Label(result);
-			l.setPadding(new Insets(8, 8, 8, 8));
-			operation_return_pane.setContent(l);
-		    log.appendText(" -- success!\n");
-		    //set pre- and post-conditions text area color
-		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    //contract evaluation result
-		    precondition_pane.setText("Precondition: True");
-		    postcondition_pane.setText("Postcondition: True");
-		    
-		    
-		} catch (PreconditionException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (PostconditionException e) {
-			log.appendText(" -- failed!\n");
-			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
-			postcondition_pane.setText("Postcondition: False");
-			postconditionUnSat();
-			
-		} catch (NumberFormatException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (Exception e ) {		
-			if (e instanceof ThirdPartyServiceException)
-				thirdpartyServiceUnSat();
-		}
-	}
-	public void contractTerminationAndSettlement() {
-		
-		System.out.println("execute contractTerminationAndSettlement");
-		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
-		log.appendText(time + " -- execute operation: contractTerminationAndSettlement in service: SalesManagementSystemSystem ");
-		
-		try {
-			//invoke op with parameters
-			//return value is primitive type, bind result to label.
-			String result = String.valueOf(salesmanagementsystemsystem_service.contractTerminationAndSettlement(
-			));	
-			Label l = new Label(result);
-			l.setPadding(new Insets(8, 8, 8, 8));
-			operation_return_pane.setContent(l);
-		    log.appendText(" -- success!\n");
-		    //set pre- and post-conditions text area color
-		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    //contract evaluation result
-		    precondition_pane.setText("Precondition: True");
-		    postcondition_pane.setText("Postcondition: True");
-		    
-		    
-		} catch (PreconditionException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (PostconditionException e) {
-			log.appendText(" -- failed!\n");
-			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
-			postcondition_pane.setText("Postcondition: False");
-			postconditionUnSat();
-			
-		} catch (NumberFormatException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (Exception e ) {		
-			if (e instanceof ThirdPartyServiceException)
-				thirdpartyServiceUnSat();
-		}
-	}
-	public void orderTerminationAndSettlement() {
-		
-		System.out.println("execute orderTerminationAndSettlement");
-		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
-		log.appendText(time + " -- execute operation: orderTerminationAndSettlement in service: SalesManagementSystemSystem ");
-		
-		try {
-			//invoke op with parameters
-			//return value is primitive type, bind result to label.
-			String result = String.valueOf(salesmanagementsystemsystem_service.orderTerminationAndSettlement(
 			));	
 			Label l = new Label(result);
 			l.setPadding(new Insets(8, 8, 8, 8));
@@ -7434,327 +8917,6 @@ public class PrototypeController implements Initializable {
 				thirdpartyServiceUnSat();
 		}
 	}
-	public void createBillOfLading() {
-		
-		System.out.println("execute createBillOfLading");
-		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
-		log.appendText(time + " -- execute operation: createBillOfLading in service: ManageBillOfLadingCRUDService ");
-		
-		try {
-			//invoke op with parameters
-			//return value is primitive type, bind result to label.
-			String result = String.valueOf(managebillofladingcrudservice_service.createBillOfLading(
-			Integer.valueOf(createBillOfLading_id_t.getText()),
-			createBillOfLading_consignee_t.getText(),
-			createBillOfLading_commoditylist_t.getText(),
-			createBillOfLading_contractobject_t.getText(),
-			Float.valueOf(createBillOfLading_quantity_t.getText()),
-			Float.valueOf(createBillOfLading_totalprice_t.getText()),
-			createBillOfLading_deadlineforperformance_t.getText(),
-			createBillOfLading_locationforperformance_t.getText(),
-			createBillOfLading_methodforperformance_t.getText()
-			));	
-			Label l = new Label(result);
-			l.setPadding(new Insets(8, 8, 8, 8));
-			operation_return_pane.setContent(l);
-		    log.appendText(" -- success!\n");
-		    //set pre- and post-conditions text area color
-		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    //contract evaluation result
-		    precondition_pane.setText("Precondition: True");
-		    postcondition_pane.setText("Postcondition: True");
-		    
-		    
-		} catch (PreconditionException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (PostconditionException e) {
-			log.appendText(" -- failed!\n");
-			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
-			postcondition_pane.setText("Postcondition: False");
-			postconditionUnSat();
-			
-		} catch (NumberFormatException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (Exception e ) {		
-			if (e instanceof ThirdPartyServiceException)
-				thirdpartyServiceUnSat();
-		}
-	}
-	public void queryBillOfLading() {
-		
-		System.out.println("execute queryBillOfLading");
-		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
-		log.appendText(time + " -- execute operation: queryBillOfLading in service: ManageBillOfLadingCRUDService ");
-		
-		try {
-			//invoke op with parameters
-				BillOfLading r = managebillofladingcrudservice_service.queryBillOfLading(
-				Integer.valueOf(queryBillOfLading_id_t.getText())
-				);
-			
-				//binding result to GUI
-				TableView<Map<String, String>> tableBillOfLading = new TableView<Map<String, String>>();
-				TableColumn<Map<String, String>, String> tableBillOfLading_Id = new TableColumn<Map<String, String>, String>("Id");
-				tableBillOfLading_Id.setMinWidth("Id".length()*10);
-				tableBillOfLading_Id.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
-					@Override
-				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
-				        return new ReadOnlyStringWrapper(data.getValue().get("Id"));
-				    }
-				});	
-				tableBillOfLading.getColumns().add(tableBillOfLading_Id);
-				TableColumn<Map<String, String>, String> tableBillOfLading_Consignee = new TableColumn<Map<String, String>, String>("Consignee");
-				tableBillOfLading_Consignee.setMinWidth("Consignee".length()*10);
-				tableBillOfLading_Consignee.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
-					@Override
-				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
-				        return new ReadOnlyStringWrapper(data.getValue().get("Consignee"));
-				    }
-				});	
-				tableBillOfLading.getColumns().add(tableBillOfLading_Consignee);
-				TableColumn<Map<String, String>, String> tableBillOfLading_CommodityList = new TableColumn<Map<String, String>, String>("CommodityList");
-				tableBillOfLading_CommodityList.setMinWidth("CommodityList".length()*10);
-				tableBillOfLading_CommodityList.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
-					@Override
-				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
-				        return new ReadOnlyStringWrapper(data.getValue().get("CommodityList"));
-				    }
-				});	
-				tableBillOfLading.getColumns().add(tableBillOfLading_CommodityList);
-				TableColumn<Map<String, String>, String> tableBillOfLading_ContractObject = new TableColumn<Map<String, String>, String>("ContractObject");
-				tableBillOfLading_ContractObject.setMinWidth("ContractObject".length()*10);
-				tableBillOfLading_ContractObject.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
-					@Override
-				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
-				        return new ReadOnlyStringWrapper(data.getValue().get("ContractObject"));
-				    }
-				});	
-				tableBillOfLading.getColumns().add(tableBillOfLading_ContractObject);
-				TableColumn<Map<String, String>, String> tableBillOfLading_Quantity = new TableColumn<Map<String, String>, String>("Quantity");
-				tableBillOfLading_Quantity.setMinWidth("Quantity".length()*10);
-				tableBillOfLading_Quantity.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
-					@Override
-				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
-				        return new ReadOnlyStringWrapper(data.getValue().get("Quantity"));
-				    }
-				});	
-				tableBillOfLading.getColumns().add(tableBillOfLading_Quantity);
-				TableColumn<Map<String, String>, String> tableBillOfLading_TotalPrice = new TableColumn<Map<String, String>, String>("TotalPrice");
-				tableBillOfLading_TotalPrice.setMinWidth("TotalPrice".length()*10);
-				tableBillOfLading_TotalPrice.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
-					@Override
-				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
-				        return new ReadOnlyStringWrapper(data.getValue().get("TotalPrice"));
-				    }
-				});	
-				tableBillOfLading.getColumns().add(tableBillOfLading_TotalPrice);
-				TableColumn<Map<String, String>, String> tableBillOfLading_DeadlineForPerformance = new TableColumn<Map<String, String>, String>("DeadlineForPerformance");
-				tableBillOfLading_DeadlineForPerformance.setMinWidth("DeadlineForPerformance".length()*10);
-				tableBillOfLading_DeadlineForPerformance.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
-					@Override
-				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
-				        return new ReadOnlyStringWrapper(data.getValue().get("DeadlineForPerformance"));
-				    }
-				});	
-				tableBillOfLading.getColumns().add(tableBillOfLading_DeadlineForPerformance);
-				TableColumn<Map<String, String>, String> tableBillOfLading_LocationForPerformance = new TableColumn<Map<String, String>, String>("LocationForPerformance");
-				tableBillOfLading_LocationForPerformance.setMinWidth("LocationForPerformance".length()*10);
-				tableBillOfLading_LocationForPerformance.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
-					@Override
-				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
-				        return new ReadOnlyStringWrapper(data.getValue().get("LocationForPerformance"));
-				    }
-				});	
-				tableBillOfLading.getColumns().add(tableBillOfLading_LocationForPerformance);
-				TableColumn<Map<String, String>, String> tableBillOfLading_MethodForPerformance = new TableColumn<Map<String, String>, String>("MethodForPerformance");
-				tableBillOfLading_MethodForPerformance.setMinWidth("MethodForPerformance".length()*10);
-				tableBillOfLading_MethodForPerformance.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
-					@Override
-				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
-				        return new ReadOnlyStringWrapper(data.getValue().get("MethodForPerformance"));
-				    }
-				});	
-				tableBillOfLading.getColumns().add(tableBillOfLading_MethodForPerformance);
-				
-				ObservableList<Map<String, String>> dataBillOfLading = FXCollections.observableArrayList();
-				
-					Map<String, String> unit = new HashMap<String, String>();
-					unit.put("Id", String.valueOf(r.getId()));
-					if (r.getConsignee() != null)
-						unit.put("Consignee", String.valueOf(r.getConsignee()));
-					else
-						unit.put("Consignee", "");
-					if (r.getCommodityList() != null)
-						unit.put("CommodityList", String.valueOf(r.getCommodityList()));
-					else
-						unit.put("CommodityList", "");
-					if (r.getContractObject() != null)
-						unit.put("ContractObject", String.valueOf(r.getContractObject()));
-					else
-						unit.put("ContractObject", "");
-					unit.put("Quantity", String.valueOf(r.getQuantity()));
-					unit.put("TotalPrice", String.valueOf(r.getTotalPrice()));
-					if (r.getDeadlineForPerformance() != null)
-						unit.put("DeadlineForPerformance", String.valueOf(r.getDeadlineForPerformance()));
-					else
-						unit.put("DeadlineForPerformance", "");
-					if (r.getLocationForPerformance() != null)
-						unit.put("LocationForPerformance", String.valueOf(r.getLocationForPerformance()));
-					else
-						unit.put("LocationForPerformance", "");
-					if (r.getMethodForPerformance() != null)
-						unit.put("MethodForPerformance", String.valueOf(r.getMethodForPerformance()));
-					else
-						unit.put("MethodForPerformance", "");
-					dataBillOfLading.add(unit);
-				
-				
-				tableBillOfLading.setItems(dataBillOfLading);
-				operation_return_pane.setContent(tableBillOfLading);					
-					
-		    log.appendText(" -- success!\n");
-		    //set pre- and post-conditions text area color
-		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    //contract evaluation result
-		    precondition_pane.setText("Precondition: True");
-		    postcondition_pane.setText("Postcondition: True");
-		    
-		    
-		} catch (PreconditionException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (PostconditionException e) {
-			log.appendText(" -- failed!\n");
-			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
-			postcondition_pane.setText("Postcondition: False");
-			postconditionUnSat();
-			
-		} catch (NumberFormatException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (Exception e ) {		
-			if (e instanceof ThirdPartyServiceException)
-				thirdpartyServiceUnSat();
-		}
-	}
-	public void modifyBillOfLading() {
-		
-		System.out.println("execute modifyBillOfLading");
-		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
-		log.appendText(time + " -- execute operation: modifyBillOfLading in service: ManageBillOfLadingCRUDService ");
-		
-		try {
-			//invoke op with parameters
-			//return value is primitive type, bind result to label.
-			String result = String.valueOf(managebillofladingcrudservice_service.modifyBillOfLading(
-			Integer.valueOf(modifyBillOfLading_id_t.getText()),
-			modifyBillOfLading_consignee_t.getText(),
-			modifyBillOfLading_commoditylist_t.getText(),
-			modifyBillOfLading_contractobject_t.getText(),
-			Float.valueOf(modifyBillOfLading_quantity_t.getText()),
-			Float.valueOf(modifyBillOfLading_totalprice_t.getText()),
-			modifyBillOfLading_deadlineforperformance_t.getText(),
-			modifyBillOfLading_locationforperformance_t.getText(),
-			modifyBillOfLading_methodforperformance_t.getText()
-			));	
-			Label l = new Label(result);
-			l.setPadding(new Insets(8, 8, 8, 8));
-			operation_return_pane.setContent(l);
-		    log.appendText(" -- success!\n");
-		    //set pre- and post-conditions text area color
-		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    //contract evaluation result
-		    precondition_pane.setText("Precondition: True");
-		    postcondition_pane.setText("Postcondition: True");
-		    
-		    
-		} catch (PreconditionException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (PostconditionException e) {
-			log.appendText(" -- failed!\n");
-			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
-			postcondition_pane.setText("Postcondition: False");
-			postconditionUnSat();
-			
-		} catch (NumberFormatException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (Exception e ) {		
-			if (e instanceof ThirdPartyServiceException)
-				thirdpartyServiceUnSat();
-		}
-	}
-	public void deleteBillOfLading() {
-		
-		System.out.println("execute deleteBillOfLading");
-		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
-		log.appendText(time + " -- execute operation: deleteBillOfLading in service: ManageBillOfLadingCRUDService ");
-		
-		try {
-			//invoke op with parameters
-			//return value is primitive type, bind result to label.
-			String result = String.valueOf(managebillofladingcrudservice_service.deleteBillOfLading(
-			Integer.valueOf(deleteBillOfLading_id_t.getText())
-			));	
-			Label l = new Label(result);
-			l.setPadding(new Insets(8, 8, 8, 8));
-			operation_return_pane.setContent(l);
-		    log.appendText(" -- success!\n");
-		    //set pre- and post-conditions text area color
-		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
-		    //contract evaluation result
-		    precondition_pane.setText("Precondition: True");
-		    postcondition_pane.setText("Postcondition: True");
-		    
-		    
-		} catch (PreconditionException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (PostconditionException e) {
-			log.appendText(" -- failed!\n");
-			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
-			postcondition_pane.setText("Postcondition: False");
-			postconditionUnSat();
-			
-		} catch (NumberFormatException e) {
-			log.appendText(" -- failed!\n");
-			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
-			precondition_pane.setText("Precondition: False");	
-			preconditionUnSat();
-			
-		} catch (Exception e ) {		
-			if (e instanceof ThirdPartyServiceException)
-				thirdpartyServiceUnSat();
-		}
-	}
 	public void createClient() {
 		
 		System.out.println("execute createClient");
@@ -7769,7 +8931,8 @@ public class PrototypeController implements Initializable {
 			createClient_name_t.getText(),
 			createClient_address_t.getText(),
 			createClient_contact_t.getText(),
-			createClient_phonenumber_t.getText()
+			createClient_phonenumber_t.getText(),
+			Integer.valueOf(createClient_groupId_t.getText())
 			));	
 			Label l = new Label(result);
 			l.setPadding(new Insets(8, 8, 8, 8));
@@ -7938,7 +9101,8 @@ public class PrototypeController implements Initializable {
 			modifyClient_name_t.getText(),
 			modifyClient_address_t.getText(),
 			modifyClient_contact_t.getText(),
-			modifyClient_phonenumber_t.getText()
+			modifyClient_phonenumber_t.getText(),
+			Integer.valueOf(modifyClient_groupId_t.getText())
 			));	
 			Label l = new Label(result);
 			l.setPadding(new Insets(8, 8, 8, 8));
@@ -8502,6 +9666,744 @@ public class PrototypeController implements Initializable {
 				thirdpartyServiceUnSat();
 		}
 	}
+	public void createBillOfLading() {
+		
+		System.out.println("execute createBillOfLading");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: createBillOfLading in service: ManageBillOfLadingCRUDService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(managebillofladingcrudservice_service.createBillOfLading(
+			Integer.valueOf(createBillOfLading_id_t.getText()),
+			createBillOfLading_consignee_t.getText(),
+			createBillOfLading_commoditylist_t.getText(),
+			Float.valueOf(createBillOfLading_totalprice_t.getText()),
+			createBillOfLading_deadlineforperformance_t.getText(),
+			createBillOfLading_locationforperformance_t.getText(),
+			createBillOfLading_methodforperformance_t.getText()
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void queryBillOfLading() {
+		
+		System.out.println("execute queryBillOfLading");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: queryBillOfLading in service: ManageBillOfLadingCRUDService ");
+		
+		try {
+			//invoke op with parameters
+				BillOfLading r = managebillofladingcrudservice_service.queryBillOfLading(
+				Integer.valueOf(queryBillOfLading_id_t.getText())
+				);
+			
+				//binding result to GUI
+				TableView<Map<String, String>> tableBillOfLading = new TableView<Map<String, String>>();
+				TableColumn<Map<String, String>, String> tableBillOfLading_Id = new TableColumn<Map<String, String>, String>("Id");
+				tableBillOfLading_Id.setMinWidth("Id".length()*10);
+				tableBillOfLading_Id.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+					@Override
+				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+				        return new ReadOnlyStringWrapper(data.getValue().get("Id"));
+				    }
+				});	
+				tableBillOfLading.getColumns().add(tableBillOfLading_Id);
+				TableColumn<Map<String, String>, String> tableBillOfLading_Consignee = new TableColumn<Map<String, String>, String>("Consignee");
+				tableBillOfLading_Consignee.setMinWidth("Consignee".length()*10);
+				tableBillOfLading_Consignee.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+					@Override
+				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+				        return new ReadOnlyStringWrapper(data.getValue().get("Consignee"));
+				    }
+				});	
+				tableBillOfLading.getColumns().add(tableBillOfLading_Consignee);
+				TableColumn<Map<String, String>, String> tableBillOfLading_CommodityList = new TableColumn<Map<String, String>, String>("CommodityList");
+				tableBillOfLading_CommodityList.setMinWidth("CommodityList".length()*10);
+				tableBillOfLading_CommodityList.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+					@Override
+				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+				        return new ReadOnlyStringWrapper(data.getValue().get("CommodityList"));
+				    }
+				});	
+				tableBillOfLading.getColumns().add(tableBillOfLading_CommodityList);
+				TableColumn<Map<String, String>, String> tableBillOfLading_TotalPrice = new TableColumn<Map<String, String>, String>("TotalPrice");
+				tableBillOfLading_TotalPrice.setMinWidth("TotalPrice".length()*10);
+				tableBillOfLading_TotalPrice.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+					@Override
+				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+				        return new ReadOnlyStringWrapper(data.getValue().get("TotalPrice"));
+				    }
+				});	
+				tableBillOfLading.getColumns().add(tableBillOfLading_TotalPrice);
+				TableColumn<Map<String, String>, String> tableBillOfLading_DeadlineForPerformance = new TableColumn<Map<String, String>, String>("DeadlineForPerformance");
+				tableBillOfLading_DeadlineForPerformance.setMinWidth("DeadlineForPerformance".length()*10);
+				tableBillOfLading_DeadlineForPerformance.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+					@Override
+				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+				        return new ReadOnlyStringWrapper(data.getValue().get("DeadlineForPerformance"));
+				    }
+				});	
+				tableBillOfLading.getColumns().add(tableBillOfLading_DeadlineForPerformance);
+				TableColumn<Map<String, String>, String> tableBillOfLading_LocationForPerformance = new TableColumn<Map<String, String>, String>("LocationForPerformance");
+				tableBillOfLading_LocationForPerformance.setMinWidth("LocationForPerformance".length()*10);
+				tableBillOfLading_LocationForPerformance.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+					@Override
+				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+				        return new ReadOnlyStringWrapper(data.getValue().get("LocationForPerformance"));
+				    }
+				});	
+				tableBillOfLading.getColumns().add(tableBillOfLading_LocationForPerformance);
+				TableColumn<Map<String, String>, String> tableBillOfLading_MethodForPerformance = new TableColumn<Map<String, String>, String>("MethodForPerformance");
+				tableBillOfLading_MethodForPerformance.setMinWidth("MethodForPerformance".length()*10);
+				tableBillOfLading_MethodForPerformance.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+					@Override
+				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+				        return new ReadOnlyStringWrapper(data.getValue().get("MethodForPerformance"));
+				    }
+				});	
+				tableBillOfLading.getColumns().add(tableBillOfLading_MethodForPerformance);
+				
+				ObservableList<Map<String, String>> dataBillOfLading = FXCollections.observableArrayList();
+				
+					Map<String, String> unit = new HashMap<String, String>();
+					unit.put("Id", String.valueOf(r.getId()));
+					if (r.getConsignee() != null)
+						unit.put("Consignee", String.valueOf(r.getConsignee()));
+					else
+						unit.put("Consignee", "");
+					if (r.getCommodityList() != null)
+						unit.put("CommodityList", String.valueOf(r.getCommodityList()));
+					else
+						unit.put("CommodityList", "");
+					unit.put("TotalPrice", String.valueOf(r.getTotalPrice()));
+					if (r.getDeadlineForPerformance() != null)
+						unit.put("DeadlineForPerformance", String.valueOf(r.getDeadlineForPerformance()));
+					else
+						unit.put("DeadlineForPerformance", "");
+					if (r.getLocationForPerformance() != null)
+						unit.put("LocationForPerformance", String.valueOf(r.getLocationForPerformance()));
+					else
+						unit.put("LocationForPerformance", "");
+					if (r.getMethodForPerformance() != null)
+						unit.put("MethodForPerformance", String.valueOf(r.getMethodForPerformance()));
+					else
+						unit.put("MethodForPerformance", "");
+					dataBillOfLading.add(unit);
+				
+				
+				tableBillOfLading.setItems(dataBillOfLading);
+				operation_return_pane.setContent(tableBillOfLading);					
+					
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void modifyBillOfLading() {
+		
+		System.out.println("execute modifyBillOfLading");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: modifyBillOfLading in service: ManageBillOfLadingCRUDService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(managebillofladingcrudservice_service.modifyBillOfLading(
+			Integer.valueOf(modifyBillOfLading_id_t.getText()),
+			modifyBillOfLading_consignee_t.getText(),
+			modifyBillOfLading_commoditylist_t.getText(),
+			Float.valueOf(modifyBillOfLading_totalprice_t.getText()),
+			modifyBillOfLading_deadlineforperformance_t.getText(),
+			modifyBillOfLading_locationforperformance_t.getText(),
+			modifyBillOfLading_methodforperformance_t.getText()
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void deleteBillOfLading() {
+		
+		System.out.println("execute deleteBillOfLading");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: deleteBillOfLading in service: ManageBillOfLadingCRUDService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(managebillofladingcrudservice_service.deleteBillOfLading(
+			Integer.valueOf(deleteBillOfLading_id_t.getText())
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void createOrderMethod() {
+		
+		System.out.println("execute createOrderMethod");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: createOrderMethod in service: ManageOrderMethodCRUDService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(manageordermethodcrudservice_service.createOrderMethod(
+			Integer.valueOf(createOrderMethod_id_t.getText()),
+			createOrderMethod_name_t.getText()
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void queryOrderMethod() {
+		
+		System.out.println("execute queryOrderMethod");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: queryOrderMethod in service: ManageOrderMethodCRUDService ");
+		
+		try {
+			//invoke op with parameters
+				OrderMethod r = manageordermethodcrudservice_service.queryOrderMethod(
+				Integer.valueOf(queryOrderMethod_id_t.getText())
+				);
+			
+				//binding result to GUI
+				TableView<Map<String, String>> tableOrderMethod = new TableView<Map<String, String>>();
+				TableColumn<Map<String, String>, String> tableOrderMethod_Id = new TableColumn<Map<String, String>, String>("Id");
+				tableOrderMethod_Id.setMinWidth("Id".length()*10);
+				tableOrderMethod_Id.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+					@Override
+				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+				        return new ReadOnlyStringWrapper(data.getValue().get("Id"));
+				    }
+				});	
+				tableOrderMethod.getColumns().add(tableOrderMethod_Id);
+				TableColumn<Map<String, String>, String> tableOrderMethod_Name = new TableColumn<Map<String, String>, String>("Name");
+				tableOrderMethod_Name.setMinWidth("Name".length()*10);
+				tableOrderMethod_Name.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+					@Override
+				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+				        return new ReadOnlyStringWrapper(data.getValue().get("Name"));
+				    }
+				});	
+				tableOrderMethod.getColumns().add(tableOrderMethod_Name);
+				
+				ObservableList<Map<String, String>> dataOrderMethod = FXCollections.observableArrayList();
+				
+					Map<String, String> unit = new HashMap<String, String>();
+					unit.put("Id", String.valueOf(r.getId()));
+					if (r.getName() != null)
+						unit.put("Name", String.valueOf(r.getName()));
+					else
+						unit.put("Name", "");
+					dataOrderMethod.add(unit);
+				
+				
+				tableOrderMethod.setItems(dataOrderMethod);
+				operation_return_pane.setContent(tableOrderMethod);					
+					
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void modifyOrderMethod() {
+		
+		System.out.println("execute modifyOrderMethod");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: modifyOrderMethod in service: ManageOrderMethodCRUDService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(manageordermethodcrudservice_service.modifyOrderMethod(
+			Integer.valueOf(modifyOrderMethod_id_t.getText()),
+			modifyOrderMethod_name_t.getText()
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void deleteOrderMethod() {
+		
+		System.out.println("execute deleteOrderMethod");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: deleteOrderMethod in service: ManageOrderMethodCRUDService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(manageordermethodcrudservice_service.deleteOrderMethod(
+			Integer.valueOf(deleteOrderMethod_id_t.getText())
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void createDeliveryMethod() {
+		
+		System.out.println("execute createDeliveryMethod");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: createDeliveryMethod in service: ManageDeliveryMethodCRUDService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(managedeliverymethodcrudservice_service.createDeliveryMethod(
+			Integer.valueOf(createDeliveryMethod_id_t.getText()),
+			createDeliveryMethod_name_t.getText()
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void queryDeliveryMethod() {
+		
+		System.out.println("execute queryDeliveryMethod");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: queryDeliveryMethod in service: ManageDeliveryMethodCRUDService ");
+		
+		try {
+			//invoke op with parameters
+				DeliveryMethod r = managedeliverymethodcrudservice_service.queryDeliveryMethod(
+				Integer.valueOf(queryDeliveryMethod_id_t.getText())
+				);
+			
+				//binding result to GUI
+				TableView<Map<String, String>> tableDeliveryMethod = new TableView<Map<String, String>>();
+				TableColumn<Map<String, String>, String> tableDeliveryMethod_Id = new TableColumn<Map<String, String>, String>("Id");
+				tableDeliveryMethod_Id.setMinWidth("Id".length()*10);
+				tableDeliveryMethod_Id.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+					@Override
+				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+				        return new ReadOnlyStringWrapper(data.getValue().get("Id"));
+				    }
+				});	
+				tableDeliveryMethod.getColumns().add(tableDeliveryMethod_Id);
+				TableColumn<Map<String, String>, String> tableDeliveryMethod_Name = new TableColumn<Map<String, String>, String>("Name");
+				tableDeliveryMethod_Name.setMinWidth("Name".length()*10);
+				tableDeliveryMethod_Name.setCellValueFactory(new Callback<CellDataFeatures<Map<String, String>, String>, ObservableValue<String>>() {	   
+					@Override
+				    public ObservableValue<String> call(CellDataFeatures<Map<String, String>, String> data) {
+				        return new ReadOnlyStringWrapper(data.getValue().get("Name"));
+				    }
+				});	
+				tableDeliveryMethod.getColumns().add(tableDeliveryMethod_Name);
+				
+				ObservableList<Map<String, String>> dataDeliveryMethod = FXCollections.observableArrayList();
+				
+					Map<String, String> unit = new HashMap<String, String>();
+					unit.put("Id", String.valueOf(r.getId()));
+					if (r.getName() != null)
+						unit.put("Name", String.valueOf(r.getName()));
+					else
+						unit.put("Name", "");
+					dataDeliveryMethod.add(unit);
+				
+				
+				tableDeliveryMethod.setItems(dataDeliveryMethod);
+				operation_return_pane.setContent(tableDeliveryMethod);					
+					
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void modifyDeliveryMethod() {
+		
+		System.out.println("execute modifyDeliveryMethod");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: modifyDeliveryMethod in service: ManageDeliveryMethodCRUDService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(managedeliverymethodcrudservice_service.modifyDeliveryMethod(
+			Integer.valueOf(modifyDeliveryMethod_id_t.getText()),
+			modifyDeliveryMethod_name_t.getText()
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void deleteDeliveryMethod() {
+		
+		System.out.println("execute deleteDeliveryMethod");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: deleteDeliveryMethod in service: ManageDeliveryMethodCRUDService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(managedeliverymethodcrudservice_service.deleteDeliveryMethod(
+			Integer.valueOf(deleteDeliveryMethod_id_t.getText())
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
 	public void manageItemsPrices() {
 		
 		System.out.println("execute manageItemsPrices");
@@ -8512,6 +10414,788 @@ public class PrototypeController implements Initializable {
 			//invoke op with parameters
 			//return value is primitive type, bind result to label.
 			String result = String.valueOf(salesmanagementsystemsystem_service.manageItemsPrices(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void createClientGroup() {
+		
+		System.out.println("execute createClientGroup");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: createClientGroup in service: ManageClientCRUDService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(manageclientcrudservice_service.createClientGroup(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void queryClientGroup() {
+		
+		System.out.println("execute queryClientGroup");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: queryClientGroup in service: ManageClientCRUDService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(manageclientcrudservice_service.queryClientGroup(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void modifyClientGroup() {
+		
+		System.out.println("execute modifyClientGroup");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: modifyClientGroup in service: ManageClientCRUDService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(manageclientcrudservice_service.modifyClientGroup(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void deleteClientGroup() {
+		
+		System.out.println("execute deleteClientGroup");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: deleteClientGroup in service: ManageClientCRUDService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(manageclientcrudservice_service.deleteClientGroup(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void orderTerminationAndSettlement() {
+		
+		System.out.println("execute orderTerminationAndSettlement");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: orderTerminationAndSettlement in service: TradingTerminationAndSettlementService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(tradingterminationandsettlementservice_service.orderTerminationAndSettlement(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void contractTerminationAndSettlement() {
+		
+		System.out.println("execute contractTerminationAndSettlement");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: contractTerminationAndSettlement in service: TradingTerminationAndSettlementService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(tradingterminationandsettlementservice_service.contractTerminationAndSettlement(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void payment() {
+		
+		System.out.println("execute payment");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: payment in service: TradingTerminationAndSettlementService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(tradingterminationandsettlementservice_service.payment(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void generateInvoice() {
+		
+		System.out.println("execute generateInvoice");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: generateInvoice in service: TradingTerminationAndSettlementService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(tradingterminationandsettlementservice_service.generateInvoice(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void generateBillOfLading() {
+		
+		System.out.println("execute generateBillOfLading");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: generateBillOfLading in service: DeliveryNotificationService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(deliverynotificationservice_service.generateBillOfLading(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void generateNotification() {
+		
+		System.out.println("execute generateNotification");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: generateNotification in service: DeliveryNotificationService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(deliverynotificationservice_service.generateNotification(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void typeChoice() {
+		
+		System.out.println("execute typeChoice");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: typeChoice in service: ExchangeProcessingService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(exchangeprocessingservice_service.typeChoice(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void cancelOrder() {
+		
+		System.out.println("execute cancelOrder");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: cancelOrder in service: ExchangeProcessingService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(exchangeprocessingservice_service.cancelOrder(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void regenerateBillOfLading() {
+		
+		System.out.println("execute regenerateBillOfLading");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: regenerateBillOfLading in service: ExchangeProcessingService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(exchangeprocessingservice_service.regenerateBillOfLading(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void regenerateNotification() {
+		
+		System.out.println("execute regenerateNotification");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: regenerateNotification in service: ExchangeProcessingService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(exchangeprocessingservice_service.regenerateNotification(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void makeNewPlan() {
+		
+		System.out.println("execute makeNewPlan");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: makeNewPlan in service: SalesPlanManagementService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(salesplanmanagementservice_service.makeNewPlan(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void addItemIntoPlan() {
+		
+		System.out.println("execute addItemIntoPlan");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: addItemIntoPlan in service: SalesPlanManagementService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(salesplanmanagementservice_service.addItemIntoPlan(
+			));	
+			Label l = new Label(result);
+			l.setPadding(new Insets(8, 8, 8, 8));
+			operation_return_pane.setContent(l);
+		    log.appendText(" -- success!\n");
+		    //set pre- and post-conditions text area color
+		    precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #7CFC00");
+		    //contract evaluation result
+		    precondition_pane.setText("Precondition: True");
+		    postcondition_pane.setText("Postcondition: True");
+		    
+		    
+		} catch (PreconditionException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (PostconditionException e) {
+			log.appendText(" -- failed!\n");
+			postcondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");	
+			postcondition_pane.setText("Postcondition: False");
+			postconditionUnSat();
+			
+		} catch (NumberFormatException e) {
+			log.appendText(" -- failed!\n");
+			precondition.setStyle("-fx-background-color:#000000; -fx-control-inner-background: #FF0000");
+			precondition_pane.setText("Precondition: False");	
+			preconditionUnSat();
+			
+		} catch (Exception e ) {		
+			if (e instanceof ThirdPartyServiceException)
+				thirdpartyServiceUnSat();
+		}
+	}
+	public void generatePlan() {
+		
+		System.out.println("execute generatePlan");
+		String time = String.format("%1$tH:%1$tM:%1$tS", System.currentTimeMillis());
+		log.appendText(time + " -- execute operation: generatePlan in service: SalesPlanManagementService ");
+		
+		try {
+			//invoke op with parameters
+			//return value is primitive type, bind result to label.
+			String result = String.valueOf(salesplanmanagementservice_service.generatePlan(
 			));	
 			Label l = new Label(result);
 			l.setPadding(new Insets(8, 8, 8, 8));
@@ -8605,6 +11289,12 @@ public class PrototypeController implements Initializable {
 	ManageBillOfLadingCRUDService managebillofladingcrudservice_service;
 	ManageProductCRUDService manageproductcrudservice_service;
 	SalesProcessingService salesprocessingservice_service;
+	DeliveryNotificationService deliverynotificationservice_service;
+	ExchangeProcessingService exchangeprocessingservice_service;
+	SalesPlanManagementService salesplanmanagementservice_service;
+	TradingTerminationAndSettlementService tradingterminationandsettlementservice_service;
+	ManageOrderMethodCRUDService manageordermethodcrudservice_service;
+	ManageDeliveryMethodCRUDService managedeliverymethodcrudservice_service;
 	
 	ClassInfo contracts;
 	ClassInfo client;
@@ -8613,11 +11303,13 @@ public class PrototypeController implements Initializable {
 	ClassInfo billoflading;
 	ClassInfo deliverynotification;
 	ClassInfo exchangenotification;
-	ClassInfo orderterm;
+	ClassInfo ordermethod;
 	ClassInfo clientgroup;
-	ClassInfo deliveryterm;
+	ClassInfo deliverymethod;
 	ClassInfo product;
 	ClassInfo orderlineproduct;
+	ClassInfo planlineproduct;
+	ClassInfo saleplan;
 		
 	@FXML
 	TitledPane object_statics;
@@ -8639,7 +11331,7 @@ public class PrototypeController implements Initializable {
 	Map<String, VBox> opInvariantPanel;
 	
 	//all textfiled or eumntity
-	TextField makeNewOrder_buyId_t;
+	TextField makeNewOrder_buyerId_t;
 	TextField addProduct_id_t;
 	TextField addProduct_quantity_t;
 	TextField generateContract_packing_t;
@@ -8676,37 +11368,19 @@ public class PrototypeController implements Initializable {
 	TextField modifyInvoice_effecitvedate_t;
 	TextField modifyInvoice_amount_t;
 	TextField deleteInvoice_id_t;
-	TextField createBillOfLading_id_t;
-	TextField createBillOfLading_consignee_t;
-	TextField createBillOfLading_commoditylist_t;
-	TextField createBillOfLading_contractobject_t;
-	TextField createBillOfLading_quantity_t;
-	TextField createBillOfLading_totalprice_t;
-	TextField createBillOfLading_deadlineforperformance_t;
-	TextField createBillOfLading_locationforperformance_t;
-	TextField createBillOfLading_methodforperformance_t;
-	TextField queryBillOfLading_id_t;
-	TextField modifyBillOfLading_id_t;
-	TextField modifyBillOfLading_consignee_t;
-	TextField modifyBillOfLading_commoditylist_t;
-	TextField modifyBillOfLading_contractobject_t;
-	TextField modifyBillOfLading_quantity_t;
-	TextField modifyBillOfLading_totalprice_t;
-	TextField modifyBillOfLading_deadlineforperformance_t;
-	TextField modifyBillOfLading_locationforperformance_t;
-	TextField modifyBillOfLading_methodforperformance_t;
-	TextField deleteBillOfLading_id_t;
 	TextField createClient_id_t;
 	TextField createClient_name_t;
 	TextField createClient_address_t;
 	TextField createClient_contact_t;
 	TextField createClient_phonenumber_t;
+	TextField createClient_groupId_t;
 	TextField queryClient_id_t;
 	TextField modifyClient_id_t;
 	TextField modifyClient_name_t;
 	TextField modifyClient_address_t;
 	TextField modifyClient_contact_t;
 	TextField modifyClient_phonenumber_t;
+	TextField modifyClient_groupId_t;
 	TextField deleteClient_id_t;
 	TextField createOrder_id_t;
 	TextField createOrder_iscompleted_t;
@@ -8726,6 +11400,34 @@ public class PrototypeController implements Initializable {
 	TextField modifyProduct_name_t;
 	TextField modifyProduct_price_t;
 	TextField deleteProduct_id_t;
+	TextField createBillOfLading_id_t;
+	TextField createBillOfLading_consignee_t;
+	TextField createBillOfLading_commoditylist_t;
+	TextField createBillOfLading_totalprice_t;
+	TextField createBillOfLading_deadlineforperformance_t;
+	TextField createBillOfLading_locationforperformance_t;
+	TextField createBillOfLading_methodforperformance_t;
+	TextField queryBillOfLading_id_t;
+	TextField modifyBillOfLading_id_t;
+	TextField modifyBillOfLading_consignee_t;
+	TextField modifyBillOfLading_commoditylist_t;
+	TextField modifyBillOfLading_totalprice_t;
+	TextField modifyBillOfLading_deadlineforperformance_t;
+	TextField modifyBillOfLading_locationforperformance_t;
+	TextField modifyBillOfLading_methodforperformance_t;
+	TextField deleteBillOfLading_id_t;
+	TextField createOrderMethod_id_t;
+	TextField createOrderMethod_name_t;
+	TextField queryOrderMethod_id_t;
+	TextField modifyOrderMethod_id_t;
+	TextField modifyOrderMethod_name_t;
+	TextField deleteOrderMethod_id_t;
+	TextField createDeliveryMethod_id_t;
+	TextField createDeliveryMethod_name_t;
+	TextField queryDeliveryMethod_id_t;
+	TextField modifyDeliveryMethod_id_t;
+	TextField modifyDeliveryMethod_name_t;
+	TextField deleteDeliveryMethod_id_t;
 	
 	HashMap<String, String> definitions_map;
 	HashMap<String, String> preconditions_map;

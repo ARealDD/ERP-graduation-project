@@ -43,7 +43,7 @@ public class SalesProcessingServiceImpl implements SalesProcessingService, Seria
 	
 	/* Generate buiness logic according to functional requirement */
 	@SuppressWarnings("unchecked")
-	public boolean makeNewOrder(int buyId) throws PreconditionException, PostconditionException, ThirdPartyServiceException {
+	public boolean makeNewOrder(int buyerId) throws PreconditionException, PostconditionException, ThirdPartyServiceException {
 		
 		
 		/* Code generated for contract definition */
@@ -52,7 +52,7 @@ public class SalesProcessingServiceImpl implements SalesProcessingService, Seria
 		//no nested iterator --  iterator: any previous:any
 		for (Client bu : (List<Client>)EntityManager.getAllInstancesOf("Client"))
 		{
-			if (bu.getId() == buyId)
+			if (bu.getId() == buyerId)
 			{
 				buyer = bu;
 				break;
@@ -185,7 +185,7 @@ public class SalesProcessingServiceImpl implements SalesProcessingService, Seria
 		/* previous state in post-condition*/
 
 		/* check precondition */
-		if (StandardOPs.oclIsundefined(currentOrder) == false && currentOrder.getIsComplete() == false) 
+		if (StandardOPs.oclIsundefined(currentOrder) == false && currentOrder.getIsCompleted() == false) 
 		{ 
 			/* Logic here */
 			Contracts con = null;
@@ -261,6 +261,9 @@ public class SalesProcessingServiceImpl implements SalesProcessingService, Seria
 			}
 			
 		
+			//return primitive type
+			refresh();				
+			return true;
 		}
 		else
 		{
@@ -288,6 +291,9 @@ public class SalesProcessingServiceImpl implements SalesProcessingService, Seria
 			}
 			
 		
+			//return primitive type
+			refresh();				
+			return true;
 		}
 		else
 		{

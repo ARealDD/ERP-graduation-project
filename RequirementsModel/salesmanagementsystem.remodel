@@ -230,11 +230,8 @@ UseCaseModel SalesManagementSystem {
 
 		[Operation]
 		salesPlanManagement()
-		exchangeNotification()
 		manageItemsPrices()
 		postingOfAccount()
-		contractTerminationAndSettlement()
-		orderTerminationAndSettlement()
 		salesCommissionManagement()
 
 	}
@@ -293,9 +290,9 @@ UseCaseModel SalesManagementSystem {
 	Service ManageBillOfLadingCRUDService {
 
 		[Operation]
-		createBillOfLading(id, consignee, commoditylist, contractobject, quantity, totalprice, deadlineforperformance, locationforperformance, methodforperformance)
+		createBillOfLading(id, consignee, commoditylist, totalprice, deadlineforperformance, locationforperformance, methodforperformance)
 		queryBillOfLading(id)
-		modifyBillOfLading(id, consignee, commoditylist, contractobject, quantity, totalprice, deadlineforperformance, locationforperformance, methodforperformance)
+		modifyBillOfLading(id, consignee, commoditylist, totalprice, deadlineforperformance, locationforperformance, methodforperformance)
 		deleteBillOfLading(id)
 
 	}
@@ -359,6 +356,26 @@ UseCaseModel SalesManagementSystem {
 		orderTerminationAndSettlement()
 		payment()
 		generateInvoice()
+
+	}
+
+	Service ManageOrderMethodCRUDService {
+
+		[Operation]
+		createOrderMethod(id, name)
+		queryOrderMethod(id)
+		modifyOrderMethod(id, name)
+		deleteOrderMethod(id)
+
+	}
+
+	Service ManageDeliveryMethodCRUDService {
+
+		[Operation]
+		createDeliveryMethod(id, name)
+		queryDeliveryMethod(id)
+		modifyDeliveryMethod(id, name)
+		deleteDeliveryMethod(id)
 
 	}
 
@@ -436,7 +453,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract SalesManagementSystemSystem::salesPlanManagement() : Boolean {
@@ -444,31 +461,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
-	}
-
-	Contract SalesManagementSystemSystem::deliveryNotification() : Boolean {
-
-		precondition:
-			true
-		postcondition:
-			true
-	}
-
-	Contract SalesManagementSystemSystem::exchangeNotification() : Boolean {
-
-		precondition:
-			true
-		postcondition:
-			true
-	}
-
-	Contract SalesManagementSystemSystem::itemsPricesMaintenance() : Boolean {
-
-		precondition:
-			true
-		postcondition:
-			true
+			result = true
 	}
 
 	Contract SalesManagementSystemSystem::postingOfAccount() : Boolean {
@@ -476,23 +469,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
-	}
-
-	Contract SalesManagementSystemSystem::contractTerminationAndSettlement() : Boolean {
-
-		precondition:
-			true
-		postcondition:
-			true
-	}
-
-	Contract SalesManagementSystemSystem::orderTerminationAndSettlement() : Boolean {
-
-		precondition:
-			true
-		postcondition:
-			true
+			result = true
 	}
 
 	Contract SalesManagementSystemSystem::salesCommissionManagement() : Boolean {
@@ -500,7 +477,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract SalesProcessingService::authorization() : Boolean {
@@ -684,96 +661,6 @@ UseCaseModel SalesManagementSystem {
 		/* postcondition: the instance invoice was deleted from the system */
 		postcondition:
 			Invoice.allInstance()->excludes(invoice) and
-			result = true
-	}
-
-	// entity create operation 
-	Contract  ManageBillOfLadingCRUDService::createBillOfLading(id : Integer, consignee : String, commoditylist : String, contractobject : String, quantity : Real, totalprice : Real, deadlineforperformance : String, locationforperformance : String, methodforperformance : String) : Boolean {
-
-		/* definition: find specific BillOfLading instance by id */
-		definition:
-			billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)
-
-		/* precondition: the instance billoflading was not found in the system */
-		precondition:
-			billoflading.oclIsUndefined() = true
-
-		/* postcondition: 
-		 * A BillOfLading instance bil was created.
-		 * all properties of bil became the same values as inputs.
-		 */
-		postcondition:
-			let bil:BillOfLading in
-			bil.oclIsNew() and
-			bil.Id = id and
-			bil.Consignee = consignee and
-			bil.CommodityList = commoditylist and
-			bil.ContractObject = contractobject and
-			bil.Quantity = quantity and
-			bil.TotalPrice = totalprice and
-			bil.DeadlineForPerformance = deadlineforperformance and
-			bil.LocationForPerformance = locationforperformance and
-			bil.MethodForPerformance = methodforperformance and
-			BillOfLading.allInstance()->includes(bil) and
-			result = true
-	}
-
-	// entity query operation 
-	Contract  ManageBillOfLadingCRUDService::queryBillOfLading(id : Integer) : BillOfLading {
-
-		/* definition: find specific BillOfLading instance by id */
-		definition:
-			billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)
-
-		/* precondition: the instance billoflading was found in the system */
-		precondition:
-			billoflading.oclIsUndefined() = false
-
-		/* postcondition: return found the instance billoflading */
-		postcondition:
-			result = billoflading
-	}
-
-	// entity modify operation 
-	Contract  ManageBillOfLadingCRUDService::modifyBillOfLading(id : Integer, consignee : String, commoditylist : String, contractobject : String, quantity : Real, totalprice : Real, deadlineforperformance : String, locationforperformance : String, methodforperformance : String) : Boolean {
-
-		/* definition: find specific BillOfLading instance by id */
-		definition:
-			billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)
-
-		/* precondition: the instance billoflading was found in the system */
-		precondition:
-			billoflading.oclIsUndefined() = false
-
-		/* postcondition: all properties of bil became the same values as inputs. */
-		postcondition:
-			billoflading.Id = id and
-			billoflading.Consignee = consignee and
-			billoflading.CommodityList = commoditylist and
-			billoflading.ContractObject = contractobject and
-			billoflading.Quantity = quantity and
-			billoflading.TotalPrice = totalprice and
-			billoflading.DeadlineForPerformance = deadlineforperformance and
-			billoflading.LocationForPerformance = locationforperformance and
-			billoflading.MethodForPerformance = methodforperformance and
-			result = true
-	}
-
-	// entity delete operation 
-	Contract  ManageBillOfLadingCRUDService::deleteBillOfLading(id : Integer) : Boolean {
-
-		/* definition: find specific BillOfLading instance by id */
-		definition:
-			billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)
-
-		/* precondition: the instance billoflading was found in the system */
-		precondition:
-			billoflading.oclIsUndefined() = false and
-			BillOfLading.allInstance()->includes(billoflading)
-
-		/* postcondition: the instance billoflading was deleted from the system */
-		postcondition:
-			BillOfLading.allInstance()->excludes(billoflading) and
 			result = true
 	}
 
@@ -1017,12 +904,250 @@ UseCaseModel SalesManagementSystem {
 			result = true
 	}
 
+	// entity create operation
+	Contract  ManageBillOfLadingCRUDService::createBillOfLading(id : Integer, consignee : String, commoditylist : String, totalprice : Real, deadlineforperformance : String, locationforperformance : String, methodforperformance : String) : Boolean {
+
+		/* definition: find specific BillOfLading instance by id */
+		definition:
+			billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)
+
+		/* precondition: the instance billoflading was not found in the system */
+		precondition:
+			billoflading.oclIsUndefined() = true
+
+		/* postcondition: 
+		 * A BillOfLading instance bil was created.
+		 * all properties of bil became the same values as inputs.
+		 */
+		postcondition:
+			let bil:BillOfLading in
+			bil.oclIsNew() and
+			bil.Id = id and
+			bil.Consignee = consignee and
+			bil.CommodityList = commoditylist and
+			bil.TotalPrice = totalprice and
+			bil.DeadlineForPerformance = deadlineforperformance and
+			bil.LocationForPerformance = locationforperformance and
+			bil.MethodForPerformance = methodforperformance and
+			BillOfLading.allInstance()->includes(bil) and
+			result = true
+	}
+
+	// entity query operation 
+	Contract  ManageBillOfLadingCRUDService::queryBillOfLading(id : Integer) : BillOfLading {
+
+		/* definition: find specific BillOfLading instance by id */
+		definition:
+			billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)
+
+		/* precondition: the instance billoflading was found in the system */
+		precondition:
+			billoflading.oclIsUndefined() = false
+
+		/* postcondition: return found the instance billoflading */
+		postcondition:
+			result = billoflading
+	}
+
+	// entity modify operation 
+	Contract  ManageBillOfLadingCRUDService::modifyBillOfLading(id : Integer, consignee : String, commoditylist : String, totalprice : Real, deadlineforperformance : String, locationforperformance : String, methodforperformance : String) : Boolean {
+
+		/* definition: find specific BillOfLading instance by id */
+		definition:
+			billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)
+
+		/* precondition: the instance billoflading was found in the system */
+		precondition:
+			billoflading.oclIsUndefined() = false
+
+		/* postcondition: all properties of bil became the same values as inputs. */
+		postcondition:
+			billoflading.Id = id and
+			billoflading.Consignee = consignee and
+			billoflading.CommodityList = commoditylist and
+			billoflading.TotalPrice = totalprice and
+			billoflading.DeadlineForPerformance = deadlineforperformance and
+			billoflading.LocationForPerformance = locationforperformance and
+			billoflading.MethodForPerformance = methodforperformance and
+			result = true
+	}
+
+	// entity delete operation 
+	Contract  ManageBillOfLadingCRUDService::deleteBillOfLading(id : Integer) : Boolean {
+
+		/* definition: find specific BillOfLading instance by id */
+		definition:
+			billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)
+
+		/* precondition: the instance billoflading was found in the system */
+		precondition:
+			billoflading.oclIsUndefined() = false and
+			BillOfLading.allInstance()->includes(billoflading)
+
+		/* postcondition: the instance billoflading was deleted from the system */
+		postcondition:
+			BillOfLading.allInstance()->excludes(billoflading) and
+			result = true
+	}
+
+	// entity create operation 
+	Contract  ManageOrderMethodCRUDService::createOrderMethod(id : Integer, name : String) : Boolean {
+
+		/* definition: find specific OrderMethod instance by id */
+		definition:
+			ordermethod:OrderMethod = OrderMethod.allInstance()->any(ord:OrderMethod | ord.Id = id)
+
+		/* precondition: the instance ordermethod was not found in the system */
+		precondition:
+			ordermethod.oclIsUndefined() = true
+
+		/* postcondition: 
+		 * A OrderMethod instance ord was created.
+		 * all properties of ord became the same values as inputs.
+		 */
+		postcondition:
+			let ord:OrderMethod in
+			ord.oclIsNew() and
+			ord.Id = id and
+			ord.Name = name and
+			OrderMethod.allInstance()->includes(ord) and
+			result = true
+	}
+
+	// entity query operation 
+	Contract  ManageOrderMethodCRUDService::queryOrderMethod(id : Integer) : OrderMethod {
+
+		/* definition: find specific OrderMethod instance by id */
+		definition:
+			ordermethod:OrderMethod = OrderMethod.allInstance()->any(ord:OrderMethod | ord.Id = id)
+
+		/* precondition: the instance ordermethod was found in the system */
+		precondition:
+			ordermethod.oclIsUndefined() = false
+
+		/* postcondition: return found the instance ordermethod */
+		postcondition:
+			result = ordermethod
+	}
+
+	// entity modify operation 
+	Contract  ManageOrderMethodCRUDService::modifyOrderMethod(id : Integer, name : String) : Boolean {
+
+		/* definition: find specific OrderMethod instance by id */
+		definition:
+			ordermethod:OrderMethod = OrderMethod.allInstance()->any(ord:OrderMethod | ord.Id = id)
+
+		/* precondition: the instance ordermethod was found in the system */
+		precondition:
+			ordermethod.oclIsUndefined() = false
+
+		/* postcondition: all properties of ord became the same values as inputs. */
+		postcondition:
+			ordermethod.Id = id and
+			ordermethod.Name = name and
+			result = true
+	}
+
+	// entity delete operation 
+	Contract  ManageOrderMethodCRUDService::deleteOrderMethod(id : Integer) : Boolean {
+
+		/* definition: find specific OrderMethod instance by id */
+		definition:
+			ordermethod:OrderMethod = OrderMethod.allInstance()->any(ord:OrderMethod | ord.Id = id)
+
+		/* precondition: the instance ordermethod was found in the system */
+		precondition:
+			ordermethod.oclIsUndefined() = false and
+			OrderMethod.allInstance()->includes(ordermethod)
+
+		/* postcondition: the instance ordermethod was deleted from the system */
+		postcondition:
+			OrderMethod.allInstance()->excludes(ordermethod) and
+			result = true
+	}
+
+	// entity create operation 
+	Contract  ManageDeliveryMethodCRUDService::createDeliveryMethod(id : Integer, name : String) : Boolean {
+
+		/* definition: find specific DeliveryMethod instance by id */
+		definition:
+			deliverymethod:DeliveryMethod = DeliveryMethod.allInstance()->any(del:DeliveryMethod | del.Id = id)
+
+		/* precondition: the instance deliverymethod was not found in the system */
+		precondition:
+			deliverymethod.oclIsUndefined() = true
+
+		/* postcondition: 
+		 * A DeliveryMethod instance del was created.
+		 * all properties of del became the same values as inputs.
+		 */
+		postcondition:
+			let del:DeliveryMethod in
+			del.oclIsNew() and
+			del.Id = id and
+			del.Name = name and
+			DeliveryMethod.allInstance()->includes(del) and
+			result = true
+	}
+
+	// entity query operation 
+	Contract  ManageDeliveryMethodCRUDService::queryDeliveryMethod(id : Integer) : DeliveryMethod {
+
+		/* definition: find specific DeliveryMethod instance by id */
+		definition:
+			deliverymethod:DeliveryMethod = DeliveryMethod.allInstance()->any(del:DeliveryMethod | del.Id = id)
+
+		/* precondition: the instance deliverymethod was found in the system */
+		precondition:
+			deliverymethod.oclIsUndefined() = false
+
+		/* postcondition: return found the instance deliverymethod */
+		postcondition:
+			result = deliverymethod
+	}
+
+	// entity modify operation 
+	Contract  ManageDeliveryMethodCRUDService::modifyDeliveryMethod(id : Integer, name : String) : Boolean {
+
+		/* definition: find specific DeliveryMethod instance by id */
+		definition:
+			deliverymethod:DeliveryMethod = DeliveryMethod.allInstance()->any(del:DeliveryMethod | del.Id = id)
+
+		/* precondition: the instance deliverymethod was found in the system */
+		precondition:
+			deliverymethod.oclIsUndefined() = false
+
+		/* postcondition: all properties of del became the same values as inputs. */
+		postcondition:
+			deliverymethod.Id = id and
+			deliverymethod.Name = name and
+			result = true
+	}
+
+	// entity delete operation 
+	Contract  ManageDeliveryMethodCRUDService::deleteDeliveryMethod(id : Integer) : Boolean {
+
+		/* definition: find specific DeliveryMethod instance by id */
+		definition:
+			deliverymethod:DeliveryMethod = DeliveryMethod.allInstance()->any(del:DeliveryMethod | del.Id = id)
+
+		/* precondition: the instance deliverymethod was found in the system */
+		precondition:
+			deliverymethod.oclIsUndefined() = false and
+			DeliveryMethod.allInstance()->includes(deliverymethod)
+
+		/* postcondition: the instance deliverymethod was deleted from the system */
+		postcondition:
+			DeliveryMethod.allInstance()->excludes(deliverymethod) and
+			result = true
+	}
+
 	Contract SalesManagementSystemSystem::manageItemsPrices() : Boolean {
 
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract ManageClientCRUDService::createClientGroup() : Boolean {
@@ -1030,7 +1155,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract ManageClientCRUDService::queryClientGroup() : Boolean {
@@ -1038,7 +1163,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract ManageClientCRUDService::modifyClientGroup() : Boolean {
@@ -1046,7 +1171,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract ManageClientCRUDService::deleteClientGroup() : Boolean {
@@ -1054,7 +1179,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract TradingTerminationAndSettlementService::orderTerminationAndSettlement() : Boolean {
@@ -1062,7 +1187,15 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
+			result = true
+	}
+
+	Contract TradingTerminationAndSettlementService::contractTerminationAndSettlement() : Boolean {
+
+		precondition:
 			true
+		postcondition:
+			result = true
 	}
 
 	Contract TradingTerminationAndSettlementService::payment() : Boolean {
@@ -1070,7 +1203,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract TradingTerminationAndSettlementService::generateInvoice() : Boolean {
@@ -1078,7 +1211,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract DeliveryNotificationService::generateBillOfLading() : Boolean {
@@ -1086,7 +1219,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract DeliveryNotificationService::generateNotification() : Boolean {
@@ -1094,7 +1227,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract ExchangeProcessingService::typeChoice() : Boolean {
@@ -1102,7 +1235,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract ExchangeProcessingService::cancelOrder() : Boolean {
@@ -1110,7 +1243,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract ExchangeProcessingService::regenerateBillOfLading() : Boolean {
@@ -1118,7 +1251,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract ExchangeProcessingService::regenerateNotification() : Boolean {
@@ -1126,7 +1259,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract SalesPlanManagementService::makeNewPlan() : Boolean {
@@ -1134,7 +1267,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract SalesPlanManagementService::addItemIntoPlan() : Boolean {
@@ -1142,7 +1275,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract SalesPlanManagementService::generatePlan() : Boolean {
@@ -1150,7 +1283,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			true
+			result = true
 	}
 
 }

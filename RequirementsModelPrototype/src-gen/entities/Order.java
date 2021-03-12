@@ -21,7 +21,7 @@ public class Order implements Serializable {
 	private BillOfLading BillOfLadingOfOrder; 
 	private DeliveryNotification DN; 
 	private List<ExchangeNotification> EN = new LinkedList<ExchangeNotification>(); 
-	private OrderTerm OT; 
+	private OrderMethod OT; 
 	private Client Buyer; 
 	private List<OrderLineProduct> ContainedOrderLine = new LinkedList<OrderLineProduct>(); 
 	private Contracts ContractOfOrder; 
@@ -82,12 +82,12 @@ public class Order implements Serializable {
 	public void deleteEN(ExchangeNotification exchangenotification) {
 		this.EN.remove(exchangenotification);
 	}
-	public OrderTerm getOT() {
+	public OrderMethod getOT() {
 		return OT;
 	}	
 	
-	public void setOT(OrderTerm orderterm) {
-		this.OT = orderterm;
+	public void setOT(OrderMethod ordermethod) {
+		this.OT = ordermethod;
 	}			
 	public Client getBuyer() {
 		return Buyer;

@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public interface SalesProcessingService {
 
 	/* all system operations of the use case*/
-	boolean makeNewOrder(int buyId) throws PreconditionException, PostconditionException, ThirdPartyServiceException;
+	boolean makeNewOrder(int buyerId) throws PreconditionException, PostconditionException, ThirdPartyServiceException;
 	boolean addProduct(int id, int quantity) throws PreconditionException, PostconditionException, ThirdPartyServiceException;
 	boolean generateContract(String packing, LocalDate dateOfShipment, String portOfShipment, String portOfDestination, String insurance, LocalDate effectiveDate) throws PreconditionException, PostconditionException, ThirdPartyServiceException;
 	boolean authorization() throws PreconditionException, PostconditionException, ThirdPartyServiceException;

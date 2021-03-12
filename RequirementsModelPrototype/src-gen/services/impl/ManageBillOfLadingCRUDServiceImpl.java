@@ -43,7 +43,7 @@ public class ManageBillOfLadingCRUDServiceImpl implements ManageBillOfLadingCRUD
 	
 	/* Generate buiness logic according to functional requirement */
 	@SuppressWarnings("unchecked")
-	public boolean createBillOfLading(int id, String consignee, String commoditylist, String contractobject, float quantity, float totalprice, String deadlineforperformance, String locationforperformance, String methodforperformance) throws PreconditionException, PostconditionException, ThirdPartyServiceException {
+	public boolean createBillOfLading(int id, String consignee, String commoditylist, float totalprice, String deadlineforperformance, String locationforperformance, String methodforperformance) throws PreconditionException, PostconditionException, ThirdPartyServiceException {
 		
 		
 		/* Code generated for contract definition */
@@ -71,8 +71,6 @@ public class ManageBillOfLadingCRUDServiceImpl implements ManageBillOfLadingCRUD
 			bil.setId(id);
 			bil.setConsignee(consignee);
 			bil.setCommodityList(commoditylist);
-			bil.setContractObject(contractobject);
-			bil.setQuantity(quantity);
 			bil.setTotalPrice(totalprice);
 			bil.setDeadlineForPerformance(deadlineforperformance);
 			bil.setLocationForPerformance(locationforperformance);
@@ -88,10 +86,6 @@ public class ManageBillOfLadingCRUDServiceImpl implements ManageBillOfLadingCRUD
 			bil.getConsignee() == consignee
 			 && 
 			bil.getCommodityList() == commoditylist
-			 && 
-			bil.getContractObject() == contractobject
-			 && 
-			bil.getQuantity() == quantity
 			 && 
 			bil.getTotalPrice() == totalprice
 			 && 
@@ -116,7 +110,7 @@ public class ManageBillOfLadingCRUDServiceImpl implements ManageBillOfLadingCRUD
 		{
 			throw new PreconditionException();
 		}
-		//string parameters: [consignee, commoditylist, contractobject, deadlineforperformance, locationforperformance, methodforperformance]
+		//string parameters: [consignee, commoditylist, deadlineforperformance, locationforperformance, methodforperformance]
 		//all relevant vars : bil
 		//all relevant entities : BillOfLading
 	} 
@@ -165,7 +159,7 @@ public class ManageBillOfLadingCRUDServiceImpl implements ManageBillOfLadingCRUD
 	 
 	
 	@SuppressWarnings("unchecked")
-	public boolean modifyBillOfLading(int id, String consignee, String commoditylist, String contractobject, float quantity, float totalprice, String deadlineforperformance, String locationforperformance, String methodforperformance) throws PreconditionException, PostconditionException, ThirdPartyServiceException {
+	public boolean modifyBillOfLading(int id, String consignee, String commoditylist, float totalprice, String deadlineforperformance, String locationforperformance, String methodforperformance) throws PreconditionException, PostconditionException, ThirdPartyServiceException {
 		
 		
 		/* Code generated for contract definition */
@@ -191,8 +185,6 @@ public class ManageBillOfLadingCRUDServiceImpl implements ManageBillOfLadingCRUD
 			billoflading.setId(id);
 			billoflading.setConsignee(consignee);
 			billoflading.setCommodityList(commoditylist);
-			billoflading.setContractObject(contractobject);
-			billoflading.setQuantity(quantity);
 			billoflading.setTotalPrice(totalprice);
 			billoflading.setDeadlineForPerformance(deadlineforperformance);
 			billoflading.setLocationForPerformance(locationforperformance);
@@ -206,10 +198,6 @@ public class ManageBillOfLadingCRUDServiceImpl implements ManageBillOfLadingCRUD
 			billoflading.getConsignee() == consignee
 			 && 
 			billoflading.getCommodityList() == commoditylist
-			 && 
-			billoflading.getContractObject() == contractobject
-			 && 
-			billoflading.getQuantity() == quantity
 			 && 
 			billoflading.getTotalPrice() == totalprice
 			 && 
@@ -232,7 +220,7 @@ public class ManageBillOfLadingCRUDServiceImpl implements ManageBillOfLadingCRUD
 		{
 			throw new PreconditionException();
 		}
-		//string parameters: [consignee, commoditylist, contractobject, deadlineforperformance, locationforperformance, methodforperformance]
+		//string parameters: [consignee, commoditylist, deadlineforperformance, locationforperformance, methodforperformance]
 		//all relevant vars : billoflading
 		//all relevant entities : BillOfLading
 	} 

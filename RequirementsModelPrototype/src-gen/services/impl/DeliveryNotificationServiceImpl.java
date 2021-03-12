@@ -15,12 +15,17 @@ import java.util.function.BooleanSupplier;
 import org.apache.commons.lang3.SerializationUtils;
 import java.util.Iterator;
 
-public class ThirdPartyServicesImpl implements ThirdPartyServices, Serializable {
+public class DeliveryNotificationServiceImpl implements DeliveryNotificationService, Serializable {
 	
 	
 	public static Map<String, List<String>> opINVRelatedEntity = new HashMap<String, List<String>>();
 	
 	
+	ThirdPartyServices services;
+			
+	public DeliveryNotificationServiceImpl() {
+		services = new ThirdPartyServicesImpl();
+	}
 
 	
 	//Shared variable from system services
@@ -38,7 +43,37 @@ public class ThirdPartyServicesImpl implements ThirdPartyServices, Serializable 
 	
 	/* Generate buiness logic according to functional requirement */
 	@SuppressWarnings("unchecked")
-	public boolean authorizationProcessing() throws PreconditionException, PostconditionException, ThirdPartyServiceException {
+	public boolean generateBillOfLading() throws PreconditionException, PostconditionException, ThirdPartyServiceException {
+		
+		
+		/* previous state in post-condition*/
+
+		/* check precondition */
+		if (true) 
+		{ 
+			/* Logic here */
+			
+			
+			refresh();
+			// post-condition checking
+			if (!(true)) {
+				throw new PostconditionException();
+			}
+			
+		
+			//return primitive type
+			refresh();				
+			return true;
+		}
+		else
+		{
+			throw new PreconditionException();
+		}
+	} 
+	 
+	
+	@SuppressWarnings("unchecked")
+	public boolean generateNotification() throws PreconditionException, PostconditionException, ThirdPartyServiceException {
 		
 		
 		/* previous state in post-condition*/

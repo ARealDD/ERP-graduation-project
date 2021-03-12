@@ -42,6 +42,18 @@ public class SalesManagementSystemSystemImpl implements SalesManagementSystemSys
 				.getAllInstancesOf("ManageProductCRUDService").get(0);
 		SalesProcessingService salesprocessingservice_service = (SalesProcessingService) ServiceManager
 				.getAllInstancesOf("SalesProcessingService").get(0);
+		DeliveryNotificationService deliverynotificationservice_service = (DeliveryNotificationService) ServiceManager
+				.getAllInstancesOf("DeliveryNotificationService").get(0);
+		ExchangeProcessingService exchangeprocessingservice_service = (ExchangeProcessingService) ServiceManager
+				.getAllInstancesOf("ExchangeProcessingService").get(0);
+		SalesPlanManagementService salesplanmanagementservice_service = (SalesPlanManagementService) ServiceManager
+				.getAllInstancesOf("SalesPlanManagementService").get(0);
+		TradingTerminationAndSettlementService tradingterminationandsettlementservice_service = (TradingTerminationAndSettlementService) ServiceManager
+				.getAllInstancesOf("TradingTerminationAndSettlementService").get(0);
+		ManageOrderMethodCRUDService manageordermethodcrudservice_service = (ManageOrderMethodCRUDService) ServiceManager
+				.getAllInstancesOf("ManageOrderMethodCRUDService").get(0);
+		ManageDeliveryMethodCRUDService managedeliverymethodcrudservice_service = (ManageDeliveryMethodCRUDService) ServiceManager
+				.getAllInstancesOf("ManageDeliveryMethodCRUDService").get(0);
 	}			
 	
 	/* Generate buiness logic according to functional requirement */
@@ -64,60 +76,9 @@ public class SalesManagementSystemSystemImpl implements SalesManagementSystemSys
 			}
 			
 		
-		}
-		else
-		{
-			throw new PreconditionException();
-		}
-	} 
-	 
-	
-	@SuppressWarnings("unchecked")
-	public boolean deliveryNotification() throws PreconditionException, PostconditionException, ThirdPartyServiceException {
-		
-		
-		/* previous state in post-condition*/
-
-		/* check precondition */
-		if (true) 
-		{ 
-			/* Logic here */
-			
-			
-			refresh();
-			// post-condition checking
-			if (!(true)) {
-				throw new PostconditionException();
-			}
-			
-		
-		}
-		else
-		{
-			throw new PreconditionException();
-		}
-	} 
-	 
-	
-	@SuppressWarnings("unchecked")
-	public boolean exchangeNotification() throws PreconditionException, PostconditionException, ThirdPartyServiceException {
-		
-		
-		/* previous state in post-condition*/
-
-		/* check precondition */
-		if (true) 
-		{ 
-			/* Logic here */
-			
-			
-			refresh();
-			// post-condition checking
-			if (!(true)) {
-				throw new PostconditionException();
-			}
-			
-		
+			//return primitive type
+			refresh();				
+			return true;
 		}
 		else
 		{
@@ -145,6 +106,9 @@ public class SalesManagementSystemSystemImpl implements SalesManagementSystemSys
 			}
 			
 		
+			//return primitive type
+			refresh();				
+			return true;
 		}
 		else
 		{
@@ -172,60 +136,9 @@ public class SalesManagementSystemSystemImpl implements SalesManagementSystemSys
 			}
 			
 		
-		}
-		else
-		{
-			throw new PreconditionException();
-		}
-	} 
-	 
-	
-	@SuppressWarnings("unchecked")
-	public boolean contractTerminationAndSettlement() throws PreconditionException, PostconditionException, ThirdPartyServiceException {
-		
-		
-		/* previous state in post-condition*/
-
-		/* check precondition */
-		if (true) 
-		{ 
-			/* Logic here */
-			
-			
-			refresh();
-			// post-condition checking
-			if (!(true)) {
-				throw new PostconditionException();
-			}
-			
-		
-		}
-		else
-		{
-			throw new PreconditionException();
-		}
-	} 
-	 
-	
-	@SuppressWarnings("unchecked")
-	public boolean orderTerminationAndSettlement() throws PreconditionException, PostconditionException, ThirdPartyServiceException {
-		
-		
-		/* previous state in post-condition*/
-
-		/* check precondition */
-		if (true) 
-		{ 
-			/* Logic here */
-			
-			
-			refresh();
-			// post-condition checking
-			if (!(true)) {
-				throw new PostconditionException();
-			}
-			
-		
+			//return primitive type
+			refresh();				
+			return true;
 		}
 		else
 		{
@@ -253,6 +166,9 @@ public class SalesManagementSystemSystemImpl implements SalesManagementSystemSys
 			}
 			
 		
+			//return primitive type
+			refresh();				
+			return true;
 		}
 		else
 		{

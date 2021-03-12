@@ -9,12 +9,8 @@ public interface SalesManagementSystemSystem {
 
 	/* all system operations of the use case*/
 	boolean salesPlanManagement() throws PreconditionException, PostconditionException, ThirdPartyServiceException;
-	boolean deliveryNotification() throws PreconditionException, PostconditionException, ThirdPartyServiceException;
-	boolean exchangeNotification() throws PreconditionException, PostconditionException, ThirdPartyServiceException;
 	boolean manageItemsPrices() throws PreconditionException, PostconditionException, ThirdPartyServiceException;
 	boolean postingOfAccount() throws PreconditionException, PostconditionException, ThirdPartyServiceException;
-	boolean contractTerminationAndSettlement() throws PreconditionException, PostconditionException, ThirdPartyServiceException;
-	boolean orderTerminationAndSettlement() throws PreconditionException, PostconditionException, ThirdPartyServiceException;
 	boolean salesCommissionManagement() throws PreconditionException, PostconditionException, ThirdPartyServiceException;
 	
 	/* all get and set functions for temp property*/
