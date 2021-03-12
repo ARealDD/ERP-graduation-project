@@ -1,16 +1,16 @@
 UseCaseModel SalesManagementSystem {
 
-	UC::orderManagement
-	UC::contractManagement relatedService(ContractManagementService)
-	UC::productManagement relatedService(ProductManagementService)
-	UC::clientInformationManagement relatedService(ClientManagementService)
+	UC::manageOrder
+	UC::manageContract
+	UC::manageProduct
+	UC::manageClient
 	UC::salesCommissionManagement()
 	UC::salesProcessing definedBySSD(SalesProcessingSSD) relatedService(SalesProcessingService)
 	UC::salesPlanManagement()
 	UC::deliveryNotification()
 	UC::exchangeNotification()
-	UC::itemsPricesMaintenance()
-	UC::invoiceManagement()
+	UC::manageItemsPrices()
+	UC::manageInvoice()
 	UC::postingOfAccount()
 	UC::contractTerminationAndSettlement()
 	UC::orderTerminationAndSettlement()
@@ -22,23 +22,23 @@ UseCaseModel SalesManagementSystem {
 	}
 
 	Actor FinancialStaff("财务职员") {
-		itemsPricesMaintenance
-		invoiceManagement
+		manageItemsPrices
+		manageInvoice
 		postingOfAccount
 		orderTerminationAndSettlement
 		contractTerminationAndSettlement
 	}
 
 	Actor DepartmentManager("部门经理") {
-		clientInformationManagement
+		manageClient
 		salesCommissionManagement
 		salesPlanManagement
 	}
 
 	Actor Administrator("系统管理员") {
-		orderManagement
-		contractManagement
-		productManagement
+		manageOrder
+		manageContract
+		manageProduct
 	}
 
 	Interaction SalesProcessingSSD {
@@ -103,9 +103,8 @@ UseCaseModel SalesManagementSystem {
 		salesPlanManagement()
 		deliveryNotification()
 		exchangeNotification()
-		itemsPricesMaintenance()
+		manageItemsPrices()
 		postingOfAccount()
-		invoiceManagement()
 		contractTerminationAndSettlement()
 		orderTerminationAndSettlement()
 		salesCommissionManagement()
@@ -119,13 +118,63 @@ UseCaseModel SalesManagementSystem {
 
 	}
 
-	Service ContractManagementService {
+	Service ManageContractsCRUDService {
 
 		[Operation]
-		createContract(id, effectiveDate, buyer, quantity, commodity, unitPrice, packing, dateOfShipment, portOfShipment, portOfDestination, insurance)
-		modifyContract(id, effectiveDate, buyer, quantity, commodity, unitPrice, packing, dateOfShipment, portOfShipment, portOfDestination, insurance)
-		queryContract(id)
-		deleteContract(id)
+		createContracts(id, buyer, packing, dateofshipment, portofshipment, portofdestination, insurance, effectivedate)
+		queryContracts(id)
+		modifyContracts(id, buyer, packing, dateofshipment, portofshipment, portofdestination, insurance, effectivedate)
+		deleteContracts(id)
+
+	}
+
+	Service ManageClientCRUDService {
+
+		[Operation]
+		createClient(id, name, address, contact, phonenumber)
+		queryClient(id)
+		modifyClient(id, name, address, contact, phonenumber)
+		deleteClient(id)
+
+	}
+
+	Service ManageOrderCRUDService {
+
+		[Operation]
+		createOrder(id, iscompleted, paymentinformation, amount)
+		queryOrder(id)
+		modifyOrder(id, iscompleted, paymentinformation, amount)
+		deleteOrder(id)
+
+	}
+
+	Service ManageInvoiceCRUDService {
+
+		[Operation]
+		createInvoice(id, title, effecitvedate, amount)
+		queryInvoice(id)
+		modifyInvoice(id, title, effecitvedate, amount)
+		deleteInvoice(id)
+
+	}
+
+	Service ManageBillOfLadingCRUDService {
+
+		[Operation]
+		createBillOfLading(id, consignee, commoditylist, contractobject, quantity, totalprice, deadlineforperformance, locationforperformance, methodforperformance)
+		queryBillOfLading(id)
+		modifyBillOfLading(id, consignee, commoditylist, contractobject, quantity, totalprice, deadlineforperformance, locationforperformance, methodforperformance)
+		deleteBillOfLading(id)
+
+	}
+
+	Service ManageProductCRUDService {
+
+		[Operation]
+		createProduct(id, name, price)
+		queryProduct(id)
+		modifyProduct(id, name, price)
+		deleteProduct(id)
 
 	}
 
@@ -142,111 +191,6 @@ UseCaseModel SalesManagementSystem {
 		currentOrderLine : OrderLineProduct
 		currentOrder : Order
 
-	}
-
-	Service OrderManagementService {
-
-		[Operation]
-		createOrder()
-		modifyOrder()
-		queryOrder()
-		deleteOrder()
-
-	}
-
-	Service ProductManagementService {
-
-		[Operation]
-		createProduct(id, name, price)
-		modifyProduct(id, name, price)
-		queryProduct(id)
-		deleteProduct()
-
-	}
-
-	Service ClientManagementService {
-
-		[Operation]
-		createClient(id,name,address,contact,phoneNumber)
-		modifyClient(id,name,address,contact,phoneNumber)
-		queryClient(id)
-		deleteClient()
-
-	}
-
-	Contract ContractManagementService::createContract(id : Integer, effectiveDate : Date, buyer : String, quantity : Real, commodity : String, unitPrice : Real, packing : String, dateOfShipment : String, portOfShipment : String, portOfDestination : String, insurance : String) : Boolean {
-
-		definition:
-			contract:Contracts = Contracts.allInstance()->any(con:Contracts | con.Id = id)
-
-		precondition:
-			contract.oclIsUndefined() = true
-
-		postcondition:
-			let con:Contracts in
-			con.oclIsNew() and
-			con.Id = id and
-			con.EffectiveDate = effectiveDate and
-			con.Buyer = buyer and
-			con.Quantity = quantity and
-			con.Commodity = commodity and
-			con.UnitPrice = unitPrice and
-			con.Packing = packing and
-			con.DateOfShipment = dateOfShipment and
-			con.PortOfShipment = portOfShipment and
-			con.PortOfDestination = portOfDestination and
-			con.Insurance = insurance and
-			Contracts.allInstance()->includes(con) and
-			result = true
-	}
-
-	Contract ContractManagementService::modifyContract(id : Integer, effectiveDate : Date, buyer : String, quantity : Real, commodity : String, unitPrice : Real, packing : String, dateOfShipment : String, portOfShipment : String, portOfDestination : String, insurance : String) : Boolean {
-
-		definition:
-			con:Contracts = Contracts.allInstance()->any(contract:Contracts | contract.Id = id)
-
-		precondition:
-			con.oclIsUndefined() = false
-
-		postcondition:
-			con.Id = id and
-			con.EffectiveDate = effectiveDate and
-			con.Buyer = buyer and
-			con.Quantity = quantity and
-			con.Commodity = commodity and
-			con.UnitPrice = unitPrice and
-			con.Packing = packing and
-			con.DateOfShipment = dateOfShipment and
-			con.PortOfShipment = portOfShipment and
-			con.PortOfDestination = portOfDestination and
-			con.Insurance = insurance and
-			result = true
-	}
-
-	Contract ContractManagementService::queryContract(id : Integer) : Contracts {
-
-		definition:
-			contract:Contracts = Contracts.allInstance()->any(con:Contracts | con.Id = id)
-
-		precondition:
-			contract.oclIsUndefined() = false
-
-		postcondition:
-			result = contract
-	}
-
-	Contract ContractManagementService::deleteContract(id : Integer) : Boolean {
-
-		definition:
-			contract:Contracts = Contracts.allInstance()->any(con:Contracts | con.Id = id)
-
-		precondition:
-			contract.oclIsUndefined() = false and
-			Contracts.allInstance()->includes(contract)
-
-		postcondition:
-			Contracts.allInstance()->excludes(contract) and
-			result = true
 	}
 
 	Contract SalesProcessingService::makeNewOrder(buyId : Integer) : Boolean {
@@ -281,7 +225,7 @@ UseCaseModel SalesManagementSystem {
 
 		precondition:
 			currentOrder.oclIsUndefined() = false and
-			currentOrder.IsComplete = false and
+			currentOrder.IsCompleted = false and
 			product.oclIsUndefined() = false
 
 		postcondition:
@@ -301,7 +245,7 @@ UseCaseModel SalesManagementSystem {
 
 		precondition:
 			currentOrder.oclIsUndefined() = false and
-			currentOrder.IsComplete = false
+			currentOrder.IsCompleted = false
 		postcondition:
 			let con:Contracts in
 			con.oclIsNew() and
@@ -319,148 +263,6 @@ UseCaseModel SalesManagementSystem {
 	}
 
 	Contract SalesProcessingService::generateOrder() : Boolean {
-
-		precondition:
-			true
-		postcondition:
-			true
-	}
-
-	Contract ClientManagementService::createClient(id : Integer, name : String, address : String, contact : String, phoneNumber : String) : Boolean {
-
-		definition:
-			client:Client = Client.allInstance()->any(cli:Client | cli.Id = id)
-
-		precondition:
-			client.oclIsUndefined() = true
-
-		postcondition:
-			let cli:Client in
-			cli.oclIsNew() and
-			cli.Id = id and
-			cli.Name = name and
-			cli.Address = address and
-			cli.Contact = contact and
-			cli.PhoneNumber = phoneNumber and
-			Client.allInstance()->includes(cli) and
-			result = true
-	}
-
-	Contract ClientManagementService::modifyClient(id : Integer, name : String, address : String, contact : String, phoneNumber : String) : Boolean {
-
-		definition:
-			client:Client = Client.allInstance()->any(cli:Client | cli.Id = id)
-
-		precondition:
-			client.oclIsUndefined() = false
-
-		postcondition:
-			cli.Id = id and
-			cli.Name = name and
-			cli.Address = address and
-			cli.Contact = contact and
-			cli.PhoneNumber = phoneNumber and
-			result = true
-	}
-
-	Contract ClientManagementService::queryClient(id : Integer) : Boolean {
-
-		definition:
-			cli:Client = Client.allInstance()->any(cl:Client | cl.Id = id)
-
-		precondition:
-			cli.oclIsUndefined() = false
-
-		postcondition:
-			result = cli
-	}
-
-	Contract ClientManagementService::deleteClient() : Boolean {
-
-		precondition:
-			true
-		postcondition:
-			true
-	}
-
-	Contract ProductManagementService::createProduct(id : Integer, name : String, price : Real) : Boolean {
-
-		definition:
-			product:Product = Product.allInstance()->any(pr:Product | pr.Id = id)
-
-		precondition:
-			product.oclIsUndefined() = true
-
-		postcondition:
-			let pro:Product in
-			pro.oclIsNew() and
-			pro.Id = id and
-			pro.Name = name and
-			pro.Price = price and
-			Product.allInstance()->includes(pro) and
-			result = true
-	}
-
-	Contract ProductManagementService::modifyProduct(id : Integer, name : String, price : Real) : Boolean {
-
-		definition:
-			product:Product = Product.allInstance()->any(pr:Product | pr.Id = id)
-
-		precondition:
-			product.oclIsUndefined() = false
-
-		postcondition:
-			pro.Id = id and
-			pro.Name = name and
-			pro.Price = price and
-			result = true
-	}
-
-	Contract ProductManagementService::queryProduct(id : Integer) : Boolean {
-
-		definition:
-			pro:Product = Product.allInstance()->any(pr:Product | pr.Id = id)
-
-		precondition:
-			pro.oclIsUndefined() = false
-
-		postcondition:
-			result = pro
-	}
-
-	Contract ProductManagementService::deleteProduct() : Boolean {
-
-		precondition:
-			true
-		postcondition:
-			true
-	}
-
-	Contract OrderManagementService::createOrder() : Boolean {
-
-		precondition:
-			true
-		postcondition:
-			true
-	}
-
-	Contract OrderManagementService::modifyOrder() : Boolean {
-
-		precondition:
-			true
-		postcondition:
-			true
-	}
-
-	Contract OrderManagementService::queryOrder() : Boolean {
-
-		precondition:
-			true
-		postcondition:
-			true
-	}
-
-	Contract OrderManagementService::deleteOrder() : Boolean {
 
 		precondition:
 			true
@@ -508,14 +310,6 @@ UseCaseModel SalesManagementSystem {
 			true
 	}
 
-	Contract SalesManagementSystemSystem::invoiceManagement() : Boolean {
-
-		precondition:
-			true
-		postcondition:
-			true
-	}
-
 	Contract SalesManagementSystemSystem::contractTerminationAndSettlement() : Boolean {
 
 		precondition:
@@ -545,10 +339,516 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			authorizationProcessing()
 		postcondition:
-			true
+			result = true
 	}
 
 	Contract ThirdPartyServices::authorizationProcessing() : Boolean {
+
+		precondition:
+			true
+		postcondition:
+			result = true
+	}
+
+	// entity create operation 
+	Contract  ManageContractsCRUDService::createContracts(id : Integer, buyer : String, packing : String, dateofshipment : Date, portofshipment : String, portofdestination : String, insurance : String, effectivedate : Date) : Boolean {
+
+		/* definition: find specific Contracts instance by id */
+		definition:
+			contracts:Contracts = Contracts.allInstance()->any(con:Contracts | con.Id = id)
+
+		/* precondition: the instance contracts was not found in the system */
+		precondition:
+			contracts.oclIsUndefined() = true
+
+		/* postcondition: 
+		 * A Contracts instance con was created.
+		 * all properties of con became the same values as inputs.
+		 */
+		postcondition:
+			let con:Contracts in
+			con.oclIsNew() and
+			con.Id = id and
+			con.Buyer = buyer and
+			con.Packing = packing and
+			con.DateOfShipment = dateofshipment and
+			con.PortOfShipment = portofshipment and
+			con.PortOfDestination = portofdestination and
+			con.Insurance = insurance and
+			con.EffectiveDate = effectivedate and
+			Contracts.allInstance()->includes(con) and
+			result = true
+	}
+
+	// entity query operation 
+	Contract  ManageContractsCRUDService::queryContracts(id : Integer) : Contracts {
+
+		/* definition: find specific Contracts instance by id */
+		definition:
+			contracts:Contracts = Contracts.allInstance()->any(con:Contracts | con.Id = id)
+
+		/* precondition: the instance contracts was found in the system */
+		precondition:
+			contracts.oclIsUndefined() = false
+
+		/* postcondition: return found the instance contracts */
+		postcondition:
+			result = contracts
+	}
+
+	// entity modify operation 
+	Contract  ManageContractsCRUDService::modifyContracts(id : Integer, buyer : String, packing : String, dateofshipment : Date, portofshipment : String, portofdestination : String, insurance : String, effectivedate : Date) : Boolean {
+
+		/* definition: find specific Contracts instance by id */
+		definition:
+			contracts:Contracts = Contracts.allInstance()->any(con:Contracts | con.Id = id)
+
+		/* precondition: the instance contracts was found in the system */
+		precondition:
+			contracts.oclIsUndefined() = false
+
+		/* postcondition: all properties of con became the same values as inputs. */
+		postcondition:
+			contracts.Id = id and
+			contracts.Buyer = buyer and
+			contracts.Packing = packing and
+			contracts.DateOfShipment = dateofshipment and
+			contracts.PortOfShipment = portofshipment and
+			contracts.PortOfDestination = portofdestination and
+			contracts.Insurance = insurance and
+			contracts.EffectiveDate = effectivedate and
+			result = true
+	}
+
+	// entity delete operation 
+	Contract  ManageContractsCRUDService::deleteContracts(id : Integer) : Boolean {
+
+		/* definition: find specific Contracts instance by id */
+		definition:
+			contracts:Contracts = Contracts.allInstance()->any(con:Contracts | con.Id = id)
+
+		/* precondition: the instance contracts was found in the system */
+		precondition:
+			contracts.oclIsUndefined() = false and
+			Contracts.allInstance()->includes(contracts)
+
+		/* postcondition: the instance contracts was deleted from the system */
+		postcondition:
+			Contracts.allInstance()->excludes(contracts) and
+			result = true
+	}
+
+	// entity create operation 
+	Contract  ManageInvoiceCRUDService::createInvoice(id : Integer, title : String, effecitvedate : Date, amount : Real) : Boolean {
+
+		/* definition: find specific Invoice instance by id */
+		definition:
+			invoice:Invoice = Invoice.allInstance()->any(invo:Invoice | invo.Id = id)
+
+		/* precondition: the instance invoice was not found in the system */
+		precondition:
+			invoice.oclIsUndefined() = true
+
+		/* postcondition: 
+		 * A Invoice instance inv was created.
+		 * all properties of inv became the same values as inputs.
+		 */
+		postcondition:
+			let invo:Invoice in
+			invo.oclIsNew() and
+			invo.Id = id and
+			invo.Title = title and
+			invo.EffecitveDate = effecitvedate and
+			invo.Amount = amount and
+			Invoice.allInstance()->includes(invo) and
+			result = true
+	}
+
+	// entity query operation 
+	Contract  ManageInvoiceCRUDService::queryInvoice(id : Integer) : Invoice {
+
+		/* definition: find specific Invoice instance by id */
+		definition:
+			invoice:Invoice = Invoice.allInstance()->any(invo:Invoice | invo.Id = id)
+
+		/* precondition: the instance invoice was found in the system */
+		precondition:
+			invoice.oclIsUndefined() = false
+
+		/* postcondition: return found the instance invoice */
+		postcondition:
+			result = invoice
+	}
+
+	// entity modify operation 
+	Contract  ManageInvoiceCRUDService::modifyInvoice(id : Integer, title : String, effecitvedate : Date, amount : Real) : Boolean {
+
+		/* definition: find specific Invoice instance by id */
+		definition:
+			invoice:Invoice = Invoice.allInstance()->any(invo:Invoice | invo.Id = id)
+
+		/* precondition: the instance invoice was found in the system */
+		precondition:
+			invoice.oclIsUndefined() = false
+
+		/* postcondition: all properties of invo became the same values as inputs. */
+		postcondition:
+			invoice.Id = id and
+			invoice.Title = title and
+			invoice.EffecitveDate = effecitvedate and
+			invoice.Amount = amount and
+			result = true
+	}
+
+	// entity delete operation 
+	Contract  ManageInvoiceCRUDService::deleteInvoice(id : Integer) : Boolean {
+
+		/* definition: find specific Invoice instance by id */
+		definition:
+			invoice:Invoice = Invoice.allInstance()->any(invo:Invoice | invo.Id = id)
+
+		/* precondition: the instance invoice was found in the system */
+		precondition:
+			invoice.oclIsUndefined() = false and
+			Invoice.allInstance()->includes(invoice)
+
+		/* postcondition: the instance invoice was deleted from the system */
+		postcondition:
+			Invoice.allInstance()->excludes(invoice) and
+			result = true
+	}
+
+	// entity create operation 
+	Contract  ManageBillOfLadingCRUDService::createBillOfLading(id : Integer, consignee : String, commoditylist : String, contractobject : String, quantity : Real, totalprice : Real, deadlineforperformance : String, locationforperformance : String, methodforperformance : String) : Boolean {
+
+		/* definition: find specific BillOfLading instance by id */
+		definition:
+			billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)
+
+		/* precondition: the instance billoflading was not found in the system */
+		precondition:
+			billoflading.oclIsUndefined() = true
+
+		/* postcondition: 
+		 * A BillOfLading instance bil was created.
+		 * all properties of bil became the same values as inputs.
+		 */
+		postcondition:
+			let bil:BillOfLading in
+			bil.oclIsNew() and
+			bil.Id = id and
+			bil.Consignee = consignee and
+			bil.CommodityList = commoditylist and
+			bil.ContractObject = contractobject and
+			bil.Quantity = quantity and
+			bil.TotalPrice = totalprice and
+			bil.DeadlineForPerformance = deadlineforperformance and
+			bil.LocationForPerformance = locationforperformance and
+			bil.MethodForPerformance = methodforperformance and
+			BillOfLading.allInstance()->includes(bil) and
+			result = true
+	}
+
+	// entity query operation 
+	Contract  ManageBillOfLadingCRUDService::queryBillOfLading(id : Integer) : BillOfLading {
+
+		/* definition: find specific BillOfLading instance by id */
+		definition:
+			billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)
+
+		/* precondition: the instance billoflading was found in the system */
+		precondition:
+			billoflading.oclIsUndefined() = false
+
+		/* postcondition: return found the instance billoflading */
+		postcondition:
+			result = billoflading
+	}
+
+	// entity modify operation 
+	Contract  ManageBillOfLadingCRUDService::modifyBillOfLading(id : Integer, consignee : String, commoditylist : String, contractobject : String, quantity : Real, totalprice : Real, deadlineforperformance : String, locationforperformance : String, methodforperformance : String) : Boolean {
+
+		/* definition: find specific BillOfLading instance by id */
+		definition:
+			billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)
+
+		/* precondition: the instance billoflading was found in the system */
+		precondition:
+			billoflading.oclIsUndefined() = false
+
+		/* postcondition: all properties of bil became the same values as inputs. */
+		postcondition:
+			billoflading.Id = id and
+			billoflading.Consignee = consignee and
+			billoflading.CommodityList = commoditylist and
+			billoflading.ContractObject = contractobject and
+			billoflading.Quantity = quantity and
+			billoflading.TotalPrice = totalprice and
+			billoflading.DeadlineForPerformance = deadlineforperformance and
+			billoflading.LocationForPerformance = locationforperformance and
+			billoflading.MethodForPerformance = methodforperformance and
+			result = true
+	}
+
+	// entity delete operation 
+	Contract  ManageBillOfLadingCRUDService::deleteBillOfLading(id : Integer) : Boolean {
+
+		/* definition: find specific BillOfLading instance by id */
+		definition:
+			billoflading:BillOfLading = BillOfLading.allInstance()->any(bil:BillOfLading | bil.Id = id)
+
+		/* precondition: the instance billoflading was found in the system */
+		precondition:
+			billoflading.oclIsUndefined() = false and
+			BillOfLading.allInstance()->includes(billoflading)
+
+		/* postcondition: the instance billoflading was deleted from the system */
+		postcondition:
+			BillOfLading.allInstance()->excludes(billoflading) and
+			result = true
+	}
+
+	// entity create operation 
+	Contract  ManageClientCRUDService::createClient(id : Integer, name : String, address : String, contact : String, phonenumber : String) : Boolean {
+
+		/* definition: find specific Client instance by id */
+		definition:
+			client:Client = Client.allInstance()->any(cli:Client | cli.Id = id)
+
+		/* precondition: the instance client was not found in the system */
+		precondition:
+			client.oclIsUndefined() = true
+
+		/* postcondition: 
+		 * A Client instance cli was created.
+		 * all properties of cli became the same values as inputs.
+		 */
+		postcondition:
+			let cli:Client in
+			cli.oclIsNew() and
+			cli.Id = id and
+			cli.Name = name and
+			cli.Address = address and
+			cli.Contact = contact and
+			cli.PhoneNumber = phonenumber and
+			Client.allInstance()->includes(cli) and
+			result = true
+	}
+
+	// entity query operation 
+	Contract  ManageClientCRUDService::queryClient(id : Integer) : Client {
+
+		/* definition: find specific Client instance by id */
+		definition:
+			client:Client = Client.allInstance()->any(cli:Client | cli.Id = id)
+
+		/* precondition: the instance client was found in the system */
+		precondition:
+			client.oclIsUndefined() = false
+
+		/* postcondition: return found the instance client */
+		postcondition:
+			result = client
+	}
+
+	// entity modify operation 
+	Contract  ManageClientCRUDService::modifyClient(id : Integer, name : String, address : String, contact : String, phonenumber : String) : Boolean {
+
+		/* definition: find specific Client instance by id */
+		definition:
+			client:Client = Client.allInstance()->any(cli:Client | cli.Id = id)
+
+		/* precondition: the instance client was found in the system */
+		precondition:
+			client.oclIsUndefined() = false
+
+		/* postcondition: all properties of cli became the same values as inputs. */
+		postcondition:
+			client.Id = id and
+			client.Name = name and
+			client.Address = address and
+			client.Contact = contact and
+			client.PhoneNumber = phonenumber and
+			result = true
+	}
+
+	// entity delete operation 
+	Contract  ManageClientCRUDService::deleteClient(id : Integer) : Boolean {
+
+		/* definition: find specific Client instance by id */
+		definition:
+			client:Client = Client.allInstance()->any(cli:Client | cli.Id = id)
+
+		/* precondition: the instance client was found in the system */
+		precondition:
+			client.oclIsUndefined() = false and
+			Client.allInstance()->includes(client)
+
+		/* postcondition: the instance client was deleted from the system */
+		postcondition:
+			Client.allInstance()->excludes(client) and
+			result = true
+	}
+
+	// entity create operation 
+	Contract  ManageOrderCRUDService::createOrder(id : Integer, iscompleted : Boolean, paymentinformation : String, amount : Real) : Boolean {
+
+		/* definition: find specific Order instance by id */
+		definition:
+			order:Order = Order.allInstance()->any(ord:Order | ord.Id = id)
+
+		/* precondition: the instance order was not found in the system */
+		precondition:
+			order.oclIsUndefined() = true
+
+		/* postcondition: 
+		 * A Order instance ord was created.
+		 * all properties of ord became the same values as inputs.
+		 */
+		postcondition:
+			let ord:Order in
+			ord.oclIsNew() and
+			ord.Id = id and
+			ord.IsCompleted = iscompleted and
+			ord.PaymentInformation = paymentinformation and
+			ord.Amount = amount and
+			Order.allInstance()->includes(ord) and
+			result = true
+	}
+
+	// entity query operation 
+	Contract  ManageOrderCRUDService::queryOrder(id : Integer) : Order {
+
+		/* definition: find specific Order instance by id */
+		definition:
+			order:Order = Order.allInstance()->any(ord:Order | ord.Id = id)
+
+		/* precondition: the instance order was found in the system */
+		precondition:
+			order.oclIsUndefined() = false
+
+		/* postcondition: return found the instance order */
+		postcondition:
+			result = order
+	}
+
+	// entity modify operation 
+	Contract  ManageOrderCRUDService::modifyOrder(id : Integer, iscompleted : Boolean, paymentinformation : String, amount : Real) : Boolean {
+
+		/* definition: find specific Order instance by id */
+		definition:
+			order:Order = Order.allInstance()->any(ord:Order | ord.Id = id)
+
+		/* precondition: the instance order was found in the system */
+		precondition:
+			order.oclIsUndefined() = false
+
+		/* postcondition: all properties of ord became the same values as inputs. */
+		postcondition:
+			order.Id = id and
+			order.IsCompleted = iscompleted and
+			order.PaymentInformation = paymentinformation and
+			order.Amount = amount and
+			result = true
+	}
+
+	// entity delete operation 
+	Contract  ManageOrderCRUDService::deleteOrder(id : Integer) : Boolean {
+
+		/* definition: find specific Order instance by id */
+		definition:
+			order:Order = Order.allInstance()->any(ord:Order | ord.Id = id)
+
+		/* precondition: the instance order was found in the system */
+		precondition:
+			order.oclIsUndefined() = false and
+			Order.allInstance()->includes(order)
+
+		/* postcondition: the instance order was deleted from the system */
+		postcondition:
+			Order.allInstance()->excludes(order) and
+			result = true
+	}
+
+	// entity create operation 
+	Contract  ManageProductCRUDService::createProduct(id : Integer, name : String, price : Real) : Boolean {
+
+		/* definition: find specific Product instance by id */
+		definition:
+			product:Product = Product.allInstance()->any(pro:Product | pro.Id = id)
+
+		/* precondition: the instance product was not found in the system */
+		precondition:
+			product.oclIsUndefined() = true
+
+		/* postcondition: 
+		 * A Product instance pro was created.
+		 * all properties of pro became the same values as inputs.
+		 */
+		postcondition:
+			let pro:Product in
+			pro.oclIsNew() and
+			pro.Id = id and
+			pro.Name = name and
+			pro.Price = price and
+			Product.allInstance()->includes(pro) and
+			result = true
+	}
+
+	// entity query operation 
+	Contract  ManageProductCRUDService::queryProduct(id : Integer) : Product {
+
+		/* definition: find specific Product instance by id */
+		definition:
+			product:Product = Product.allInstance()->any(pro:Product | pro.Id = id)
+
+		/* precondition: the instance product was found in the system */
+		precondition:
+			product.oclIsUndefined() = false
+
+		/* postcondition: return found the instance product */
+		postcondition:
+			result = product
+	}
+
+	// entity modify operation 
+	Contract  ManageProductCRUDService::modifyProduct(id : Integer, name : String, price : Real) : Boolean {
+
+		/* definition: find specific Product instance by id */
+		definition:
+			product:Product = Product.allInstance()->any(pro:Product | pro.Id = id)
+
+		/* precondition: the instance product was found in the system */
+		precondition:
+			product.oclIsUndefined() = false
+
+		/* postcondition: all properties of pro became the same values as inputs. */
+		postcondition:
+			product.Id = id and
+			product.Name = name and
+			product.Price = price and
+			result = true
+	}
+
+	// entity delete operation 
+	Contract  ManageProductCRUDService::deleteProduct(id : Integer) : Boolean {
+
+		/* definition: find specific Product instance by id */
+		definition:
+			product:Product = Product.allInstance()->any(pro:Product | pro.Id = id)
+
+		/* precondition: the instance product was found in the system */
+		precondition:
+			product.oclIsUndefined() = false and
+			Product.allInstance()->includes(product)
+
+		/* postcondition: the instance product was deleted from the system */
+		postcondition:
+			Product.allInstance()->excludes(product) and
+			result = true
+	}
+
+	Contract SalesManagementSystemSystem::manageItemsPrices() : Boolean {
 
 		precondition:
 			true
@@ -605,6 +905,7 @@ DomainModel SalesManagementSystem {
 	}
 
 	@AutoCRUD Entity Invoice {
+		Id : Integer
 		Title : String
 		EffecitveDate : Date
 		Amount : Real
@@ -626,27 +927,29 @@ DomainModel SalesManagementSystem {
 		BelongedOrder : Order ! Association
 	}
 
-	@AutoCRUD Entity DeliveryNotification {
+	Entity DeliveryNotification {
+		Id : Integer
 		EffectiveDate : Date
 		Details : String
 	}
 
-	@AutoCRUD Entity ExchangeNotification {
+	Entity ExchangeNotification {
+		Id : Integer
 		EffectiveDate : Date
 		Details : String
 	}
 
-	@AutoCRUD Entity OrderTerm {
+	Entity OrderTerm {
 		Id : Integer
 		Name : String
 	}
 
-	@AutoCRUD Entity ClientGroup {
+	Entity ClientGroup {
 		Id : Integer
 		Name : String
 	}
 
-	@AutoCRUD Entity DeliveryTerm {
+	Entity DeliveryTerm {
 		Id : Integer
 		Name : String
 	}
@@ -657,7 +960,8 @@ DomainModel SalesManagementSystem {
 		Price : Real
 	}
 
-	@AutoCRUD Entity OrderLineProduct {
+	Entity OrderLineProduct {
+		Id : Integer
 		Quantity : Integer
 		SubAmount : Real
 
