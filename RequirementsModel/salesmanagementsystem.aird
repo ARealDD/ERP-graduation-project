@@ -4,7 +4,7 @@
     <semanticResources>salesmanagementsystem.remodel</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_TYOVQGeREeuqmsQ-nf-RuA">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/net.mydreamy.requirementmodel.design/description/requirementmodel.odesign#//@ownedViewpoints[name='RequirementModel']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_cH6DsXJ9Eeugp8KMzLa6Kg" name="Use Case Diagram" repPath="#_cHyH4HJ9Eeugp8KMzLa6Kg" changeId="e6521ccb-45db-4e52-be6b-39d25752ad6d">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_cH6DsXJ9Eeugp8KMzLa6Kg" name="Use Case Diagram" repPath="#_cHyH4HJ9Eeugp8KMzLa6Kg" changeId="d655acf5-7011-47d7-adf2-8ce5837784f4">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/net.mydreamy.requirementmodel.design/description/requirementmodel.odesign#//@ownedViewpoints[name='RequirementModel']/@ownedRepresentations[name='Use%20Case%20Diagram']"/>
         <target xmi:type="rEMODEL:UseCaseModel" href="salesmanagementsystem.remodel#//@UseCaseModel"/>
       </ownedRepresentationDescriptors>

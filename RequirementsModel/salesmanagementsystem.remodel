@@ -1147,7 +1147,7 @@ UseCaseModel SalesManagementSystem {
 		precondition:
 			true
 		postcondition:
-			result = true
+			result = false
 	}
 
 	Contract ManageClientCRUDService::createClientGroup() : Boolean {
